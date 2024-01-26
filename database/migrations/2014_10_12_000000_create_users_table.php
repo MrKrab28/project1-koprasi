@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('no_hp')->unique();
             $table->enum('jk', ['L', 'P']);
             $table->string('foto_ktp')->default('default.png');
+            $table->string('nik')->unique();
             $table->enum('level', ['admin', 'user'])->default('user');
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
@@ -32,6 +33,7 @@ return new class extends Migration
         $user ->no_hp = '123123';
         $user ->jk = 'L';
         $user ->password = bcrypt('123');
+        $user->nik = '7371112810990005';
         $user ->save();
     }
 

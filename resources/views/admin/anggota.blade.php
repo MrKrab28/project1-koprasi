@@ -19,45 +19,55 @@
                                 <tr>
 
                                     <th>No</th>
-                                    <th>NIM</th>
                                     <th>Nama Lengkap</th>
+                                    <th>Jenis Kelamin</th>
+                                    <th>Email</th>
                                     <th>No. HP</th>
-                                    <th>Status</th>
-                                    <th></th>
+                                    <th>NIK KTP</th>
+                                    <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
 
+                            @foreach ($user as $user )
 
 
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $user->nama }}</td>
 
-                                    <td class="text-center">
-                                        <button class="btn btn-primary btn-sm" onclick="document.location.href = ''">
-                                            <i class="fa-solid fa-pen-to-square"></i>
-                                        </button>
+                                @if ( $user->jk == 'L')
+                                <td>Laki-Laki</td>
+                                @else
+                                <td>Perempuan</td>
+                                @endif
 
-                                        <form action="" class="d-inline"
-                                        method="POST" >
-                                        <button type="submit" class="btn btn-danger btn-sm">
-                                            <i class="fa-solid fa-trash"></i>
-                                        </button>
-                                                @csrf
-                                                @method('delete')
+                                <td>{{ $user->email }}</td>
+                                <td>{{ $user->no_hp }}</td>
+                                <td>{{ $user->nik }}</td>
+
+                                <td class="text-center">
+                                    <button class="btn btn-primary btn-sm" onclick="document.location.href = ''">
+                                        <i class="ti ti-pencil"></i>
+                                    </button>
+
+                                    <form action="" class="d-inline"
+                                    method="POST" >
+                                    <button type="submit" class="btn btn-danger btn-sm">
+                                        <i class=" ti ti-trash"></i>
+                                    </button>
+                                    @csrf
+                                    @method('delete')
                                                 <input type="hidden" name="id" value="">
                                             </form>
 
                                         </td>
                                     </tr>
 
+                                    @endforeach
                                 </tbody>
 
-                        </table>
+                            </table>
                     </div>
                 </div>
             </div>

@@ -18,7 +18,7 @@
         <span class="hide-menu">Master</span>
       </li>
       <li class="sidebar-item">
-        <a class="sidebar-link" href="{{ route('anggota') }}" aria-expanded="false">
+        <a class="sidebar-link" href="{{ route('index.user') }}" aria-expanded="false">
           <span>
             <i class="ti ti-user"></i>
           </span>

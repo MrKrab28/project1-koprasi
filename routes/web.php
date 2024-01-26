@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,3 +28,6 @@ Route::post('/login', [AuthController::class, 'postLogin'])->name('authenticate'
 Route::get('/user', function(){
     return view('admin.anggota');
 })->name('anggota');
+
+// USER
+Route::get('/user', [UserController::class, 'index'])->name('index.user');
