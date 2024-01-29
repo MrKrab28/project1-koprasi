@@ -13,7 +13,18 @@ return new class extends Migration
     {
         Schema::create('simpanan', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('id_anggota');
+            $table->foreignId('id_pokok');
+            $table->integer('wajib');
+            $table->integer('sukarela');
+            $table->integer('total_saldo');
+            $table->string('ket');
+            $table->date('tgl_simpanan');
             $table->timestamps();
+
+            $table->foreign('id_anggota')->references('id')->on('users')
+            ->onUpdate('cascade')
+            ->onDelete('cascade');
         });
     }
 

@@ -22,6 +22,6 @@ class Pinjaman extends Model
 
     public function pinjaman()
     {
-        return $this->belongsTo(User::class. 'id_user');
+        return $this->belongsTo(User::class, 'id_user');
     }
 }

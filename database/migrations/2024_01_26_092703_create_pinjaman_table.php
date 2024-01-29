@@ -13,7 +13,20 @@ return new class extends Migration
     {
         Schema::create('pinjaman', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('id_anggota');
+            $table->integer('total_pinjaman');
+            $table->string('lama_pinjam');
+            $table->string('bunga');
+            $table->string('ket');
+            $table->date('tgl_pinjaman');
+            $table->enum('status',  ['Diterima', 'Ditolak', 'Diproses'] )->nullable();
             $table->timestamps();
+
+            $table->foreign('id_anggota')->references('id')->on('users')
+            ->onUpdate('cascade')
+            ->onDelete('cascade');
+
+            // $table->foreign('id')
         });
     }
 

@@ -29,11 +29,11 @@ class User extends Authenticatable
 
     ];
 
-    public function user()
+    public function simpanan()
     {
         return $this->hasMany(Simpanan::class, 'id_anggota');
     }
-
+        
     public function pinjaman()
     {
         return $this->hasMany(Pinjaman::class, 'id_anggota');
