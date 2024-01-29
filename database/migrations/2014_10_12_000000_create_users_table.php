@@ -15,13 +15,14 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
-            $table->string('email')->unique();
+            $table->string('email');
             $table->string('password');
-            $table->string('no_hp')->unique();
+            $table->string('no_hp');
             $table->enum('jk', ['L', 'P']);
             $table->string('foto_ktp')->default('default.png');
-            $table->string('nik')->unique();
+            $table->string('nik');
             $table->enum('level', ['admin', 'user'])->default('user');
+            $table->string('no_rekening')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
@@ -32,8 +33,10 @@ return new class extends Migration
         $user ->email = 'admin@mail.com';
         $user ->no_hp = '123123';
         $user ->jk = 'L';
+        $user ->level = 'admin';
         $user ->password = bcrypt('123');
         $user->nik = '7371112810990005';
+        $user->no_rekening = '12312314';
         $user ->save();
     }
 

@@ -25,7 +25,7 @@ class User extends Authenticatable
         'foto_ktp',
         'nik',
         'jk',
-
+        'no_rekening',
 
     ];
 
@@ -33,7 +33,11 @@ class User extends Authenticatable
     {
         return $this->hasMany(Simpanan::class, 'id_anggota');
     }
-        
+
+    public function norek(){
+        return $this->hasOne(Simpanan::class, 'no_rekening');
+    }
+
     public function pinjaman()
     {
         return $this->hasMany(Pinjaman::class, 'id_anggota');

@@ -10,15 +10,16 @@ class Pinjaman extends Model
     use HasFactory;
 
     protected $fillable = [
-        'nim',
-        'nama',
-        'no_hp',
-        'password',
-        'foto',
-        'id_prodi',
-        'active',
-        'level'
+        'total_pinjaman',
+        'lama_pinjam',
+        'bunga',
+        'ket',
+        'tgl_peminjaman',
+        'tgl_jatuhTempo',
+        'lama_angsuran'
     ];
+
+
 
     public function pinjaman()
     {

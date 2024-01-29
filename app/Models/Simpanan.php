@@ -9,10 +9,25 @@ class Simpanan extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'jumlah_setor',
+        'saldo_awal',
+        'saldo_akhir',
+        'ket',
+        'tgl_simpan',
+    ];
+
+
+
+
 
 
     public function simpanan()
     {
         return $this->belongsTo(User::class, 'id_user');
+    }
+
+    public function norek(){
+        return $this->hasOne(Pinjaman::class, 'no_rekening');
     }
 }

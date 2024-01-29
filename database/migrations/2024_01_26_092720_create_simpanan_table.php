@@ -14,15 +14,20 @@ return new class extends Migration
         Schema::create('simpanan', function (Blueprint $table) {
             $table->id();
             $table->foreignId('id_anggota');
-            $table->foreignId('id_pokok');
-            $table->integer('wajib');
-            $table->integer('sukarela');
-            $table->integer('total_saldo');
+            $table->string('id_transaksi');
+            $table->integer('jumlah_setor');
+            $table->string('no_rekening');
+            $table->integer('saldo_awal');
+            $table->integer('saldo_akhir');
             $table->string('ket');
-            $table->date('tgl_simpanan');
+            $table->date('tgl_simpan');
             $table->timestamps();
 
             $table->foreign('id_anggota')->references('id')->on('users')
+            ->onUpdate('cascade')
+            ->onDelete('cascade');
+
+            $table->foreign('no_rekening')->references('no_rekening')->on('users')
             ->onUpdate('cascade')
             ->onDelete('cascade');
         });
