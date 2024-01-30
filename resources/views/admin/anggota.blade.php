@@ -24,6 +24,7 @@
                                     <th>Email</th>
                                     <th>No. HP</th>
                                     <th>NIK KTP</th>
+                                    <th>No.Rekening</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -45,9 +46,10 @@
                                 <td>{{ $user->email }}</td>
                                 <td>{{ $user->no_hp }}</td>
                                 <td>{{ $user->nik }}</td>
+                                <td>{{ $user->no_rekening }}</td>
 
                                 <td class="text-center">
-                                    <button class="btn btn-primary btn-sm" onclick="document.location.href = ''">
+                                    <button class="btn btn-primary btn-sm" onclick="document.location.href = '{{ route('') }}'">
                                         <i class="ti ti-pencil"></i>
                                     </button>
 

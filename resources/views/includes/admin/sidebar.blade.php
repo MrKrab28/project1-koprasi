@@ -38,7 +38,7 @@
           <span>
             <i class="ti ti-alert-circle"></i>
           </span>
-          <span class="hide-menu">Tabungan</span>
+          <span class="hide-menu">Simpanan</span>
         </a>
       </li>
       <li class="sidebar-item">
@@ -46,7 +46,7 @@
           <span>
             <i class="ti ti-cards"></i>
           </span>
-          <span class="hide-menu">Daftar Pengajuan</span>
+          <span class="hide-menu">Pinjaman</span>
         </a>
       </li>
       <li class="sidebar-item">
