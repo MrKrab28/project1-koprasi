@@ -39,17 +39,22 @@ class UserController extends Controller
 
         public function edit(User $user)
         {
-            return view('admin.anggota', compact('user'));
+            return view('admin.anggota-edit', compact('user'));
         }
 
         public function update(Request $request, User $user)
         {
+                // $request->validate([
+                //     'jk' => 'in:P,L'
+                // ]);
+
             $foto = $request->file('foto_ktp');
 
             $user = User::find($user->id);
 
             $user->nama = $request->nama;
             $user->email = $request->email;
+            $user->jk = $request->jk;
             $user->password = bcrypt($request->password);
             $user->no_hp = $request->no_hp;
             // $user->foto_ktp = $request->foto_ktp;
@@ -65,14 +70,14 @@ class UserController extends Controller
 
             $user->update();
 
-            return redirect()->back()->with('Success', 'Berhasi Mengubah Data');
+            return redirect()->route('index.user')->with('Success', 'Berhasi Mengubah Data');
 
         }
 
         public function delete(User $user)
         {
             $user->delete();
-            return redirect()->route('index.user');
+            return redirect()->back();
         }
 
 

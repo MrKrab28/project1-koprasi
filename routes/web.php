@@ -31,5 +31,6 @@ Route::get('/user', function(){
 
 // USER
 Route::get('/user', [UserController::class, 'index'])->name('index.user');
-Route::get('/user/edit/{id}', [UserController::class, 'edit'] )->name('edit.user');
-Route::put('/user/edit/update/{id}', [UserController::class, 'update'] )->name('edit.update');
+Route::get('/user/edit/{user}', [UserController::class, 'edit'] )->name('edit.user');
+Route::put('/user/update/{user}', [UserController::class, 'update'] )->name('update.user');
+Route::delete('user/{user}',[UserController::class, 'delete'])->name('delete.user');

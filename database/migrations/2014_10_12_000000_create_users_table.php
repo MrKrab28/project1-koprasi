@@ -38,6 +38,30 @@ return new class extends Migration
         $user->nik = '7371112810990005';
         $user->no_rekening = '12312314';
         $user ->save();
+
+        $user = new User();
+        $user ->nama = 'imam';
+        $user ->email = 'imam@mail.com';
+        $user ->no_hp = '3456234';
+        $user ->jk = 'L';
+        // $user ->level = 'admin';
+        $user ->password = bcrypt('123');
+        $user->nik = '7371112810990003';
+        $user->no_rekening = '123456';
+        $user ->save();
+
+
+
+        $user = new User();
+        $user ->nama = 'ASRI';
+        $user ->email = 'asri@mail.com';
+        $user ->no_hp = '34561234';
+        $user ->jk = 'P';
+        // $user ->level = 'admin';
+        $user ->password = bcrypt('123');
+        $user->nik = '737111281093546003';
+        $user->no_rekening = '123233456';
+        $user ->save();
     }
 
     /**
