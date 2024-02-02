@@ -31,6 +31,11 @@ class AuthController extends Controller
         return redirect()->back()->with('LoginError', 'Email atau Password Salah');
     }
 
+    public function getregister()
+    {
+        return view('auth.register');
+    }
+
 
 
 

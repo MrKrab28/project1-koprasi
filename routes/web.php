@@ -20,10 +20,12 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/', [AuthController::class, 'index'])->middleware('auth')->name('dashboard');
-
+// Auth
 Route::get('/login', [AuthController::class, 'getLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'postLogin'])->name('authenticate');
-
+// Register
+Route::get('/register', [AuthController::class, 'getregister'])->name('getregister.user');
+Route::post('/register', [UserController::class, 'store'])->name('register.user');
 
 Route::get('/user', function(){
     return view('admin.anggota');

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('email');
             $table->string('password');
             $table->string('no_hp');
-            $table->enum('jk', ['L', 'P']);
+            $table->enum('jk', ['L', 'P'])->nullable();
             $table->string('foto_ktp')->default('default.png');
             $table->string('nik');
             $table->enum('level', ['admin', 'user'])->default('user');

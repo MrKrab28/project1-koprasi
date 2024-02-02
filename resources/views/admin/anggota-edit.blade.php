@@ -34,7 +34,7 @@
                                    <label for="inlineRadio2"> Laki - Laki</label>
                                 </div>
 
-
+ 
                             </div>
                             <div class="input-group mb-3">
                                 <label for="" class="input-group-text" id="basic-addon1">Email</label>

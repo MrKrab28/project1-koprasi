@@ -16,23 +16,23 @@ class UserController extends Controller
         return view('admin.anggota', compact('user'));
     }
 
-    public function Store(Request $request){
+    public function store(Request $request){
         $data = $request->validate([
             'nama' => 'required',
             'email' => 'required|email|unique:users,email',
             'password' => 'required',
             'no_hp' => 'required|unique:users,no_hp',
-            'foto_ktp' => 'required',
+            // 'foto_ktp' => 'required',
             'nik' => 'required|unique:users,nik',
             'jk' => 'required',
             'no_rekening' => 'required|unique:users,no_rekening',
         ]);
 
             $data['password'] = Hash::make($data['password']);
-            $user = User::create($data);
-            event(new Registered($user));
+            User::create($data);
 
-            return redirect()->route('index.user')->with('success', 'Berhasil Mendaftar Sebagai Anggota');
+
+            return redirect()->route('login')->with('success', 'Berhasil Mendaftar Sebagai Anggota');
 
     }
 

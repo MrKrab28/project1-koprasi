@@ -20,7 +20,7 @@
           <div class="col-md-8 col-lg-6 col-xxl-3">
             <div class="card mb-0">
               <div class="card-body">
-                <a href="./index.html" class="text-nowrap logo-img text-center d-block py-3 w-100">
+                <a href="{{ route('login') }}" class="text-nowrap logo-img text-center d-block py-3 w-100">
                   <img src="{{ asset('assets/images/logos/logo-koperasi.png') }}" width="180" alt="">
                 </a>
                 <p class="text-center"><b>Selamat   Datang</b></p>
@@ -41,7 +41,7 @@
                         Remeber this Device
                       </label>
                     </div> --}}
-                    <a class="text-primary fw-bold" href="./index.html">Forgot Password ?</a>
+                    <label for="register">Belum Punya Akun?<a id="register" class="text-primary fw-bold" href="{{ route('getregister.user') }}">Buat Akun</a></label>
                   </div>
                   <button type="submit" class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2">LOGIN</button>
 
