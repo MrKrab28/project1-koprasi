@@ -27,9 +27,6 @@ return new class extends Migration
             ->onUpdate('cascade')
             ->onDelete('cascade');
 
-            $table->foreign('no_rekening')->references('no_rekening')->on('users')
-            ->onUpdate('cascade')
-            ->onDelete('cascade');
         });
     }
 

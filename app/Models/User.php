@@ -29,10 +29,10 @@ class User extends Authenticatable
 
     ];
 
-    public function simpanan()
-    {
-        return $this->hasMany(Simpanan::class, 'id_anggota');
-    }
+    // public function simpanan()
+    // {
+    //     return $this->hasMany(Simpanan::class, 'id_anggota');
+    // }
 
     public function norek(){
         return $this->hasOne(Simpanan::class, 'no_rekening');

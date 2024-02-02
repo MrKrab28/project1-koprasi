@@ -22,9 +22,9 @@ class Simpanan extends Model
 
 
 
-    public function simpanan()
+    public function anggota()
     {
-        return $this->belongsTo(User::class, 'id_user');
+        return $this->belongsTo(User::class, 'id_anggota');
     }
 
     public function norek(){
