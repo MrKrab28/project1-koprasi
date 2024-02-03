@@ -13,20 +13,23 @@ class AuthController extends Controller
         return view('layout');
     }
 
-    public function getLogin(){
+    public function getLogin()
+    {
         return view('auth.login');
     }
 
-    public function postLogin(Request $request){
+    public function postLogin(Request $request)
+    {
         $credentials = $request->validate([
             'email' => 'required',
             'password' => 'required'
         ]);
 
-        if(Auth::attempt($credentials))
-        {
+        if (Auth::guard('anggota')->attempt($credentials)) {
             return redirect()->route('dashboard');
-
+        }
+        if (Auth::guard('admin')->attempt($credentials)) {
+            return redirect()->route('dashboard');
         }
         return redirect()->back()->with('LoginError', 'Email atau Password Salah');
     }
@@ -43,6 +46,4 @@ class AuthController extends Controller
         $request->session()->regenerateToken();
         return view('auth.login');
     }
-
-
 }

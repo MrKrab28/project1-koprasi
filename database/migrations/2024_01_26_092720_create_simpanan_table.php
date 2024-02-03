@@ -1,8 +1,9 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
+use App\Models\Simpanan;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 return new class extends Migration
 {
@@ -14,12 +15,18 @@ return new class extends Migration
         Schema::create('simpanan', function (Blueprint $table) {
             $table->id();
             $table->foreignId('id_anggota');
+            $table->integer('saldo');
             $table->timestamps();
 
             $table->foreign('id_anggota')->references('id')->on('users')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
         });
+
+        $simpanan = new Simpanan();
+        $simpanan->id_anggota = 1;
+        $simpanan->saldo = 1000;
+        $simpanan->save();
     }
 
     /**

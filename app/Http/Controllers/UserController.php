@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Simpanan;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -80,6 +81,10 @@ class UserController extends Controller
             return redirect()->back();
         }
 
+        public function getSimpanan(){
+            $user = User::with('simpanan');
 
+            return view('admin.simpanan', compact('user'));
+        }
 
 }

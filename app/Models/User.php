@@ -42,6 +42,11 @@ class User extends Authenticatable
         return $this->hasOne(Simpanan::class, 'id_anggota');
     }
 
+    // public function simpanan()
+    // {
+    //     return $this->belongsTo(Simpanan::class, 'id_anggota');
+    // }
+
     public function simpanan_items(): HasManyThrough
     {
         return $this->hasManyThrough(SimpananItem::class, Simpanan::class, 'id_anggota', 'id_simpanan');

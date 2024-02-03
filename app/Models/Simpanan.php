@@ -13,15 +13,17 @@ class Simpanan extends Model
     protected $table = 'simpanan';
 
     protected $fillable = [
-        'jumlah_setor',
-        'saldo_awal',
-        'saldo_akhir',
-        'ket',
-        'tgl_simpan',
-    ];
+        'id_anggota',
+        'saldo',
+        ];
 
     public function items(): HasMany
     {
         return $this->hasMany(SimpananItem::class, 'id_simpanan');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'id');
     }
 }
