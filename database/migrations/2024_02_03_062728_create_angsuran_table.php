@@ -13,18 +13,14 @@ return new class extends Migration
     {
         Schema::create('angsuran', function (Blueprint $table) {
             $table->id();
-            $table->string('id_transaksi');
             $table->foreignId('id_pinjaman');
-            $table->integer('angsuran_ke');
-            $table->integer('sisa');
-            $table->integer('jumlah_bayar');
-            $table->integer('denda');
-            $table->integer('total_tagihan');
+            $table->integer('nominal');
+            $table->date('tanggal_pembayaran');
             $table->timestamps();
 
             $table->foreign('id_pinjaman')->references('id')->on('pinjaman')
-            ->onUpdate('cascade')
-            ->onDelete('cascade');
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
         });
     }
 

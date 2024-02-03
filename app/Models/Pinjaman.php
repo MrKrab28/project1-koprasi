@@ -4,25 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Pinjaman extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'total_pinjaman',
-        'lama_pinjam',
-        'bunga',
-        'ket',
-        'tgl_peminjaman',
-        'tgl_jatuhTempo',
-        'lama_angsuran'
-    ];
+    protected $table = 'pinjaman';
 
-
-
-    public function pinjaman()
+    public function angsuran(): HasMany
     {
-        return $this->belongsTo(User::class, 'id_user');
+        return $this->hasMany(Angsuran::class, 'id_pinjaman');
     }
 }

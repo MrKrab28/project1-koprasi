@@ -11,9 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('transaksi', function (Blueprint $table) {
+        Schema::create('simpanan_item', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('id_simpanan');
+            $table->integer('jumlah_setor');
+            $table->date('tgl_simpan');
             $table->timestamps();
+
+            $table->foreign('id_simpanan')->references('id')->on('simpanan')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
         });
     }
 
@@ -22,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('transaksi');
+        Schema::dropIfExists('simpanan_item');
     }
 };
