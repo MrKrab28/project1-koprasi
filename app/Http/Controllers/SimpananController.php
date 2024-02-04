@@ -11,11 +11,7 @@ class SimpananController extends Controller
 {
     public function index()
     {
-        return view('admin.simpanan');
-    }
-
-    public function getSimpanan(){
-        $user = User::with('simpanan');
+        $user = User::has('simpanan')->get();
 
         return view('admin.simpanan', compact('user'));
     }

@@ -15,7 +15,6 @@ return new class extends Migration
         Schema::create('simpanan', function (Blueprint $table) {
             $table->id();
             $table->foreignId('id_anggota');
-            $table->integer('saldo');
             $table->timestamps();
 
             $table->foreign('id_anggota')->references('id')->on('users')

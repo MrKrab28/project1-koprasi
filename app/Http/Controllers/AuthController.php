@@ -25,12 +25,10 @@ class AuthController extends Controller
             'password' => 'required'
         ]);
 
-        if (Auth::guard('anggota')->attempt($credentials)) {
-            return redirect()->route('dashboard');
-        }
         if (Auth::guard('admin')->attempt($credentials)) {
             return redirect()->route('dashboard');
         }
+
         return redirect()->back()->with('LoginError', 'Email atau Password Salah');
     }
 

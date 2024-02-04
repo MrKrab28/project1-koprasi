@@ -21,14 +21,11 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        $admin= new Admin();
+        $admin = new Admin();
         $admin->nama = 'admin';
         $admin->email = 'admin@localhost';
         $admin->password = Hash::make('123');
-
         $admin->save();
-
-
     }
 
     /**
