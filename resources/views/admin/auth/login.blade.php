@@ -20,12 +20,13 @@
           <div class="col-md-8 col-lg-6 col-xxl-3">
             <div class="card mb-0">
               <div class="card-body">
-                <h3 class="d-flex align-items-center justify-content-center text-primary">Login Anggota</h3>
-                <a href="{{ route('user.login') }}" class="text-nowrap logo-img text-center d-block py-3 w-100">
-                 <img src="{{ asset('assets/images/logos/logo-koperasi.png') }}" width="180" alt="">
+                <h3 class="d-flex align-items-center justify-content-center text-primary">Login Admin</h3>
+
+                <a href="{{ route('admin.login') }}" class="text-nowrap logo-img text-center d-block py-3 w-100">
+                  <img src="{{ asset('assets/images/logos/logo-koperasi.png') }}" width="180" alt="">
                 </a>
                 <p class="text-center"><b>Selamat   Datang</b></p>
-                <form action="{{ route('user.authenticate') }}" method="POST">
+                <form action="{{ route('admin.authenticate') }}" method="POST">
                     @csrf
                   <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Email</label>

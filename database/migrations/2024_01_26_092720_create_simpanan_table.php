@@ -24,7 +24,7 @@ return new class extends Migration
 
         $simpanan = new Simpanan();
         $simpanan->id_anggota = 1;
-        $simpanan->saldo = 1000;
+        // $simpanan->saldo = 1000;
         $simpanan->save();
     }
 

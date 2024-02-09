@@ -8,7 +8,7 @@
             <div class="col-lg-8 d-flex align-items-strech">
                 <div class="card w-100">
                     <div class="card-body">
-                        <form action="{{ route('update.user', $user) }}" method="POST">
+                        <form action="{{ route('user.update', $user) }}" method="POST">
                             @csrf
                             @method('put')
                             <div class="d-sm-flex d-block align-items-center justify-content-between mb-9">
@@ -34,7 +34,7 @@
                                    <label for="inlineRadio2"> Laki - Laki</label>
                                 </div>
 
- 
+
                             </div>
                             <div class="input-group mb-3">
                                 <label for="" class="input-group-text" id="basic-addon1">Email</label>

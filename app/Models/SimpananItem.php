@@ -10,4 +10,9 @@ class SimpananItem extends Model
     use HasFactory;
 
     protected $table = 'simpanan_item';
+
+    public function user()
+    {
+       
+    }
 }

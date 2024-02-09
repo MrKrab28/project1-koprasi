@@ -13,14 +13,14 @@ return new class extends Migration
     {
         Schema::create('pinjaman', function (Blueprint $table) {
             $table->id();
-            $table->string('id_transaksi');
+            // $table->string('id_pinjaman');
             $table->foreignId('id_anggota');
             $table->integer('total_pinjaman');
-            $table->string('bunga');
+            // $table->string('bunga');
+            // $table->enum('status', ['Proses', 'Selesai'])->default('Proses');
             $table->date('tgl_pinjaman');
-            $table->integer('jumlah_angsuran');
-            $table->enum('status', ['Proses', 'Selesai'])->default('Proses');
-            $table->string('keterangan');
+            // $table->integer('jumlah_angsuran');
+            // $table->string('keterangan');
             $table->timestamps();
 
             $table->foreign('id_anggota')->references('id')->on('users')

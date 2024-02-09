@@ -35,7 +35,7 @@
 
                             <tr>
 
-                                <td>A00{{ $loop->iteration }}</td>
+                                <td>{{ $loop->iteration }}</td>
                                 <td>{{ $user->nama }}</td>
 
                                 @if ( $user->jk == 'L')
@@ -50,11 +50,11 @@
                                 <td>{{ $user->no_rekening }}</td>
 
                                 <td class="text-center">
-                                    <button class="btn btn-primary btn-sm" onclick="document.location.href = '{{ route('edit.user', $user) }}'">
+                                    <button class="btn btn-primary btn-sm" onclick="document.location.href = '{{ route('user.edit', $user) }}'">
                                         <i class="ti ti-pencil"></i>
                                     </button>
 
-                                    <form action="{{ route('delete.user', $user) }}" class="d-inline"
+                                    <form action="{{ route('user.delete', $user) }}" class="d-inline"
                                     method="POST" >
                                     <button type="submit" class="btn btn-danger btn-sm" >
                                         <i class=" ti ti-trash"></i>

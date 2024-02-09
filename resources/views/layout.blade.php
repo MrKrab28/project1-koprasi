@@ -40,8 +40,14 @@
         <!--  Main wrapper -->
         <div class="body-wrapper">
             <!--  Header Start -->
-            @include('includes.admin.header')
+            @auth('anggota')
 
+            @include('includes.header')
+            @endauth
+            @auth('admin')
+
+            @include('includes.admin.header')
+            @endauth
 
 
             <!--  Header End -->

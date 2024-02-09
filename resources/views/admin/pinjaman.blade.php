@@ -8,11 +8,9 @@
                     <div class="card-body mt-5">
                         <div class="card-header d-flex justify-content-between">
                             <div class="header-title">
-                                <h4 class="card-title">Daftar Simpanan</h4>
+                                <h4 class="card-title">Daftar pinjaman</h4>
                             </div>
                             <div class="me-3">
-                                {{-- <form action="{{ route('store.simpanan') }}" method="GET" >
-                                </form> --}}
                                 <button type="submit" class="btn btn-primary " data-bs-toggle="modal"
                                 data-bs-target="#exampleModal">Tambah Data</button>
                                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
@@ -24,7 +22,7 @@
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                 aria-label="Close"></button>
                                             </div>
-                                            <form action="{{ route('simpanan-store') }}" method="POST">
+                                            <form action="{{ route('pinjaman-store') }}" method="POST">
                                                 @csrf
                                                 <div class="modal-body">
                                                     <div class="mb-3 mb-sm-0">
@@ -39,14 +37,14 @@
 
                                                     </div>
                                                     <div class="input-group mb-3">
-                                                        <label for="" class="input-group-text" id="basic-addon1">Setoran Awal</label>
-                                                        <input type="number" class="form-control" name="jumlah_setor"
+                                                        <label for="" class="input-group-text" id="basic-addon1">Pinjaman</label>
+                                                        <input type="number" class="form-control" name="total_pinjaman"
                                                             aria-label="Username">
 
                                                     </div>
                                                     <div class="input-group mb-3">
-                                                        <label for="" class="input-group-text" id="basic-addon1">Tanggal Simpan</label>
-                                                        <input type="date" class="form-control" name="tgl_simpan"
+                                                        <label for="" class="input-group-text" id="basic-addon1">Tanggal pinjaman</label>
+                                                        <input type="date" class="form-control" name="tgl_pinjaman"
                                                             aria-label="Username">
 
                                                     </div>
@@ -70,9 +68,8 @@
 
                                         <th>No</th>
                                         <th>Nama Lengkap</th>
-                                        <th>Saldo</th>
-                                        <th>No.Hp</th>
-                                        <th>No.Rekening</th>
+                                        <th>Pinjaman</th>
+                                        <th>Tanggal Pinjaman</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -83,12 +80,11 @@
 
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $user->nama }}</td>
-                                            <td>Rp. {{ number_format($user->simpanan_items->sum('jumlah_setor')) }}</td>
-                                            <td>{{ $user->no_hp }}</td>
-                                            <td>{{ $user->no_rekening }}</td>
+                                            <td>Rp. {{ number_format($user) }}</td>
+                                            <td>{{ $user->pinjaman->tgl_pinjaman }}</td>
 
                                             <td class="text-center">
-                                                <button class="btn btn-primary btn-sm" onclick="document.location.href = '?anggota={{ $user->id }}'">
+                                                <button  class="btn btn-primary btn-sm">
                                                     Detail
                                                 </button>
 
