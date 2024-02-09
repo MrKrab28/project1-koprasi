@@ -15,7 +15,10 @@ return new class extends Migration
             $table->id();
             $table->foreignId('id_pinjaman');
             $table->integer('nominal');
-            $table->date('tanggal_pembayaran');
+            $table->integer('total_angsuran');
+            $table->integer('jumlah_angsuran');
+            $table->integer('angsuran ke-');
+            $table->date('tanggal_angsur');
             $table->timestamps();
 
             $table->foreign('id_pinjaman')->references('id')->on('pinjaman')

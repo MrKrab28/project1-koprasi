@@ -26,7 +26,7 @@
                                                 @csrf
                                                 <div class="modal-body">
                                                     <div class="mb-3 mb-sm-0">
-                                                        <h5 class="card-title fw-semibold">Tambah Data Simpanan</h5>
+                                                        <h5 class="card-title fw-semibold">Tambah Data Pinjaman</h5>
                                                     </div>
                                                     Masukkan ID Anggota Untuk Menambah Data
                                                     <div class="input-group mb-3">
@@ -68,7 +68,7 @@
 
                                         <th>No</th>
                                         <th>Nama Lengkap</th>
-                                        <th>Pinjaman</th>
+                                        {{-- <th>Pinjaman</th> --}}
                                         <th>Tanggal Pinjaman</th>
                                         <th>Aksi</th>
                                     </tr>
@@ -80,11 +80,14 @@
 
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $user->nama }}</td>
-                                            <td>Rp. {{ number_format($user) }}</td>
-                                            <td>{{ $user->pinjaman->tgl_pinjaman }}</td>
+                                            {{-- <td>Rp. {{ number_format($user) }}</td> --}}
+                                            @foreach ($user->pinjaman as $item )
+                                            <td>{{ Carbon\Carbon::parse($item->tgl_pinjaman)->isoFormat('D MMMM YYYY')}}</td>
+
+                                            @endforeach
 
                                             <td class="text-center">
-                                                <button  class="btn btn-primary btn-sm">
+                                                <button  class="btn btn-primary btn-sm" onclick="document.location.href = '?anggota={{ $user->id }}'">
                                                     Detail
                                                 </button>
 
