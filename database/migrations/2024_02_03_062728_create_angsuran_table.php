@@ -14,11 +14,9 @@ return new class extends Migration
         Schema::create('angsuran', function (Blueprint $table) {
             $table->id();
             $table->foreignId('id_pinjaman');
-            $table->integer('nominal');
-            $table->integer('total_angsuran');
-            $table->integer('jumlah_angsuran');
-            $table->integer('angsuran ke-');
-            $table->date('tanggal_angsur');
+            $table->integer('nominal_angsuran');
+
+            $table->date('tgl_angsur');
             $table->timestamps();
 
             $table->foreign('id_pinjaman')->references('id')->on('pinjaman')

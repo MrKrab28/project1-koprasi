@@ -16,11 +16,11 @@ return new class extends Migration
             // $table->string('id_pinjaman');
             $table->foreignId('id_anggota');
             $table->integer('total_pinjaman');
+            $table->integer('banyak_angsuran');
+            $table->integer('nominal_angsuran');
+            $table->date('tgl_pinjaman');
             // $table->string('bunga');
             // $table->enum('status', ['Proses', 'Selesai'])->default('Proses');
-            $table->date('tgl_pinjaman');
-            // $table->integer('jumlah_angsuran');
-            // $table->string('keterangan');
             $table->timestamps();
 
             $table->foreign('id_anggota')->references('id')->on('users')

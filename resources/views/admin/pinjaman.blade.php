@@ -12,38 +12,48 @@
                             </div>
                             <div class="me-3">
                                 <button type="submit" class="btn btn-primary " data-bs-toggle="modal"
-                                data-bs-target="#exampleModal">Tambah Data</button>
+                                    data-bs-target="#exampleModal">Tambah Data</button>
                                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                                aria-hidden="true">
+                                    aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Data Pinjaman</h1>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                aria-label="Close"></button>
+                                                    aria-label="Close"></button>
                                             </div>
                                             <form action="{{ route('pinjaman-store') }}" method="POST">
                                                 @csrf
                                                 <div class="modal-body">
                                                     <div class="mb-3 mb-sm-0">
-                                                        <h5 class="card-title fw-semibold">Tambah Data Pinjaman</h5>
+                                                        <h5 class="card-title fw-semibold">Isi Formulir Untuk Menambahkan Data Pinjaman</h5>
                                                     </div>
-                                                    Masukkan ID Anggota Untuk Menambah Data
+
                                                     <div class="input-group mb-3">
                                                         <label for="" class="input-group-text" id="basic-addon1">ID
                                                             Anggota</label>
                                                         <input type="number" class="form-control" name="id_anggota"
-                                                            aria-label="Username" >
+                                                            aria-label="Username">
 
                                                     </div>
                                                     <div class="input-group mb-3">
-                                                        <label for="" class="input-group-text" id="basic-addon1">Pinjaman</label>
+                                                        <label for="" class="input-group-text"
+                                                            id="basic-addon1">Pinjaman</label>
                                                         <input type="number" class="form-control" name="total_pinjaman"
                                                             aria-label="Username">
 
                                                     </div>
                                                     <div class="input-group mb-3">
-                                                        <label for="" class="input-group-text" id="basic-addon1">Tanggal pinjaman</label>
+                                                        <label for="" class="input-group-text"
+                                                            id="basic-addon1">Banyak Angsuran</label>
+                                                        <input type="number" class="form-control" name="banyak_angsuran"
+                                                            aria-label="Username">
+
+                                                    </div>
+
+                                                    <div class="input-group mb-3">
+                                                        <label for="" class="input-group-text"
+                                                            id="basic-addon1">Tanggal pinjaman</label>
                                                         <input type="date" class="form-control" name="tgl_pinjaman"
                                                             aria-label="Username">
 
@@ -68,8 +78,9 @@
 
                                         <th>No</th>
                                         <th>Nama Lengkap</th>
-                                        {{-- <th>Pinjaman</th> --}}
-                                        <th>Tanggal Pinjaman</th>
+                                        <th>No.HP</th>
+                                        <th>No.Rekening</th>
+                                        {{-- <th>Tanggal Pinjaman</th> --}}
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -80,14 +91,18 @@
 
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $user->nama }}</td>
-                                            {{-- <td>Rp. {{ number_format($user) }}</td> --}}
-                                            @foreach ($user->pinjaman as $item )
-                                            <td>{{ Carbon\Carbon::parse($item->tgl_pinjaman)->isoFormat('D MMMM YYYY')}}</td>
+                                            <td>{{ $user->no_hp }}</td>
+                                            {{-- <td>{{ $user->email }}</td> --}}
+                                            <td>{{ $user->no_rekening }} </td>
 
-                                            @endforeach
+                                            {{-- <td>{{ Carbon\Carbon::parse($user->tgl_pinjaman)->isoFormat('D MMMM YYYY') }} --}}
+                                            </td>
+
+
 
                                             <td class="text-center">
-                                                <button  class="btn btn-primary btn-sm" onclick="document.location.href = '?anggota={{ $user->id }}'">
+                                                <button class="btn btn-primary btn-sm"
+                                                    onclick="document.location.href = '?anggota={{ $user->id }}'">
                                                     Detail
                                                 </button>
 

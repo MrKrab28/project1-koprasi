@@ -12,24 +12,10 @@
                         <div class="mb-3 mb-sm-0">
                             <h5 class="card-title fw-semibold">Detail Pinjaman</h5>
                         </div>
-                        <button type="submit" class="btn btn-primary " data-bs-toggle="modal"
-                                data-bs-target="#exampleModal">Bayar Angsuran</button>
+                        {{-- <button type="submit" class="btn btn-primary " data-bs-toggle="modal"
+                            data-bs-target="#exampleModal">Bayar Angsuran</button> --}}
                     </div>
 
-                    <form action="{{ route('simpanan-storeItem') }}" method="POST" class="mb-4">
-                        @csrf
-                        <input type="hidden" name="anggota" value="{{ Request::get('anggota') }}">
-                        {{-- <div class="input-group mb-3">
-                                <label for="" class="input-group-text" id="basic-addon1">Jumlah Setor</label>
-                                <input type="number" class="form-control" name="jumlah_setor" step="1000" required>
-                            </div>
-                            <div class="input-group mb-3">
-                                <label for="" class="input-group-text" id="basic-addon1">Tanggal Simpan</label>
-                                <input type="date" class="form-control" name="tgl_simpan"  required>
-                            </div> --}}
-
-
-                    </form>
 
                     <table id="table" class="table table-hover" style="width: 100%">
                         <thead>
@@ -37,23 +23,29 @@
 
                                 <th>No</th>
                                 <th>Total Pinjaman</th>
-                                <th>Total Angsuran</th>
-                                <th>Jumlah Angsuran</th>
+                                <th>Banyak Angsuran</th>
+                                <th>Nominal Angsuran</th>
                                 <th>Tanggal Pinjaman</th>
-                                {{-- <th>Aksi</th> --}}
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($user->pinjaman>sortBy('tgl_pinjaman') as $item)
+                            @foreach ($pinjaman->sortBy('tgl_pinjaman') as $item)
                                 <tr>
 
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>Rp. {{ number_format($item->jumlah_setor) }}</td>
+                                    <td>Rp. {{ number_format($item->total_pinjaman) }}</td>
 
 
-                                    <td>{{ $item->total_angsuran }}</td>
-                                    <td>{{ $item->jumlah_angsuran }}</td>
+                                    <td>{{ $item->banyak_angsuran }}x Angsur</td>
+                                    <td>Rp. {{ number_format($item->nominal_angsuran) }}</td>
                                     <td>{{ Carbon\Carbon::parse($item->tgl_pinjaman)->isoFormat('D MMMM YYYY') }}</td>
+                                    <td>
+                                        <button class="btn btn-primary btn-sm"
+                                            onclick="document.location.href = '{{ route('angsuran') }}?pinjaman={{ $item->id}}'">
+                                            Lihat Angsuran
+                                        </button>
+                                    </td>
 
                                     {{-- <td class="text-center">
                                         <button class="btn btn-primary btn-sm" onclick="document.location.href = '{{ route('detail.simpanan',$user->simpanan->id) }}'">

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AngsuranController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\SimpananController;
@@ -27,6 +28,8 @@ Route::group(['middleware' => 'auth:admin'], function () {
     // pinjaman
     Route::get('pinjaman', [AdminPinjamanController::class, 'index'])->name('pinjaman-user');
     Route::post('pinjaman/add', [AdminPinjamanController::class, 'store'])->name('pinjaman-store');
+    Route::get('pinjaman/angsuran', [AngsuranController::class, 'index'])->name('angsuran');
+    Route::post('pinjaman/angsuran', [AngsuranController::class, 'store'])->name('angsuran-store');
 
     Route::get('/logout', [AuthController::class, 'logout'])->name('admin.logout');
 });

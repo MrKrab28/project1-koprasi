@@ -37,6 +37,7 @@ class User extends Authenticatable
         return $this->hasMany(Pinjaman::class, 'id_anggota');
     }
 
+
     public function simpanan(): HasOne
     {
         return $this->hasOne(Simpanan::class, 'id_anggota');
