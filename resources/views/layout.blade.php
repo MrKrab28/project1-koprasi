@@ -5,67 +5,108 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>{{ config('app.name') }}</title>
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}">
+
     @include('includes.styles')
-    @stack('styles')
 </head>
 
-<body>
+<body data-sidebar="dark">
+    <!-- Begin page -->
+    <div id="layout-wrapper">
+        @include('includes.header')
 
-    <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
-        data-sidebar-position="fixed" data-header-position="fixed">
+        @include('includes.sidebar')
 
-        <aside class="left-sidebar">
-            <!-- Sidebar scroll-->
-            <div>
-                <div class="brand-logo d-flex align-items-center justify-content-between">
-                    <a href="./index.html" class="text-nowrap logo-img ms-5 mt-3">
-                        <img src="{{ asset('assets/images/logos/logo-koperasi.png') }}" width="100" alt="" />
-                    </a>
-                    <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
-                        <i class="ti ti-x fs-8"></i>
-                    </div>
-                </div>
-                <!-- Sidebar navigation-->
-                <!-- Sidebar Start -->
-                @include('includes.admin.sidebar')
-                <!--  Sidebar End -->
-                <!-- End Sidebar navigation -->
+        <div class="main-content" id="result">
+            <div class="page-content">
+                <div class="container-fluid">
+                    @yield('content')
+                    <div class="row">
+                        <div class="col-md-6 col-xl-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="mini-stat">
+                                        <span class="mini-stat-icon bg-purple me-0 float-end"><i
+                                                class="mdi mdi-basket"></i></span>
+                                        <div class="mini-stat-info">
+                                            <span class="counter text-purple">25140</span>
+                                            Total Sales
+                                        </div>
+                                        <p class=" mb-0 mt-4 text-muted">Total income: $22506 <span class="float-end"><i
+                                                    class="fa fa-caret-up me-1"></i>10.25%</span></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> <!--End col -->
+                        <div class="col-md-6 col-xl-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="mini-stat">
+                                        <span class="mini-stat-icon bg-blue-grey me-0 float-end"><i
+                                                class="mdi mdi-black-mesa"></i></span>
+                                        <div class="mini-stat-info">
+                                            <span class="counter text-blue-grey">65241</span>
+                                            New Orders
+                                        </div>
+                                        <p class="text-muted mb-0 mt-4">Total income: $22506 <span class="float-end"><i
+                                                    class="fa fa-caret-up me-1"></i>10.25%</span></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> <!-- End col -->
+                        <div class="col-md-6 col-xl-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="mini-stat">
+                                        <span class="mini-stat-icon bg-brown me-0 float-end"><i
+                                                class="mdi mdi-buffer"></i></span>
+                                        <div class="mini-stat-info">
+                                            <span class="counter text-brown">85412</span>
+                                            New Users
+                                        </div>
+                                        <p class="text-muted mb-0 mt-4">Total income: $22506 <span class="float-end"><i
+                                                    class="fa fa-caret-up me-1"></i>10.25%</span></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> <!-- End col -->
+                        <div class="col-md-6 col-xl-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="mini-stat">
+                                        <span class="mini-stat-icon bg-teal me-0 float-end"><i
+                                                class="mdi mdi-coffee"></i></span>
+                                        <div class="mini-stat-info">
+                                            <span class="counter text-teal">20544</span>
+                                            Unique Visitors
+                                        </div>
+                                        <p class="text-muted mb-0 mt-4">Total income: $22506 <span class="float-end"><i
+                                                    class="fa fa-caret-up me-1"></i>10.25%</span></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!--end col -->
+                    </div> <!-- end row-->
+                </div> <!-- container-fluid -->
             </div>
-            <!-- End Sidebar scroll-->
-        </aside>
-
-
-
-        <!--  Main wrapper -->
-        <div class="body-wrapper">
-            <!--  Header Start -->
-            @auth('anggota')
-
-            @include('includes.header')
-            @endauth
-            @auth('admin')
-
-            @include('includes.admin.header')
-            @endauth
-
-
-            <!--  Header End -->
-
-
-            {{-- content --}}
-            <div class="container-fluid">
-
-                @yield('content')
-            </div>
+            <!-- End Page-content -->
         </div>
 
+        <footer class="footer">
+            <div class="container-fluid">
+                @php
+                    $year = 2024;
+                @endphp
+                <div class="text-sm-end d-none d-sm-block">
+                    {{ $year }} © {{ config('app.name') }}
+                </div>
+            </div>
+        </footer>
     </div>
 
-
     @include('includes.scripts')
-
-    @stack('scripts')
 </body>
 
 </html>

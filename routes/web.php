@@ -11,8 +11,13 @@ Route::get('/register', [RegisterController::class, 'index'])->name('user.getreg
 Route::post('/register', [RegisterController::class, 'store'])->name('user.register');
 
 Route::get('/', function () {
-   
-    return redirect()->route('user.login');
+    return view('layout');
+    // return redirect()->route('user.login');
+});
+
+Route::get('login', function () {
+    return view('login');
+    // return redirect()->route('user.login');
 });
 
 Route::get('user/dashboard', [UserAuthController::class, 'dashboard'])->name('user.dashboard')->middleware('auth:anggota');

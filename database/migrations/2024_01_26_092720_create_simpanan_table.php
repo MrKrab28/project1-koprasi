@@ -15,17 +15,17 @@ return new class extends Migration
         Schema::create('simpanan', function (Blueprint $table) {
             $table->id();
             $table->foreignId('id_anggota');
+            $table->foreignId('id_jenis');
             $table->timestamps();
 
             $table->foreign('id_anggota')->references('id')->on('users')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-        });
 
-        $simpanan = new Simpanan();
-        $simpanan->id_anggota = 1;
-        // $simpanan->saldo = 1000;
-        $simpanan->save();
+            $table->foreign('id_jenis')->references('id')->on('jenis_simpanan')
+                ->onUpdate('cascade')
+                ->onDelete('restrict');
+        });
     }
 
     /**

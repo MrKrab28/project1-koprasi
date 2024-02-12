@@ -1,49 +1,51 @@
-<header class="app-header">
-    <nav class="navbar navbar-expand-lg navbar-light">
-        <ul class="navbar-nav">
-            <li class="nav-item d-block d-xl-none">
-                <a class="nav-link sidebartoggler nav-icon-hover" id="headerCollapse" href="javascript:void(0)">
-                    <i class="ti ti-menu-2"></i>
+<header id="page-topbar">
+    <div class="navbar-header">
+        <div class="d-flex">
+            <!-- LOGO -->
+            <div class="navbar-brand-box">
+                <a href="#" class="logo logo-dark">
+                    <span class="logo-sm">
+                        <img src="{{ asset('assets/images/logo.png') }}" alt="" height="22">
+                    </span>
+                    <span class="logo-lg">
+                        <img src="{{ asset('assets/images/logo-dark.png') }}" alt="" height="17">
+                    </span>
                 </a>
-            </li>
-            <li class="nav-item">
 
-                <a class="text-primary fs-6"><b> Koperasi simpan pinjam </b></a>
+                <a href="#" class="logo logo-light">
+                    <span class="logo-sm">
+                        <img src="{{ asset('assets/images/logo-light.png') }}" alt="" height="22">
+                    </span>
+                    <span class="logo-lg">
+                        <img src="{{ asset('assets/images/logo-light.png') }}" alt="" height="36">
+                    </span>
+                </a>
+            </div>
 
+            <button type="button" class="btn btn-sm px-3 font-size-24 header-item waves-effect" id="vertical-menu-btn">
+                <i class="mdi mdi-menu"></i>
+            </button>
 
-
-            </li>
-        </ul>
-        <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
-            <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-end">
-                <li class="nav-item dropdown">
-                    <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2"
-                        data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="{{ asset('assets/images/profile/user-1.jpg') }}" alt="" width="35"
-                            height="35" class="rounded-circle">
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
-                        <div class="message-body">
-                            <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
-                                <i class="ti ti-user fs-6"></i>
-                                <p class="mb-0 fs-3">My Profile</p>
-                            </a>
-                            <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
-                                <i class="ti ti-mail fs-6"></i>
-                                <p class="mb-0 fs-3">My Account</p>
-                            </a>
-                            <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
-                                <i class="ti ti-list-check fs-6"></i>
-                                <p class="mb-0 fs-3">My Task</p>
-                            </a>
-                            <form action="{{ route('user.logout') }}" method="POST">
-                            @csrf
-                                <button type="submit" class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</button>
-                            </form>
-                        </div>
-                    </div>
-                </li>
-            </ul>
+            <div class="d-none d-sm-block ms-2">
+                <h4 class="page-title"></h4>
+            </div>
         </div>
-    </nav>
+
+        <div class="d-flex">
+            <div class="dropdown d-inline-block">
+                <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
+                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img class="rounded-circle header-profile-user"
+                        src="{{ asset('assets/images/users/avatar-1.jpg') }}" alt="Header Avatar">
+                </button>
+                <div class="dropdown-menu dropdown-menu-end">
+                    <a class="dropdown-item" href="#">Profile</a>
+                    <a class="dropdown-item" href="#">My Wallet</a>
+                    <a class="dropdown-item" href="#">Lock screen</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item text-danger" href="#">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </header>

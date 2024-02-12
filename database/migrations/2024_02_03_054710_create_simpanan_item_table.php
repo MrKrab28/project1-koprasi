@@ -23,11 +23,6 @@ return new class extends Migration
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
         });
-        $simpanan = new SimpananItem();
-        $simpanan->id_simpanan = 1;
-        $simpanan->jumlah_setor = 52000;
-        $simpanan->tgl_simpan = now();
-        $simpanan->save();
     }
 
     /**
