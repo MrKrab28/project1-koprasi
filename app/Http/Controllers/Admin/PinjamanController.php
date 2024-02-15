@@ -31,12 +31,14 @@ class PinjamanController extends Controller
             'total_pinjaman' => 'required|numeric'
         ]);
 
+        $angsuran = $request->total_pinjaman / $request->banyak_angsuran + ($request->total_pinjaman / $request->banyak_angsuran * 0.1);
+
         $pinjaman = new Pinjaman();
         $pinjaman->id_anggota = $request->id_anggota;
         $pinjaman->tgl_pinjaman = $request->tgl_pinjaman;
         $pinjaman->total_pinjaman = $request->total_pinjaman;
         $pinjaman->banyak_angsuran = $request->banyak_angsuran;
-        $pinjaman->nominal_angsuran = $pinjaman->total_pinjaman / $pinjaman->banyak_angsuran + ($pinjaman->total_pinjaman / $pinjaman->banyak_angsuran * 0.1);
+        $pinjaman->nominal_angsuran = round($angsuran, -3);
         $pinjaman->save();
 
         $angsuran = new Angsuran();
@@ -50,26 +52,26 @@ class PinjamanController extends Controller
     }
 
 
-    public function angsuran(Request $request){
+    // public function angsuran(Request $request){
 
-        $request->validate([
-            'anggota' => 'required',
-            'tgl_angsur'
-        ]);
+    //     $request->validate([
+    //         'anggota' => 'required',
+    //         'tgl_angsur'
+    //     ]);
 
-        $pinjaman = new Pinjaman();
-        $pinjaman->id_anggota = $request->id_anggota;
-        $pinjaman->tgl_pinjaman = $request->tgl_pinjaman;
-        $pinjaman->total_pinjaman = $request->total_pinjaman;
-        $pinjaman->save();
+    //     $pinjaman = new Pinjaman();
+    //     $pinjaman->id_anggota = $request->id_anggota;
+    //     $pinjaman->tgl_pinjaman = $request->tgl_pinjaman;
+    //     $pinjaman->total_pinjaman = $request->total_pinjaman;
+    //     $pinjaman->save();
 
-        $angsuran = new Angsuran();
-        $angsuran->id_pinjaman = $pinjaman->id;
-        $angsuran->banyak_angsuran = $request->banyak_angsuran;
-        $angsuran->nominal_angsuran = $pinjaman->total_pinjaman / $angsuran->banyak_angsuran;
-        $angsuran->tanggal_angsur = $request->tanggal_angsur;
-        $angsuran->save();
-    }
+    //     $angsuran = new Angsuran();
+    //     $angsuran->id_pinjaman = $pinjaman->id;
+    //     $angsuran->banyak_angsuran = $request->banyak_angsuran;
+    //     $angsuran->nominal_angsuran = $pinjaman->total_pinjaman / $angsuran->banyak_angsuran;
+    //     $angsuran->tanggal_angsur = $request->tanggal_angsur;
+    //     $angsuran->save();
+    // }
 
 
 

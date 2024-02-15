@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Simpanan;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\JenisSimpanan;
 use App\Models\SimpananItem;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -15,49 +16,49 @@ class SimpananController extends Controller
 {
     public function index(Request $request)
     {
-        if ($request->has('anggota')) {
-            $user = User::find($request->anggota);
+        if ($request->has('jenis')) {
+            $data = [
+                'jenis' => JenisSimpanan::find($request->jenis),
+                'daftarSimpanan' => Simpanan::where('id_jenis', $request->jenis)->get(),
+                'daftarAnggota' => User::all()
+            ];
 
-            return view('admin.simpanan-detail', compact('user'));
+            return view('admin.simpanan', $data);
+        } else {
+            abort(404);
+        }
+    }
+
+    public function detail(Request $request) {
+
+        if ($request->has('id')) {
+            $simpanan = Simpanan::find($request->id);
+
+            return view('admin.simpanan-detail', compact('simpanan'));
+        } else {
+            abort(404);
         }
 
-        $users = User::has('simpanan')->get();
-
-        return view('admin.simpanan', compact('users'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'id_anggota' => 'required|unique:simpanan,id_anggota',
+            'jenis' => 'required',
+            'id_anggota' => 'required',
             'jumlah_setor' => 'required|numeric',
             'tgl_simpan' => 'required|date',
         ]);
 
 
-    //    $user =  Simpananitem::create($data);
+        //    $user =  Simpananitem::create($data);
         $simpanan = new Simpanan();
         $simpanan->id_anggota = $request->id_anggota;
+        $simpanan->id_jenis = $request->jenis;
         $simpanan->save();
 
-       $item = new SimpananItem();
-       $item->id_simpanan = $simpanan->id;
-       $item->jumlah_setor = $request->jumlah_setor;
-       $item->tgl_simpan = $request->tgl_simpan;
-       $item->save();
-       return redirect()->route('simpanan-user');
-    }
-
-    public function storeItem(Request $request) {
-        $request->validate([
-            'anggota' => 'required',
-            'jumlah_setor' => 'required'
-        ]);
-
-        $user = User::find($request->anggota);
-
         $item = new SimpananItem();
-        $item->id_simpanan = $user->simpanan->id;
+        $item->id_simpanan = $simpanan->id;
         $item->jumlah_setor = $request->jumlah_setor;
         $item->tgl_simpan = $request->tgl_simpan;
         $item->save();
@@ -65,4 +66,20 @@ class SimpananController extends Controller
         return redirect()->back();
     }
 
+    public function storeItem(Request $request)
+    {
+        $request->validate([
+            'id_simpanan' => 'required',
+            'jumlah_setor' => 'required',
+            'tgl_simpan' => 'required'
+        ]);
+
+        $item = new SimpananItem();
+        $item->id_simpanan = $request->id_simpanan;
+        $item->jumlah_setor = $request->jumlah_setor;
+        $item->tgl_simpan = $request->tgl_simpan;
+        $item->save();
+
+        return redirect()->back();
+    }
 }

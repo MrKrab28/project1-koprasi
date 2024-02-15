@@ -22,8 +22,12 @@ class Simpanan extends Model
         return $this->hasMany(SimpananItem::class, 'id_simpanan');
     }
 
+    public function jenis(){
+        return $this->belongsTo(JenisSimpanan::class, 'id_jenis');
+    }
+
     public function user()
     {
-        return $this->belongsTo(User::class, 'id');
+        return $this->belongsTo(User::class, 'id_anggota');
     }
 }

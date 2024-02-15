@@ -5,8 +5,8 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="card">
-                    <div class="card-body mt-5">
-                        <div class="card-header d-flex justify-content-between">
+                    <div class="card-body mt-4">
+                        <div class="card-header d-flex justify-content-between  mb-3">
                             <div class="header-title">
                                 <h4 class="card-title">Daftar pinjaman</h4>
                             </div>

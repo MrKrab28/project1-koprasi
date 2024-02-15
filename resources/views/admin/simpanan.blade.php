@@ -14,38 +14,41 @@
                                 {{-- <form action="{{ route('store.simpanan') }}" method="GET" >
                                 </form> --}}
                                 <button type="submit" class="btn btn-primary " data-bs-toggle="modal"
-                                data-bs-target="#exampleModal">Tambah Data</button>
+                                    data-bs-target="#exampleModal">Tambah Data</button>
                                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                                aria-hidden="true">
+                                    aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Data Simpanan
+                                                </h1>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                aria-label="Close"></button>
+                                                    aria-label="Close"></button>
                                             </div>
                                             <form action="{{ route('simpanan-store') }}" method="POST">
                                                 @csrf
+                                                <input type="hidden" name="jenis" value="{{ Request::get('jenis') }}"
+                                                    required>
                                                 <div class="modal-body">
-                                                    <div class="mb-3 mb-sm-0">
-                                                        <h5 class="card-title fw-semibold">Tambah Data Simpanan</h5>
+                                                    <div class="mb-3">
+                                                        <label for="anggota" class="form-label">Anggota</label>
+                                                        <select class="form-select" name="id_anggota" id="anggota" required>
+                                                            @foreach ($daftarAnggota as $anggota)
+                                                                <option value="{{ $anggota->id }}">{{ $anggota->nama }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
                                                     </div>
-                                                    Masukkan ID Anggota Untuk Menambah Data
-                                                    <div class="input-group mb-3">
-                                                        <label for="" class="input-group-text" id="basic-addon1">ID
-                                                            Anggota</label>
-                                                        <input type="number" class="form-control" name="id_anggota"
-                                                            aria-label="Username" >
 
+                                                    <div class="mb-3">
+                                                        <label for="jumlah_setor" class="form-label">Setoran Awal</label>
+                                                        <input type="number" class="form-control" id="jumlah_setor"
+                                                            name="jumlah_setor" value="{{ $jenis->jumlah }}" required>
                                                     </div>
-                                                    <div class="input-group mb-3">
-                                                        <label for="" class="input-group-text" id="basic-addon1">Setoran Awal</label>
-                                                        <input type="number" class="form-control" name="jumlah_setor"
-                                                            aria-label="Username">
 
-                                                    </div>
                                                     <div class="input-group mb-3">
-                                                        <label for="" class="input-group-text" id="basic-addon1">Tanggal Simpan</label>
+                                                        <label for="" class="input-group-text"
+                                                            id="basic-addon1">Tanggal Simpan</label>
                                                         <input type="date" class="form-control" name="tgl_simpan"
                                                             aria-label="Username">
 
@@ -78,17 +81,18 @@
                                 </thead>
                                 <tbody>
 
-                                    @foreach ($users as $user)
+                                    @foreach ($daftarSimpanan as $simpanan)
                                         <tr>
 
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $user->nama }}</td>
-                                            <td>Rp. {{ number_format($user->simpanan_items->sum('jumlah_setor')) }}</td>
-                                            <td>{{ $user->no_hp }}</td>
-                                            <td>{{ $user->no_rekening }}</td>
+                                            <td>{{ $simpanan->user->nama }}</td>
+                                            <td>Rp. {{ $simpanan->items->sum('jumlah_setor') }}</td>
+                                            <td>{{ $simpanan->user->no_hp }}</td>
+                                            <td>{{ $simpanan->user->no_rekening }}</td>
 
                                             <td class="text-center">
-                                                <button class="btn btn-primary btn-sm" onclick="document.location.href = '?anggota={{ $user->id }}'">
+                                                <button class="btn btn-primary btn-sm"
+                                                    onclick="document.location.href = '{{ route('simpanan-user.detail') }}?id={{ $simpanan->id }}'">
                                                     Detail
                                                 </button>
 
@@ -105,28 +109,22 @@
         </div>
     </div>
 @endsection
+
+{{-- @include('includes.plugins.select') --}}
+
 @push('styles')
     @include('includes.datatables.styles')
 @endpush
 
 @push('scripts')
     @include('includes.datatables.scripts')
+
     <script>
         $(document).ready(function() {
             $('#table').DataTable({
                 responsive: true,
                 sort: false
             });
-        });
-
-        channel.bind('user-registered', function(data) {
-            if ($('#pending').length > 1) {
-                $('.pending').text(data.totalUnverified);
-            } else {
-                $('#pending').html(
-                    '<button class="btn btn-primary btn-block mb-3" onclick="window.location.reload()">Tampilkan <span class="pending">' +
-                    data.totalUnverified + '</span> akun Mahasiswa terbaru</button>');
-            }
         });
 
         function deleteData(id) {

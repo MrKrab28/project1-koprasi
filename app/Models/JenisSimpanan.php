@@ -10,4 +10,9 @@ class JenisSimpanan extends Model
     use HasFactory;
 
     protected $table = 'jenis_simpanan';
+
+    public function simpanan(){
+        return $this->hasMany(Simpanan::class, 'id_jenis');
+    }
 }
+

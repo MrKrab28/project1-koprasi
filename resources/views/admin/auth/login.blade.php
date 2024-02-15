@@ -8,7 +8,7 @@
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description">
     <meta content="Themesbrand" name="author">
     <!-- App favicon -->
-    <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}">
+    <link rel="shortcut icon" href="{{ asset('assets/images/logo-koperasi.png') }}">
 
     @include('includes.styles')
 </head>
@@ -22,26 +22,26 @@
                         <div class="card-body">
                             <div class="text-center mt-4">
                                 <div class="mb-3">
-                                    <a href="#"><img src="{{ asset('assets/images/logo.png') }}" height="30"
+                                    <a href="#"><img src="{{ asset('assets/images/logo-koperasi.png') }}" height="150"
                                             alt="logo"></a>
                                 </div>
                             </div>
                             <div class="p-3">
-                                <h4 class="font-size-18 mt-2 text-center">Welcome Back !</h4>
-                                <p class="text-muted text-center mb-4">Sign in to continue to Admiria.</p>
+                                <h4 class="font-size-18 mt-2 text-center">Login Admin</h4>
+                                <p class="text-muted text-center mb-4">Koperasi Simpan Pinjam</p>
 
-                                <form class="form-horizontal" action="">
-
+                                <form class="form-horizontal" action="{{ route('admin-authenticate') }}" method="POST">
+                                    @csrf
                                     <div class="mb-3">
                                         <label class="form-label" for="username">Username</label>
-                                        <input type="text" class="form-control" id="username"
-                                            placeholder="Enter username">
+                                        <input type="email" name="email" class="form-control" id="username"
+                                            placeholder="Masukkan Email">
                                     </div>
 
                                     <div class="mb-3">
                                         <label class="form-label" for="userpassword">Password</label>
-                                        <input type="password" class="form-control" id="userpassword"
-                                            placeholder="Enter password">
+                                        <input type="password" name="password" class="form-control" id="userpassword"
+                                            placeholder="Masukkan password">
                                     </div>
 
                                     <div class="row mt-4">

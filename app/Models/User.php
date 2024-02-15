@@ -38,9 +38,9 @@ class User extends Authenticatable
     }
 
 
-    public function simpanan(): HasOne
+    public function simpanan()
     {
-        return $this->hasOne(Simpanan::class, 'id_anggota');
+        return $this->hasmany(Simpanan::class, 'id_anggota');
     }
 
     public function simpanan_items(): HasManyThrough

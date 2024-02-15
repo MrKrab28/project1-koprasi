@@ -8,7 +8,7 @@
             <div class="col-lg-8 d-flex align-items-strech">
                 <div class="card w-100">
                     <div class="card-body">
-                        <form action="{{ route('user.update', $user) }}" method="POST">
+                        <form action="{{ route('user-update', $user) }}" method="POST">
                             @csrf
                             @method('put')
                             <div class="d-sm-flex d-block align-items-center justify-content-between mb-9">

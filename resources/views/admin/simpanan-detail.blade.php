@@ -5,28 +5,29 @@
         <!--  Row 1 -->
 
         <div class="row mt-5">
-                <div class="card mb-0">
-                    <div class="card-body">
+            <div class="card mb-0">
+                <div class="card-body">
 
-                        <div class="d-sm-flex d-block align-items-center justify-content-between mb-9">
-                            <div class="mb-3 mb-sm-0">
-                                <h5 class="card-title fw-semibold">Tambah Data Simpanan</h5>
-                            </div>
+                    <div class="d-sm-flex d-block align-items-center justify-content-between mb-9">
+                        <div class="mb-3 mb-sm-0">
+                            <h5 class="card-title fw-semibold">Tambah Data Simpanan</h5>
                         </div>
+                    </div>
 
-                        <form action="{{ route('simpanan-storeItem') }}" method="POST" class="mb-4">
-                            @csrf
-                            <input type="hidden" name="anggota" value="{{ Request::get('anggota') }}">
-                            <div class="input-group mb-3">
-                                <label for="" class="input-group-text" id="basic-addon1">Jumlah Setor</label>
-                                <input type="number" class="form-control" name="jumlah_setor" step="1000" required>
-                            </div>
-                            <div class="input-group mb-3">
-                                <label for="" class="input-group-text" id="basic-addon1">Tanggal Simpan</label>
-                                <input type="date" class="form-control" name="tgl_simpan"  required>
-                            </div>
-                            <button type="submit" class="btn btn-success">Tambah Setoran</button>
-                        </form>
+                    <form action="{{ route('simpanan-storeItem') }}" method="POST" class="mb-4">
+                        @csrf
+                        <input type="hidden" name="id_simpanan" value="{{ Request::get('id') }}">
+                        <div class="input-group mb-3">
+                            <label for="" class="input-group-text" id="basic-addon1">Jumlah Setor</label>
+                            <input type="number" class="form-control" name="jumlah_setor" step="1000"
+                                value="{{ $simpanan->jenis->jumlah }}" required>
+                        </div>
+                        <div class="input-group mb-3">
+                            <label for="" class="input-group-text" id="basic-addon1">Tanggal Simpan</label>
+                            <input type="date" class="form-control" name="tgl_simpan" required>
+                        </div>
+                        <button type="submit" class="btn btn-success">Tambah Setoran</button>
+                    </form>
 
                     <table id="table" class="table table-hover" style="width: 100%">
                         <thead>
@@ -39,7 +40,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($user->simpanan_items->sortBy('tgl_simpan') as $item)
+                            @foreach ($simpanan->items->sortBy('tgl_simpan') as $item)
                                 <tr>
 
                                     <td>{{ $loop->iteration }}</td>

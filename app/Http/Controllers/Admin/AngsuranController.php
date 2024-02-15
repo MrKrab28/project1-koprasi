@@ -32,9 +32,17 @@ class AngsuranController extends Controller
 
         $pinjaman =  Pinjaman::find($request->pinjaman);
 
+        $sisaAngsur = $pinjaman->banyak_angsuran - $pinjaman->angsuran->count();
+
+        if ($sisaAngsur == 1) {
+            $angsuran = $pinjaman->total_pinjaman + ($pinjaman->total_pinjaman * 0.1) - $pinjaman->angsuran->sum('nominal_angsuran');
+        } else {
+            $angsuran = $pinjaman->nominal_angsuran;
+        }
+
         $angsur = new Angsuran();
         $angsur->id_pinjaman = $pinjaman->id;
-        $angsur->nominal_angsuran = $pinjaman->nominal_angsuran;
+        $angsur->nominal_angsuran = $angsuran;
         $angsur->tgl_angsur = $request->tgl_angsur;
         $angsur->save();
 

@@ -17,9 +17,9 @@
                         <span>Master Data</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="#">Jenis Simpanan</a></li>
-                        <li><a href="#">Data Petugas</a></li>
-                        <li><a href="#">Data Anggota</a></li>
+                        <li><a href="{{ route('jenisSimpanan-index') }}">Jenis Simpanan</a></li>
+                        <li><a href="{{ route('petugas-index') }}">Data Petugas</a></li>
+                        <li><a href="{{ route('user-index') }}">Data Anggota</a></li>
                     </ul>
                 </li>
 
@@ -43,13 +43,13 @@
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         @foreach ($jenis_simpanan as $item)
-                            <li><a href="#">{{ $item->nama }}</a></li>
+                            <li><a href="{{ route('simpanan-user') }}?jenis={{ $item->id }}">{{ $item->nama }}</a></li>
                         @endforeach
                     </ul>
                 </li>
 
                 <li>
-                    <a href="#" class="waves-effect">
+                    <a href="{{ route('pinjaman-user') }}" class="waves-effect">
                         <i class="mdi mdi-cash-plus"></i>
                         <span>Pinjaman</span>
                     </a>
