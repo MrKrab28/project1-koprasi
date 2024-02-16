@@ -35,9 +35,9 @@ class PemasukanController extends Controller
         return view('admin.pemasukan-edit', compact('pemasukan'));
     }
 
-    public function update(Request $request){
+    public function update(Request $request, Pemasukan $pemasukan){
 
-        $pemasukan = new Pemasukan();
+        $pemasukan = Pemasukan::find($pemasukan->id);
         $pemasukan->sumber_pemasukan = $request->sumber_pemasukan;
         $pemasukan->jumlah_pemasukan = $request->jumlah_pemasukan;
         $pemasukan->tgl_pemasukan = $request->tgl_pemasukan;
