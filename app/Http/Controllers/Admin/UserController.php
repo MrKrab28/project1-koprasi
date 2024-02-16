@@ -70,7 +70,7 @@ class UserController extends Controller
 
         $user->update();
 
-        return redirect()->route('index-user')->with('Success', 'Berhasi Mengubah Data');
+        return redirect()->route('user-index')->with('Success', 'Berhasi Mengubah Data');
 
     }
     public function delete(User $user)

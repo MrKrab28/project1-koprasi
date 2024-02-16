@@ -1,16 +1,17 @@
 <?php
 
-use App\Http\Controllers\Admin\AngsuranController;
-use App\Http\Controllers\Admin\AuthController;
-use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\JenisSimpananController;
-use App\Http\Controllers\Admin\PemasukanController;
-use App\Http\Controllers\Admin\PetugasController as AdminPetugasController;
-use App\Http\Controllers\SimpananController;
-use App\Http\Controllers\Admin\UserController as AdminUserController;
-use App\Http\Controllers\Admin\SimpananController as AdminSimpananController;
-use App\Http\Controllers\Admin\PinjamanController as AdminPinjamanController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SimpananController;
+use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Admin\AngsuranController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\PemasukanController;
+use App\Http\Controllers\Admin\PengeluaranController;
+use App\Http\Controllers\Admin\JenisSimpananController;
+use App\Http\Controllers\Admin\UserController as AdminUserController;
+use App\Http\Controllers\Admin\PetugasController as AdminPetugasController;
+use App\Http\Controllers\Admin\PinjamanController as AdminPinjamanController;
+use App\Http\Controllers\Admin\SimpananController as AdminSimpananController;
 
 // Route::group(['middleware' => 'auth:admin', 'as' => 'admin.'], function () {
 Route::group(['middleware' => 'auth:admin'], function () {
