@@ -18,7 +18,8 @@
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Data Pinjaman</h1>
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Data Pinjaman
+                                                </h1>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                     aria-label="Close"></button>
                                             </div>
@@ -26,15 +27,25 @@
                                                 @csrf
                                                 <div class="modal-body">
                                                     <div class="mb-3 mb-sm-0">
-                                                        <h5 class="card-title fw-semibold">Isi Formulir Untuk Menambahkan Data Pinjaman</h5>
+                                                        <h5 class="card-title fw-semibold">Isi Formulir Untuk Menambahkan
+                                                            Data Pinjaman</h5>
                                                     </div>
 
-                                                    <div class="input-group mb-3">
+                                                    {{-- <div class="input-group mb-3">
                                                         <label for="" class="input-group-text" id="basic-addon1">ID
                                                             Anggota</label>
                                                         <input type="number" class="form-control" name="id_anggota"
                                                             aria-label="Username">
 
+                                                    </div> --}}
+                                                    <div class="mb-3">
+                                                        <select class="form-control" data-width="100%" id="id_anggota"
+                                                            name="id_anggota">
+
+                                                            <option value="">ID Anggota</option>
+                                                            
+
+                                                        </select>
                                                     </div>
                                                     <div class="input-group mb-3">
                                                         <label for="" class="input-group-text"
@@ -72,7 +83,7 @@
 
                         <div class="table-responsive">
                             {{-- <table id="table" class="table table-striped mt-5" data-toggle="data-table"> --}}
-                            <table id="table" class="table table-hover mt-5">
+                            <table id="table" class="table table-hover mt-5" style="width: 100%">
                                 <thead>
                                     <tr>
 
@@ -121,11 +132,17 @@
 @endsection
 @push('styles')
     @include('includes.datatables.styles')
+    @include('includes.select2.styles')
 @endpush
 
 @push('scripts')
     @include('includes.datatables.scripts')
+    @include('includes.select2.scripts')
     <script>
+        $(document).ready(function() {
+            $('#id_anggota').select2();
+        });
+
         $(document).ready(function() {
             $('#table').DataTable({
                 responsive: true,

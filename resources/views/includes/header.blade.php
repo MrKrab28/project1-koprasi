@@ -42,7 +42,7 @@
                     <a class="dropdown-item" href="#">Profile</a>
                     <a class="dropdown-item" href="#">My Wallet</a>
                     <a class="dropdown-item" href="#">Lock screen</a>
-                    <a class="dropdown-item" href="{{ route('admin-logout')}}">Lock screen</a>
+                    <a class="dropdown-item" href="{{ route('admin-logout')}}">Logout</a>
                     {{-- <form action=" {{ route('user-logout') }}" method="get">
                     @csrf
                         <div class="dropdown-divider"></div>

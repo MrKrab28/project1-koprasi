@@ -14,18 +14,18 @@ class PetugasController extends Controller
          return view('admin.petugas', compact('petugas'));
     }
 
+
     public function store(Request $request){
         $request->validate([
             'nama' => 'required',
             'alamat' => 'required',
-            'no_hp' => 'requied',
+            'no_hp' => 'required',
             'jk' => 'required',
             'jabatan' => 'required',
             'email' => 'required',
             'password' => 'required',
             'tgl_bergabung' => 'required|date',
         ]);
-
         $petugas = new Petugas();
         $petugas->nama = $request->nama;
         $petugas->alamat = $request->alamat;
@@ -33,11 +33,11 @@ class PetugasController extends Controller
         $petugas->jk = $request->jk;
         $petugas->jabatan = $request->jabatan;
         $petugas->email = $request->email;
-        $petugas->pasword = bcrypt($request->password);
+        $petugas->password = bcrypt($request->password);
         $petugas->tgl_bergabung = $request->tgl_bergabung;
         $petugas->save();
 
-        return redirect()->route('petugas-store');
+        return redirect()->route('petugas-index');
     }
 
     public function edit(Petugas $petugas){

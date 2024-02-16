@@ -17,7 +17,7 @@ class UserController extends Controller
         return view('admin.anggota', compact('user'));
     }
 
-    public function store(Request $request){
+    public function register(Request $request){
         $data = $request->validate([
             'nama' => 'required',
             'email' => 'required|email|unique:users,email',

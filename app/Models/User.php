@@ -29,6 +29,7 @@ class User extends Authenticatable
         'nik',
         'jk',
         'no_rekening',
+        'tgl_bergabung',
 
     ];
 

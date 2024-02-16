@@ -27,13 +27,14 @@ class UserController extends Controller
             'nik' => 'required|unique:users,nik',
             'jk' => 'required',
             'no_rekening' => 'required|unique:users,no_rekening',
+            'tgl_bergabung' => 'required|date',
         ]);
 
         $data['password'] = Hash::make($data['password']);
         User::create($data);
 
 
-        return redirect()->route('login')->with('success', 'Berhasil Mendaftar Sebagai Anggota');
+        return redirect()->route('user-index')->with('success', 'Berhasil Mendaftarkan Anggota');
     }
 
     public function edit(User $user)

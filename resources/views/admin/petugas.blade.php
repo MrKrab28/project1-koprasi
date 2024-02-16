@@ -55,15 +55,15 @@
                                                     <div class="mb-3">
                                                         <div class="form-check">
                                                             <input class="form-check-input" type="radio"
-                                                                name="flexRadioDefault" id="flexRadioDefault1">
+                                                                name="jk" value="L" id="jk">
                                                             <label class="form-check-label" for="flexRadioDefault1">
                                                                 Laki - Laki
                                                             </label>
                                                         </div>
                                                         <div class="form-check">
                                                             <input class="form-check-input" type="radio"
-                                                                name="flexRadioDefault" id="flexRadioDefault2" checked>
-                                                            <label class="form-check-label" for="flexRadioDefault2">
+                                                                name="jk" value="P" id="flexRadioDefault2" checked>
+                                                            <label class="form-check-label" for="jk">
                                                                 Perempuan
                                                             </label>
                                                         </div>
@@ -72,6 +72,11 @@
                                                         <label for="email" class="form-label">Email</label>
                                                         <input type="email" class="form-control" id="email"
                                                             name="email" required>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="password" class="form-label">Password</label>
+                                                        <input type="password" class="form-control" id="password"
+                                                            name="password" required>
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="tgl_bergabung" class="form-label">Tanggal
@@ -112,8 +117,8 @@
 
 
 
+                                    @foreach ($petugas as $petugas)
                                     <tr>
-                                        @foreach ($petugas as $petugas)
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $petugas->nama }}</td>
                                             <td>{{ $petugas->alamat }}</td>

@@ -40,11 +40,15 @@ return [
     'guards' => [
         'anggota' => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'users'
         ],
         'admin' => [
             'driver' => 'session',
-            'provider' => 'admins',
+            'provider' => 'admins'
+        ],
+        'petugas' => [
+            'driver' => 'session',
+            'provider' => 'petugas'
         ],
     ],
 
@@ -74,6 +78,10 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\Admin::class,
         ],
+        'petugas' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Petugas::class,
+        ]
 
         // 'users' => [
         //     'driver' => 'database',

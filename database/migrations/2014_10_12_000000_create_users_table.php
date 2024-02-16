@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('nik');
             $table->enum('level', ['admin', 'user'])->default('user');
             $table->string('no_rekening')->unique();
+            $table->date('tgl_bergabung');
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
@@ -37,6 +38,7 @@ return new class extends Migration
         $user->password = bcrypt('123');
         $user->nik = '7371112810990005';
         $user->no_rekening = '12312314';
+        $user->tgl_bergabung = now();
         $user->save();
 
         $user = new User();
@@ -48,6 +50,7 @@ return new class extends Migration
         $user->password = bcrypt('123');
         $user->nik = '7371112810990003';
         $user->no_rekening = '123456';
+        $user->tgl_bergabung = now();
         $user->save();
 
 
@@ -61,6 +64,7 @@ return new class extends Migration
         $user->password = bcrypt('123');
         $user->nik = '737111281093546003';
         $user->no_rekening = '123233456';
+        $user->tgl_bergabung = now();
         $user->save();
     }
 

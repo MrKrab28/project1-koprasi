@@ -29,8 +29,8 @@
                         <span>Transaksi</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="#">Pemasukan</a></li>
-                        <li><a href="#">Pengeluaran</a></li>
+                        <li><a href="{{ route('pemasukan-index') }}">Pemasukan</a></li>
+                        <li><a href="{{ route('pengeluaran-index') }}">Pengeluaran</a></li>
                     </ul>
                 </li>
 

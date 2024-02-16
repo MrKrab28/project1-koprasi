@@ -4,7 +4,8 @@ use App\Http\Controllers\Admin\AngsuranController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\JenisSimpananController;
-use App\Http\Controllers\Admin\PetugasController;
+use App\Http\Controllers\Admin\PemasukanController;
+use App\Http\Controllers\Admin\PetugasController as AdminPetugasController;
 use App\Http\Controllers\SimpananController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\SimpananController as AdminSimpananController;
@@ -16,6 +17,7 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     // user controller
     Route::get('/user', [AdminUserController::class, 'index'])->name('user-index');
+    Route::post('/user/add', [AdminUserController::class, 'store'])->name('user-store');
     Route::get('/user/edit/{user}', [AdminUserController::class, 'edit'])->name('user-edit');
     Route::put('/user/update/{user}', [AdminUserController::class, 'update'])->name('user-update');
     Route::delete('user/{user}', [AdminUserController::class, 'delete'])->name('user-delete');
@@ -47,9 +49,23 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::get('admin/logout', [AuthController::class, 'logout'])->name('admin-logout');
 
     // Petugas
-    Route::get('petugas', [PetugasController::class, 'index'])->name('petugas-index');
-    Route::post('petugas/add', [PetugasController::class, 'store'])->name('petugas-store');
-    Route::get('petugas/edit/{petugas}', [PetugasController::class, 'edit'])->name('petugas-edit');
-    Route::put('petugas/update/{petugas}', [PetugasController::class, 'update'])->name('petugas-update');
-    Route::delete('petugas/{petugas}', [PetugasController::class, 'delete'])->name('petugas-delete');
+    Route::get('petugas', [AdminPetugasController::class, 'index'])->name('petugas-index');
+    Route::post('petugas/add', [AdminPetugasController::class, 'store'])->name('petugas-store');
+    Route::get('petugas/edit/{petugas}', [AdminPetugasController::class, 'edit'])->name('petugas-edit');
+    Route::put('petugas/update/{petugas}', [AdminPetugasController::class, 'update'])->name('petugas-update');
+    Route::delete('petugas/{petugas}', [AdminPetugasController::class, 'delete'])->name('petugas-delete');
+
+    // TRANSAKSI
+
+
+        //Pemasukan
+        Route::get('pemasukan', [PemasukanController::class, 'index'])->name('pemasukan-index');
+        Route::post('pemasukan/add', [PemasukanController::class, 'store'])->name('pemasukan-store');
+        Route::get('pemasukan/edit/{pemasukan}', [PemasukanController::class, 'edit'])->name('pemasukan-edit');
+        Route::put('pemasukan/update/{pemasukan}', [PemasukanController::class, 'update'])->name('pemasukan-update');
+        Route::delete('pemasukan/{pemasukan}', [PemasukanController::class, 'delete'])->name('pemasukan-delete');
+
+        // Pengeluaran
+        Route::get('pengeluaran', [PengeluaranController::class, 'index'])->name('pengeluaran-index');
+
 });

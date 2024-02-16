@@ -7,4 +7,7 @@
 <!-- Custom Css-->
 <link href="{{ asset('assets/css/custom.css') }}" rel="stylesheet" type="text/css" />
 
+{{-- select2 css --}}
+{{-- <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" /> --}}
+
 @stack('styles')
