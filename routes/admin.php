@@ -68,5 +68,9 @@ Route::group(['middleware' => 'auth:admin'], function () {
 
         // Pengeluaran
         Route::get('pengeluaran', [PengeluaranController::class, 'index'])->name('pengeluaran-index');
+        Route::post('pengeluaran/add', [PengeluaranController::class, 'store'])->name('pengeluaran-store');
+        Route::get('pengeluaran/edit/{pengeluaran}', [PengeluaranController::class, 'edit'])->name('pengeluaran-edit');
+        Route::put('pengeluaran/update/{pengeluaran}', [PengeluaranController::class, 'update'])->name('pengeluaran-update');
+        Route::delete('pengeluaran/{pengeluaran}', [PengeluaranController::class, 'delete'])->name('pengeluaran-delete');
 
 });

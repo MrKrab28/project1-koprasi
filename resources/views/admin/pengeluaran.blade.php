@@ -8,7 +8,7 @@
                     <div class="card-body mt-5">
                         <div class="card-header d-flex justify-content-between">
                             <div class="header-title mb-3">
-                                <h4 class="card-title">Daftar Pemasukan</h4>
+                                <h4 class="card-title">Daftar Pengeluaran</h4>
                             </div>
                             <button type="submit" class="btn btn-primary " data-bs-toggle="modal"
                                 data-bs-target="#exampleModal">Tambah Data</button>
@@ -18,27 +18,27 @@
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Data Pemasukan
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Data Pengeluaran
                                         </h1>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
-                                    <form action="{{ route('pemasukan-store') }}" method="POST">
+                                    <form action="{{ route('pengeluaran-store') }}" method="POST">
                                         @csrf
                                         <div class="modal-body">
                                             <div class="mb-3">
-                                                <label for="sumber_pemasukan" class="form-label">Sumber Pemasukan</label>
-                                                <input type="text" class="form-control" name="sumber_pemasukan" id="sumber_pemasukan" required>
+                                                <label for="jumlah_pengeluaran" class="form-label">Jumlah Pengeluaran</label>
+                                                <input type="number" class="form-control" name="jumlah_pengeluaran" id="jumlah_pengeluaran" required>
                                             </div>
 
                                             <div class="mb-3">
-                                                <label for="jumlah_pemasukan" class="form-label">Jumlah Pemasukan</label>
-                                                <input type="number" class="form-control" id="jumlah_pemasukan" name="jumlah_pemasukan"
+                                                <label for="tujuan_pengeluaran" class="form-label">Tujuan Pengeluaran</label>
+                                                <input type="text" class="form-control" id="tujuan_pengeluaran" name="tujuan_pengeluaran"
                                                     required>
                                             </div>
                                             <div class="mb-3">
-                                                <label for="tgl_pemasukan" class="form-label">Tanggal Pemasukan</label>
-                                                <input type="date" class="form-control" id="tgl_pemasukan" name="tgl_pemasukan"
+                                                <label for="tgl_pengeluaran" class="form-label">Tanggal Pengeluaran</label>
+                                                <input type="date" class="form-control" id="tgl_pengeluaran" name="tgl_pengeluaran"
                                                     required>
                                             </div>
                                             <div class="mb-3">
@@ -65,31 +65,31 @@
                                     <tr>
 
                                         <th>No</th>
-                                        <th>Sumber Pemasukan</th>
-                                        <th>Jumlah Pemasukan</th>
-                                        <th>Tanggal Pemasukan</th>
+                                        <th>Jumlah Pengeluaran</th>
+                                        <th>Tujuan Pengeluaran</th>
+                                        <th>Tanggal pengeluaran</th>
                                         <th>Keterangan</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
 
-                                    @foreach ($pemasukan as $pemasukan)
+                                    @foreach ($pengeluaran as $pengeluaran)
                                         <tr>
 
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $pemasukan->sumber_pemasukan }}</td>
-                                            <td>Rp. {{ number_format($pemasukan->jumlah_pemasukan)  }}</td>
-                                            <td>{{ Carbon\Carbon::parse($pemasukan->tgl_pemasukan)->isoFormat('D MMMM YYYY')  }}</td>
-                                            <td>{{ $pemasukan->keterangan }}</td>
+                                            <td>Rp. {{ number_format($pengeluaran->jumlah_pengeluaran)  }}</td>
+                                            <td>{{ $pengeluaran->tujuan_pengeluaran }}</td>
+                                            <td>{{  Carbon\Carbon::parse($pengeluaran->tgl_pengeluaran)->isoFormat('D MMMM YYYY')  }}</td>
+                                            <td>{{ $pengeluaran->keterangan }}</td>
 
                                             <td class="text-center">
                                                 <button class="btn btn-primary btn-sm"
-                                                    onclick="document.location.href = '{{ route('pemasukan-edit', $pemasukan) }}'">
+                                                    onclick="document.location.href = '{{ route('pengeluaran-edit', $pengeluaran) }}'">
                                                     <i class="ti ti-pencil"></i>
                                                 </button>
 
-                                                <form action="{{ route('pemasukan-delete', $pemasukan) }}" class="d-inline"
+                                                <form action="{{ route('pengeluaran-delete', $pengeluaran) }}" class="d-inline"
                                                     method="POST">
                                                     <button type="submit" class="btn btn-danger btn-sm">
                                                         <i class=" ti ti-trash"></i>
