@@ -50,7 +50,7 @@
 
                         <div class="table-responsive">
                             {{-- <table id="table" class="table table-striped mt-5" data-toggle="data-table"> --}}
-                            <table id="table" class="table table-hover mt-5">
+                            <table id="table" class="table table-hover mt-5 w-100">
                                 <thead>
                                     <tr>
 
@@ -64,10 +64,9 @@
 
                                     @foreach ($jenis_simpanan as $jenis)
                                         <tr>
-
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $jenis->nama }}</td>
-                                            <td>{{ $jenis->jumlah }}</td>
+                                            <td>{{ $jenis->jumlah ? 'Rp. ' . number_format($jenis->jumlah) : '-' }}</td>
 
                                             <td class="text-center">
                                                 <button class="btn btn-primary btn-sm"

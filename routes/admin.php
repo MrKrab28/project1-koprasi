@@ -8,13 +8,19 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\PemasukanController;
 use App\Http\Controllers\Admin\PengeluaranController;
 use App\Http\Controllers\Admin\JenisSimpananController;
+use App\Http\Controllers\Admin\PenarikanController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\PetugasController as AdminPetugasController;
 use App\Http\Controllers\Admin\PinjamanController as AdminPinjamanController;
 use App\Http\Controllers\Admin\SimpananController as AdminSimpananController;
+use App\Models\Penarikan;
 
 // Route::group(['middleware' => 'auth:admin', 'as' => 'admin.'], function () {
 Route::group(['middleware' => 'auth:admin'], function () {
+    Route::get('/', function () {
+        return redirect()->route('dashboard');
+    });
+
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     // user controller
     Route::get('/user', [AdminUserController::class, 'index'])->name('user-index');
@@ -37,17 +43,12 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::get('pinjaman/angsuran', [AngsuranController::class, 'index'])->name('angsuran');
     Route::post('pinjaman/angsuran', [AngsuranController::class, 'store'])->name('angsuran-store');
 
-    Route::get('/logout', [AuthController::class, 'logout'])->name('admin.logout');
-
-
     // jenis simpanan
     Route::get('jenis-simpanan', [JenisSimpananController::class, 'index'])->name('jenisSimpanan-index');
     Route::post('jenis-simpanan/add', [JenisSimpananController::class, 'store'])->name('jenisSimpanan-store');
     Route::get('jenis-simpanan/edit/{jenis}', [JenisSimpananController::class, 'edit'])->name('jenisSimpanan-edit');
     Route::put('jenis-simpanan/update/{jenis}', [JenisSimpananController::class, 'update'])->name('jenisSimpanan-update');
     Route::delete('jenis-simpanan/{jenis}', [JenisSimpananController::class, 'delete'])->name('jenisSimpanan-delete');
-    // Auth
-    Route::get('admin/logout', [AuthController::class, 'logout'])->name('admin-logout');
 
     // Petugas
     Route::get('petugas', [AdminPetugasController::class, 'index'])->name('petugas-index');
@@ -73,4 +74,10 @@ Route::group(['middleware' => 'auth:admin'], function () {
         Route::put('pengeluaran/update/{pengeluaran}', [PengeluaranController::class, 'update'])->name('pengeluaran-update');
         Route::delete('pengeluaran/{pengeluaran}', [PengeluaranController::class, 'delete'])->name('pengeluaran-delete');
 
+        // PENARIKAN
+        Route::get('penarikan', [PenarikanController::class, 'penarikan'])->name('penarikan');
+        Route::post('penarikan/add', [PenarikanController::class, 'store'])->name('penarikan-store');   
+
+    // Auth
+    Route::get('logout', [AuthController::class, 'logout'])->name('admin-logout');
 });

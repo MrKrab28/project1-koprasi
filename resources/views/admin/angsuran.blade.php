@@ -7,115 +7,89 @@
         <div class="row mt-5">
             <div class="col-md-5">
                 <div class="card">
-                    <div class="card-body">
-                        <div class="card-title">
-                            <h5>Detail Pinjaman</h5>
+                    <div class="card-header">
+                        <div class="header-title">
+                            <h4>Detail Pinjaman</h4>
                         </div>
-                        <table>
-                            <tr>
-                                <td>Total Pinjaman</td>
-                                <td class="px-2">:</td>
-                                <td>
-                                    Rp. {{ number_format($pinjaman->total_pinjaman)  }}
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Banyak Angsuran</td>
-                                <td class="px-2">:</td>
-                                <td>{{ $pinjaman->banyak_angsuran }}x</td>
-                            </tr>
-                            <tr>
-                                <td>Sisa Pinjaman</td>
-                                <td class="px-2">:</td>
-                                <td>Rp. {{ number_format($pinjaman->total_pinjaman + ($pinjaman->total_pinjaman * 0.1) - $pinjaman->angsuran->sum('nominal_angsuran')) }}</td>
-                            </tr>
-                            <tr>
-                                <td>Sisa Angsuran</td>
-                                <td class="px-2">:</td>
-                                <td>{{ number_format($pinjaman->banyak_angsuran - $pinjaman->angsuran->count()) }}x</td>
-                            </tr>
-                            <tr>
-                                <td>Tanggal Pinjaman</td>
-                                <td class="px-2">:</td>
-                                <td>{{ Carbon\Carbon::parse($pinjaman->tgl_pinjaman)->isoFormat('DD MMMM YYYY') }}</td>
-                            </tr>
-                            <tr>
-                                <td>Status Pinjaman</td>
-                                <td class="px-2">:</td>
-                                @if ($pinjaman->total_pinjaman + ($pinjaman->total_pinjaman * 0.1) == $pinjaman->angsuran->sum('nominal_angsuran'))
-
-                                <td><span class="text-primary">Lunas</span></td>
-                                @else
-                                <td><span class="text-danger">Belum Lunas</span></td>
-                                @endif
-                            </tr>
-                        </table>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label for="total" class="form-label">Total Pinjaman</label>
+                            <input type="text" readonly class="form-control-plaintext" id="total"
+                                value="Rp. {{ number_format($pinjaman->total_pinjaman) }}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="bunga" class="form-label">Bunga</label>
+                            <input type="text" readonly class="form-control-plaintext" id="bunga"
+                                value="Rp. {{ number_format($pinjaman->total_pinjaman * $pinjaman->bunga) }}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="banyak_angsur" class="form-label">Banyak Angsuran</label>
+                            <input type="text" readonly class="form-control-plaintext" id="banyak_angsur"
+                                value="{{ $pinjaman->banyak_angsuran }}x">
+                        </div>
+                        <div class="mb-3">
+                            <label for="sisa_angsur" class="form-label">Sisa Angsuran</label>
+                            <input type="text" readonly class="form-control-plaintext" id="sisa_angsur"
+                                value="{{ number_format($pinjaman->banyak_angsuran - $pinjaman->angsuran->count()) }}x">
+                        </div>
+                        <div class="mb-3">
+                            <label for="sisa" class="form-label">Sisa Pinjaman</label>
+                            <input type="text" readonly class="form-control-plaintext" id="sisa"
+                                value="Rp. {{ number_format($pinjaman->sisa) }}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="tanggal" class="form-label">Tanggal Pinjaman</label>
+                            <input type="text" readonly class="form-control-plaintext" id="tanggal"
+                                value="{{ Carbon\Carbon::parse($pinjaman->tgl_pinjaman)->isoFormat('DD MMMM YYYY') }}">
+                        </div>
+                        @if (!$pinjaman->lunas)
+                            <div class="mb-3">
+                                <label for="jatuh_tempo" class="form-label">Jatuh Tempo</label>
+                                <input type="text" readonly class="form-control-plaintext" id="jatuh_tempo"
+                                    value="{{ Carbon\Carbon::parse($pinjaman->jatuh_tempo)->isoFormat('DD MMMM YYYY') }}">
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>
             <div class="col-md-7">
                 <div class="card mb-0">
-                    <div class="card-body">
-
-                        <div class="d-sm-flex d-block align-items-center justify-content-between mb-9">
-                            <div class="mb-3 mb-sm-0">
-                                <h5 class="card-title fw-semibold">Bayar</h5>
-                            </div>
-                            <form action="{{ route('angsuran-store') }}" method="POST" class="mb-4">
-
-                                     @if ( $pinjaman->total_pinjaman + ($pinjaman->total_pinjaman * 0.1) == $pinjaman->angsuran->sum('nominal_angsuran'))
-
-                                     <button type="submit" class="btn btn-primary " data-bs-toggle="modal"
-                                     data-bs-target="#exampleModal" hidden >Bayar Angsuran</button>
-
-                                     @else
-
-                                     <button type="submit" class="btn btn-primary " data-bs-toggle="modal"
-                                     data-bs-target="#exampleModal" >Bayar Angsuran</button>
-                                     @endif
+                    <div class="card-header">
+                        <div class="header-title d-flex justify-content-between align-items-center">
+                            <h4 class="mb-0">Angsuran</h4>
+                            @if (!$pinjaman->lunas)
+                                <button class="btn btn-primary " data-bs-toggle="modal"
+                                    data-bs-target="#bayarAngsuran">Bayar Angsuran</button>
+                            @endif
                         </div>
-                            @csrf
-                            <input type="hidden" name="pinjaman" value="{{ Request::get('pinjaman') }}">
-                            <div class="input-group mb-3">
-                                <label for="" class="input-group-text"
-                                    id="basic-addon1" >Tanggal Bayar Angsuran</label>
-                                <input type="date" class="form-control" name="tgl_angsur"
-                                    aria-label="Username" required>
 
+                    </div>
+                    <div class="card-body">
+                        @if ($pinjaman->lunas)
+                            <div class="alert alert-success" role="alert">
+                                Pinjaman Lunas
                             </div>
-                        </form>
+                        @endif
                         <table id="table" class="table table-hover" style="width: 100%">
                             <thead>
                                 <tr>
 
                                     <th>No</th>
-                                    {{-- <th>Sisa Pinjaman</th> --}}
-                                    {{-- <th>Banyak Angsuran</th> --}}
                                     <th>Nominal Angsuran</th>
                                     <th>Tanggal Bayar Angsuran</th>
-                                    {{-- <th>Aksi</th> --}}
+                                    <th>Denda</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($pinjaman->angsuran->sortBy('tgl_angsur') as $item)
                                     <tr>
-
                                         <td>{{ $loop->iteration }}</td>
-                                        {{-- <td> {{ $item->angsuran->nominal_angsuran }}</td> --}}
-
-                                        {{-- @foreach (  $ as ) --}}
-
-                                        {{-- <td>{{ $item->banyak_angsuran }}</td> --}}
                                         <td>Rp. {{ number_format($item->nominal_angsuran) }}</td>
                                         <td>{{ Carbon\Carbon::parse($item->tgl_angsur)->isoFormat('D MMMM YYYY') }}</td>
-
-                                        {{-- @endforeach --}}
-                                        {{-- <td class="text-center">
-                                            <button class="btn btn-primary btn-sm" onclick="document.location.href = '{{ route('detail.simpanan',$user->simpanan->id) }}'">
-                                                DetailF
-                                            </button>
-
-                                        </td> --}}
+                                        <td>Rp. {{ number_format($item->denda) ?? '0' }}</td>
+                                        {{-- kode untuk hitung hari keterlambatan --}}
+                                        {{-- <td>{{ Carbon\Carbon::parse(TANGGAL JATUH TEMPO)->diffInDays(today()) }}</td> --}}
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -124,11 +98,39 @@
                     </div>
                 </div>
             </div>
-            {{-- @endforeach --}}
 
         </div>
     </div>
 @endsection
+
+@push('modals')
+    <!-- Modal -->
+    <div class="modal fade" id="bayarAngsuran" tabindex="-1" aria-labelledby="bayarAngsuranLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="bayarAngsuranLabel">Bayar Angsuran</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="{{ route('angsuran-store') }}" method="post">
+                    @csrf
+                    <div class="modal-body">
+                        <input type="hidden" name="pinjaman" value="{{ Request::get('pinjaman') }}">
+                        <div class="mb-3">
+                            <label for="tgl_angsur" class="form-label">Tanggal Bayar</label>
+                            <input type="date" class="form-control" id="tgl_angsur" name="tgl_angsur" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+@endpush
+
 @push('styles')
     @include('includes.datatables.styles')
 @endpush

@@ -25,7 +25,8 @@
                                 <th>Total Pinjaman</th>
                                 <th>Banyak Angsuran</th>
                                 <th>Nominal Angsuran</th>
-                                <th>Tanggal Pinjaman</th>
+                                <th>Tanggal Jatuh Tempo</th>
+                                <th>Status</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -39,7 +40,8 @@
 
                                     <td>{{ $item->banyak_angsuran }}x Angsur</td>
                                     <td>Rp. {{ number_format($item->nominal_angsuran) }}</td>
-                                    <td>{{ Carbon\Carbon::parse($item->tgl_pinjaman)->isoFormat('D MMMM YYYY') }}</td>
+                                    <td>{{ Carbon\Carbon::parse($item->jatuh_tempo)->isoFormat('D MMMM YYYY') }}</td>
+                                        <td>{!! $item->lunas ? '<span class="text-success">Lunas</span>' : '<span class="text-danger">Belum Lunas</span>' !!}</td>
                                     <td>
                                         <button class="btn btn-primary btn-sm"
                                             onclick="document.location.href = '{{ route('angsuran') }}?pinjaman={{ $item->id}}'">

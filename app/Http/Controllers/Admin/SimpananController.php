@@ -7,6 +7,7 @@ use App\Models\Simpanan;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\JenisSimpanan;
+use App\Models\Penarikan;
 use App\Models\SimpananItem;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -82,4 +83,6 @@ class SimpananController extends Controller
 
         return redirect()->back();
     }
+
+    
 }

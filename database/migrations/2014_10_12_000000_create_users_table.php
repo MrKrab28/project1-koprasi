@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('no_hp');
             $table->enum('jk', ['L', 'P'])->nullable();
             $table->string('foto_ktp')->default('default.png');
-            $table->string('nik');
+            $table->string('nik')->unique();
             $table->enum('level', ['admin', 'user'])->default('user');
             $table->string('no_rekening')->unique();
             $table->date('tgl_bergabung');

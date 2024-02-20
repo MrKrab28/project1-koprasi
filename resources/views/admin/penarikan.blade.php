@@ -14,17 +14,20 @@
                         </div>
                     </div>
 
-                    <form action="{{ route('simpanan-storeItem') }}" method="POST" class="mb-4">
+                    <form action="{{ route('penarikan-store') }}" method="POST" class="mb-4">
                         @csrf
                         <input type="hidden" name="id_simpanan" value="{{ Request::get('id') }}">
                         <div class="input-group mb-3">
-                            <label for="" class="input-group-text" id="basic-addon1">Jumlah Setor</label>
-                            <input type="number" class="form-control" name="jumlah_setor" step="1000"
-                                value="{{ $simpanan->jenis->jumlah }}" required>
+                            <label for="jumlah_penarikan" class="input-group-text" id="basic-addon1">Jumlah Penarikan</label>
+                            <input type="number" class="form-control" name="jumlah_penarikan" required>
                         </div>
                         <div class="input-group mb-3">
-                            <label for="" class="input-group-text" id="basic-addon1">Tanggal Simpan</label>
-                            <input type="date" class="form-control" name="tgl_simpan" required>
+                            <label for="tgl_penarikan" class="input-group-text" id="basic-addon1">Tanggal Penarikan</label>
+                            <input type="date" class="form-control" name="tgl_penarikan" required>
+                        </div>
+                        <div class="input-group mb-3">
+                            <label for="waktu_penarikan" class="input-group-text" id="basic-addon1">Waktu Penarikan</label>
+                            <input type="time" class="form-control" name="waktu_penarikan" required>
                         </div>
                         <button type="submit" class="btn btn-success">Tambah Setoran</button>
                     </form>
@@ -34,20 +37,22 @@
                             <tr>
 
                                 <th>No</th>
-                                <th>Jumlah Setor</th>
-                                <th>Tanggal Setor</th>
+                                <th>Jumlah Penarikan</th>
+                                <th>Tanggal Penarikan</th>
+                                <th>Waktu penarikan</th>
                                 {{-- <th>Aksi</th> --}}
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($simpanan->items->sortBy('tgl_simpan') as $item)
+                            @foreach ($penarikan->sortBy('tgl_penarikan') as $item)
                                 <tr>
 
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>Rp. {{ number_format($item->jumlah_setor) }}</td>
+                                    <td>Rp. {{ number_format($item->jumlah_penarikan) }}</td>
 
 
-                                    <td>{{ Carbon\Carbon::parse($item->tgl_simpan)->isoFormat('D MMMM YYYY') }}</td>
+                                    <td>{{ Carbon\Carbon::parse($item->tgl_penarikan)->isoFormat('D MMMM YYYY') }}</td>
+                                    <td>{{ $item->waktu_penarikan}}</td>
                                 </tr>
                             @endforeach
                         </tbody>

@@ -10,7 +10,7 @@ class AuthController extends Controller
 {
     public function login()
     {
-        return view('admin.auth.login');
+        return view('auth.admin');
     }
 
     public function authenticate(Request $request)
@@ -21,6 +21,10 @@ class AuthController extends Controller
         ]);
 
         if (Auth::guard('admin')->attempt($credentials)) {
+            return redirect()->route('dashboard');
+        }
+
+        if (Auth::guard('petugas')->attempt($credentials)) {
             return redirect()->route('dashboard');
         }
 

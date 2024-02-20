@@ -19,7 +19,9 @@ return new class extends Migration
             $table->integer('banyak_angsuran');
             $table->integer('nominal_angsuran');
             $table->date('tgl_pinjaman');
-            // $table->string('bunga');
+            $table->date('jatuh_tempo');
+            $table->integer('denda');
+            $table->float('bunga');
             // $table->enum('status', ['Proses', 'Selesai'])->default('Proses');
             $table->timestamps();
 

@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
@@ -38,7 +40,6 @@ class User extends Authenticatable
         return $this->hasMany(Pinjaman::class, 'id_anggota');
     }
 
-
     public function simpanan()
     {
         return $this->hasmany(Simpanan::class, 'id_anggota');
@@ -48,6 +49,14 @@ class User extends Authenticatable
     {
         return $this->hasManyThrough(SimpananItem::class, Simpanan::class, 'id_anggota', 'id_simpanan');
     }
+
+    public function pinjamanTerakhir(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->pinjaman->sortByDesc('tgl_pinjaman')->first()
+        );
+    }
+
 
     /**
      * The attributes that should be hidden for serialization.

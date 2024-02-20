@@ -60,7 +60,7 @@
 
                         <div class="table-responsive">
                             {{-- <table id="table" class="table table-striped mt-5" data-toggle="data-table"> --}}
-                            <table id="table" class="table table-hover mt-5">
+                            <table id="table" class="table table-hover mt-5 w-100">
                                 <thead>
                                     <tr>
 

@@ -13,71 +13,7 @@
                             <div class="me-3">
                                 <button type="submit" class="btn btn-primary " data-bs-toggle="modal"
                                     data-bs-target="#exampleModal">Tambah Data</button>
-                                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                                    aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Data Pinjaman
-                                                </h1>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
-                                            </div>
-                                            <form action="{{ route('pinjaman-store') }}" method="POST">
-                                                @csrf
-                                                <div class="modal-body">
-                                                    <div class="mb-3 mb-sm-0">
-                                                        <h5 class="card-title fw-semibold">Isi Formulir Untuk Menambahkan
-                                                            Data Pinjaman</h5>
-                                                    </div>
 
-                                                    {{-- <div class="input-group mb-3">
-                                                        <label for="" class="input-group-text" id="basic-addon1">ID
-                                                            Anggota</label>
-                                                        <input type="number" class="form-control" name="id_anggota"
-                                                            aria-label="Username">
-
-                                                    </div> --}}
-                                                    <div class="mb-3">
-                                                        <select class="form-control" data-width="100%" id="id_anggota"
-                                                            name="id_anggota">
-
-                                                            <option value="">ID Anggota</option>
-                                                            
-
-                                                        </select>
-                                                    </div>
-                                                    <div class="input-group mb-3">
-                                                        <label for="" class="input-group-text"
-                                                            id="basic-addon1">Pinjaman</label>
-                                                        <input type="number" class="form-control" name="total_pinjaman"
-                                                            aria-label="Username">
-
-                                                    </div>
-                                                    <div class="input-group mb-3">
-                                                        <label for="" class="input-group-text"
-                                                            id="basic-addon1">Banyak Angsuran</label>
-                                                        <input type="number" class="form-control" name="banyak_angsuran"
-                                                            aria-label="Username">
-
-                                                    </div>
-
-                                                    <div class="input-group mb-3">
-                                                        <label for="" class="input-group-text"
-                                                            id="basic-addon1">Tanggal pinjaman</label>
-                                                        <input type="date" class="form-control" name="tgl_pinjaman"
-                                                            aria-label="Username">
-
-                                                    </div>
-                                                    <div class="modal-footer">
-
-                                                        <button type="submit" class="btn btn-primary">Tambahkan</button>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
 
@@ -91,20 +27,22 @@
                                         <th>Nama Lengkap</th>
                                         <th>No.HP</th>
                                         <th>No.Rekening</th>
-                                        {{-- <th>Tanggal Pinjaman</th> --}}
+                                        <th>Status Pinjaman Terakhir</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
 
-                                    @foreach ($users as $user)
+                                    @foreach ($daftarPinjaman as $user)
                                         <tr>
 
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $user->nama }}</td>
                                             <td>{{ $user->no_hp }}</td>
-                                            {{-- <td>{{ $user->email }}</td> --}}
                                             <td>{{ $user->no_rekening }} </td>
+                                            <td>{!! $user->pinjamanTerakhir->lunas
+                                                ? '<span class="text-success">Lunas</span>'
+                                                : '<span class="text-danger">Belum Lunas</span>' !!}</td>
 
                                             {{-- <td>{{ Carbon\Carbon::parse($user->tgl_pinjaman)->isoFormat('D MMMM YYYY') }} --}}
                                             </td>
@@ -130,14 +68,85 @@
         </div>
     </div>
 @endsection
+
+@push('modals')
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Data Pinjaman
+                    </h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="{{ route('pinjaman-store') }}" method="POST">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="anggota" class="form-label">Anggota</label>
+                            <select class="form-select js-choice" id="anggota" name="id_anggota" required>
+                                <option value="">Pilih</option>
+                                @foreach ($daftarAnggota as $anggota)
+                                    <option value="{{ $anggota->id }}">{{ $anggota->nama }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="total_pinjaman" class="form-label">Pinjaman</label>
+                            <input type="text" class="form-control" id="total_pinjaman" name="total_pinjaman" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="banyak_angsuran" class="form-label">Banyak Angsuran</label>
+                            <input type="number" class="form-control" id="banyak_angsuran" name="banyak_angsuran" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="tgl_pinjaman" class="form-label">Tanggal Pinjaman</label>
+                            <input type="date" class="form-control" id="tgl_pinjaman" name="tgl_pinjaman" required>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="denda" class="form-label">Denda Jatuh Tempo</label>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1">Rp.</span>
+                                        <input type="text" class="form-control" id="denda" name="denda" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="bunga" class="form-label">Bunga</label>
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" id="bunga" name="bunga" required>
+                                        <span class="input-group-text" id="basic-addon1">%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+
+                            <button type="submit" class="btn btn-primary">Tambahkan</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+@endpush
+
 @push('styles')
     @include('includes.datatables.styles')
-    @include('includes.select2.styles')
+    @include('includes.choices-js.styles')
 @endpush
 
 @push('scripts')
     @include('includes.datatables.scripts')
-    @include('includes.select2.scripts')
+    @include('includes.choices-js.scripts')
     <script>
         $(document).ready(function() {
             $('#id_anggota').select2();

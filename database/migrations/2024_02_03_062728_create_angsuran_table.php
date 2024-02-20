@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('id_pinjaman');
             $table->integer('nominal_angsuran');
+            $table->integer('denda')->nullable();
 
             $table->date('tgl_angsur');
             $table->timestamps();

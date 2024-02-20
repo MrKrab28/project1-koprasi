@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Angsuran;
 use App\Models\Pinjaman;
+use Carbon\Carbon;
 
 class PinjamanController extends Controller
 {
@@ -16,13 +17,17 @@ class PinjamanController extends Controller
             $pinjaman = User::find($request->anggota)->pinjaman;
             return view('admin.pinjaman-detail', compact('pinjaman'));
         }
-        $users = User::has('pinjaman')->get();
-        return view('admin.pinjaman', compact('users'));
+
+        $data = [
+            'daftarAnggota' => User::all(),
+            'daftarPinjaman' => User::has('pinjaman')->get()
+        ];
+
+        return view('admin.pinjaman', $data);
     }
 
     public function store(Request $request)
     {
-
         $request->validate([
             'id_anggota' => 'required',
             'banyak_angsuran' => 'required',
@@ -31,14 +36,18 @@ class PinjamanController extends Controller
             'total_pinjaman' => 'required|numeric'
         ]);
 
-        $angsuran = $request->total_pinjaman / $request->banyak_angsuran + ($request->total_pinjaman / $request->banyak_angsuran * 0.1);
+        $bunga = $request->bunga / 100;
+        $angsuran = $request->total_pinjaman / $request->banyak_angsuran + ($request->total_pinjaman / $request->banyak_angsuran * $bunga);
 
         $pinjaman = new Pinjaman();
         $pinjaman->id_anggota = $request->id_anggota;
         $pinjaman->tgl_pinjaman = $request->tgl_pinjaman;
+        $pinjaman->jatuh_tempo = Carbon::parse($request->tgl_pinjaman)->addMonth();
         $pinjaman->total_pinjaman = $request->total_pinjaman;
         $pinjaman->banyak_angsuran = $request->banyak_angsuran;
         $pinjaman->nominal_angsuran = round($angsuran, -3);
+        $pinjaman->denda = $request->denda;
+        $pinjaman->bunga = $bunga;
         $pinjaman->save();
 
         $angsuran = new Angsuran();

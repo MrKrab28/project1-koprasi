@@ -99,11 +99,11 @@
                                 <tr>
 
                                     <th>No</th>
+                                    <th>NIK KTP</th>
                                     <th>Nama Lengkap</th>
                                     <th>Jenis Kelamin</th>
                                     <th>Email</th>
                                     <th>No. HP</th>
-                                    <th>NIK KTP</th>
                                     <th>No.Rekening</th>
                                     <th>Tanggal Bergabung</th>
                                     <th>Aksi</th>
@@ -117,6 +117,7 @@
                             <tr>
 
                                 <td>{{ $loop->iteration }}</td>
+                                <td>{{ $user->nik }}</td>
                                 <td>{{ $user->nama }}</td>
 
                                 @if ( $user->jk == 'L')
@@ -127,7 +128,6 @@
 
                                 <td>{{ $user->email }}</td>
                                 <td>{{ $user->no_hp }}</td>
-                                <td>{{ $user->nik }}</td>
                                 <td>{{ $user->no_rekening }}</td>
                                 <td>{{ $user->tgl_bergabung }}</td>
 

@@ -30,7 +30,7 @@
                                 <h4 class="font-size-18 mt-2 text-center">koperasi Simpan Pinjam</h4>
                                 <p class="text-muted text-center mb-4">Selamat Datang</p>
 
-                                <form class="form-horizontal" action="{{ route('user-authenticate') }}" method="POST">
+                                <form class="form-horizontal" action="{{ route('authenticate') }}" method="POST">
                                     @csrf
                                     <div class="mb-3">
                                         <label class="form-label" for="username">Username</label>
