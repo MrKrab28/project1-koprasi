@@ -118,33 +118,35 @@
     </div>
 @endsection
 
-@push('modals')
-    <!-- Modal -->
-    <div class="modal fade" id="bayarAngsuran" tabindex="-1" aria-labelledby="bayarAngsuranLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="bayarAngsuranLabel">Bayar Angsuran</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <form action="{{ route('angsuran-store') }}" method="post">
-                    @csrf
-                    <div class="modal-body">
-                        <input type="hidden" name="pinjaman" value="{{ Request::get('pinjaman') }}">
-                        <div class="mb-3">
-                            <label for="tgl_angsur" class="form-label">Tanggal Bayar</label>
-                            <input type="date" class="form-control" id="tgl_angsur" name="tgl_angsur" required>
+@if (!$telahMembayarBulanIni)
+    @push('modals')
+        <!-- Modal -->
+        <div class="modal fade" id="bayarAngsuran" tabindex="-1" aria-labelledby="bayarAngsuranLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="bayarAngsuranLabel">Bayar Angsuran</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form action="{{ route('angsuran-store') }}" method="post">
+                        @csrf
+                        <div class="modal-body">
+                            <input type="hidden" name="pinjaman" value="{{ Request::get('pinjaman') }}">
+                            <div class="mb-3">
+                                <label for="tgl_angsur" class="form-label">Tanggal Bayar</label>
+                                <input type="date" class="form-control" id="tgl_angsur" name="tgl_angsur" required>
+                            </div>
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                        <button type="submit" class="btn btn-primary">Simpan</button>
-                    </div>
-                </form>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                            <button type="submit" class="btn btn-primary">Simpan</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
-@endpush
+    @endpush
+@endif
 
 @push('styles')
     @include('includes.datatables.styles')
