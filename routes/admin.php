@@ -60,23 +60,23 @@ Route::group(['middleware' => 'auth:admin'], function () {
     // TRANSAKSI
 
 
-        //Pemasukan
-        Route::get('pemasukan', [PemasukanController::class, 'index'])->name('pemasukan-index');
-        Route::post('pemasukan/add', [PemasukanController::class, 'store'])->name('pemasukan-store');
-        Route::get('pemasukan/edit/{pemasukan}', [PemasukanController::class, 'edit'])->name('pemasukan-edit');
-        Route::put('pemasukan/update/{pemasukan}', [PemasukanController::class, 'update'])->name('pemasukan-update');
-        Route::delete('pemasukan/{pemasukan}', [PemasukanController::class, 'delete'])->name('pemasukan-delete');
+    //Pemasukan
+    Route::get('pemasukan', [PemasukanController::class, 'index'])->name('pemasukan-index');
+    Route::post('pemasukan/add', [PemasukanController::class, 'store'])->name('pemasukan-store');
+    Route::get('pemasukan/edit/{pemasukan}', [PemasukanController::class, 'edit'])->name('pemasukan-edit');
+    Route::put('pemasukan/update/{pemasukan}', [PemasukanController::class, 'update'])->name('pemasukan-update');
+    Route::delete('pemasukan/{pemasukan}', [PemasukanController::class, 'delete'])->name('pemasukan-delete');
 
-        // Pengeluaran
-        Route::get('pengeluaran', [PengeluaranController::class, 'index'])->name('pengeluaran-index');
-        Route::post('pengeluaran/add', [PengeluaranController::class, 'store'])->name('pengeluaran-store');
-        Route::get('pengeluaran/edit/{pengeluaran}', [PengeluaranController::class, 'edit'])->name('pengeluaran-edit');
-        Route::put('pengeluaran/update/{pengeluaran}', [PengeluaranController::class, 'update'])->name('pengeluaran-update');
-        Route::delete('pengeluaran/{pengeluaran}', [PengeluaranController::class, 'delete'])->name('pengeluaran-delete');
+    // Pengeluaran
+    Route::get('pengeluaran', [PengeluaranController::class, 'index'])->name('pengeluaran-index');
+    Route::post('pengeluaran/add', [PengeluaranController::class, 'store'])->name('pengeluaran-store');
+    Route::get('pengeluaran/edit/{pengeluaran}', [PengeluaranController::class, 'edit'])->name('pengeluaran-edit');
+    Route::put('pengeluaran/update/{pengeluaran}', [PengeluaranController::class, 'update'])->name('pengeluaran-update');
+    Route::delete('pengeluaran/{pengeluaran}', [PengeluaranController::class, 'delete'])->name('pengeluaran-delete');
 
-        // PENARIKAN
-        Route::get('penarikan', [PenarikanController::class, 'penarikan'])->name('penarikan');
-        Route::post('penarikan/add', [PenarikanController::class, 'store'])->name('penarikan-store');   
+    // PENARIKAN
+    Route::get('penarikan', [PenarikanController::class, 'penarikan'])->name('penarikan');
+    Route::post('penarikan/add', [PenarikanController::class, 'store'])->name('penarikan-store');
 
     // Auth
     Route::get('logout', [AuthController::class, 'logout'])->name('admin-logout');

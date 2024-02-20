@@ -5,14 +5,14 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="card">
-                    <div class="card-body mt-5">
-                        <div class="card-header d-flex justify-content-between">
-                            <div class="header-title mb-3">
-                                <h4 class="card-title">Daftar Jenis Simpanan</h4>
-                            </div>
-                            <button type="submit" class="btn btn-primary " data-bs-toggle="modal"
-                                data-bs-target="#exampleModal">Tambah Data</button>
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <div class="header-title">
+                            <h4 class="mb-0">Jenis Simpanan</h4>
                         </div>
+                        <button type="submit" class="btn btn-primary " data-bs-toggle="modal"
+                            data-bs-target="#exampleModal">Tambah Data</button>
+                    </div>
+                    <div class="card-body">
                         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                             aria-hidden="true">
                             <div class="modal-dialog">

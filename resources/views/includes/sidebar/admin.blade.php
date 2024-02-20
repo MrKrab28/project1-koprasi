@@ -17,7 +17,17 @@
                         <span>Master Data</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="#">Data Akun</a></li>
                         <li><a href="{{ route('jenisSimpanan-index') }}">Jenis Simpanan</a></li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="mdi mdi-account"></i>
+                        <span>Pengguna</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
                         <li><a href="{{ route('petugas-index') }}">Data Petugas</a></li>
                         <li><a href="{{ route('user-index') }}">Data Anggota</a></li>
                     </ul>
@@ -29,8 +39,8 @@
                         <span>Transaksi</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="{{ route('pemasukan-index') }}">Pemasukan</a></li>
-                        <li><a href="{{ route('pengeluaran-index') }}">Pengeluaran</a></li>
+                        <li><a href="{{ route('pemasukan-index') }}">Debit</a></li>
+                        <li><a href="{{ route('pengeluaran-index') }}">Kredit</a></li>
                     </ul>
                 </li>
 
@@ -70,6 +80,8 @@
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="#">Data Anggota</a></li>
+                        <li><a href="#">Jurnal Umum</a></li>
+                        <li><a href="#">Buku Besar</a></li>
                         <li><a href="#">Neraca Saldo</a></li>
                         <li><a href="#">SHU</a></li>
                     </ul>

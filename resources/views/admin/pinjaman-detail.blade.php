@@ -1,70 +1,62 @@
 @extends('layout')
 
 @section('content')
-    <div class="container-fluid">
+    <div class="container-fluid content-inner mt-2 py-0">
         <!--  Row 1 -->
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <div class="header-title">
+                    <h4 class="mb-0">Detail pinjaman</h4>
+                </div>
+            </div>
+            <div class="card-body">
+                <table id="table" class="table table-hover" style="width: 100%">
+                    <thead>
+                        <tr>
 
-        <div class="row mt-5">
-            <div class="card mb-0">
-                <div class="card-body">
-
-                    <div class="d-sm-flex d-block align-items-center justify-content-between mb-9">
-                        <div class="mb-3 mb-sm-0">
-                            <h5 class="card-title fw-semibold">Detail Pinjaman</h5>
-                        </div>
-                        {{-- <button type="submit" class="btn btn-primary " data-bs-toggle="modal"
-                            data-bs-target="#exampleModal">Bayar Angsuran</button> --}}
-                    </div>
-
-
-                    <table id="table" class="table table-hover" style="width: 100%">
-                        <thead>
+                            <th>No</th>
+                            <th>Total Pinjaman</th>
+                            <th>Banyak Angsuran</th>
+                            <th>Nominal Angsuran</th>
+                            <th>Tanggal Jatuh Tempo</th>
+                            <th>Status</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($pinjaman->sortBy('tgl_pinjaman') as $item)
                             <tr>
 
-                                <th>No</th>
-                                <th>Total Pinjaman</th>
-                                <th>Banyak Angsuran</th>
-                                <th>Nominal Angsuran</th>
-                                <th>Tanggal Jatuh Tempo</th>
-                                <th>Status</th>
-                                <th>Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($pinjaman->sortBy('tgl_pinjaman') as $item)
-                                <tr>
-
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>Rp. {{ number_format($item->total_pinjaman) }}</td>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>Rp. {{ number_format($item->total_pinjaman) }}</td>
 
 
-                                    <td>{{ $item->banyak_angsuran }}x Angsur</td>
-                                    <td>Rp. {{ number_format($item->nominal_angsuran) }}</td>
-                                    <td>{{ Carbon\Carbon::parse($item->jatuh_tempo)->isoFormat('D MMMM YYYY') }}</td>
-                                        <td>{!! $item->lunas ? '<span class="text-success">Lunas</span>' : '<span class="text-danger">Belum Lunas</span>' !!}</td>
-                                    <td>
-                                        <button class="btn btn-primary btn-sm"
-                                            onclick="document.location.href = '{{ route('angsuran') }}?pinjaman={{ $item->id}}'">
-                                            Lihat Angsuran
-                                        </button>
-                                    </td>
+                                <td>{{ $item->banyak_angsuran }}x Angsur</td>
+                                <td>Rp. {{ number_format($item->nominal_angsuran) }}</td>
+                                <td>{{ Carbon\Carbon::parse($item->jatuh_tempo)->isoFormat('D MMMM YYYY') }}</td>
+                                <td>{!! $item->lunas ? '<span class="text-success">Lunas</span>' : '<span class="text-danger">Belum Lunas</span>' !!}</td>
+                                <td>
+                                    <button class="btn btn-primary btn-sm"
+                                        onclick="document.location.href = '{{ route('angsuran') }}?pinjaman={{ $item->id }}'">
+                                        Lihat Angsuran
+                                    </button>
+                                </td>
 
-                                    {{-- <td class="text-center">
+                                {{-- <td class="text-center">
                                         <button class="btn btn-primary btn-sm" onclick="document.location.href = '{{ route('detail.simpanan',$user->simpanan->id) }}'">
                                             DetailF
                                         </button>
 
                                     </td> --}}
-                                </tr>
-                            @endforeach
-                        </tbody>
+                            </tr>
+                        @endforeach
+                    </tbody>
 
-                    </table>
-                </div>
+                </table>
             </div>
-            {{-- @endforeach --}}
-
         </div>
+        {{-- @endforeach --}}
+
     </div>
 @endsection
 @push('styles')

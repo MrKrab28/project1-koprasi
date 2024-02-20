@@ -1,22 +1,20 @@
 @extends('layout')
 
 @section('content')
-    <div class="conatiner-fluid content-inner mt-2 py-0">
+    <div class="container-fluid content-inner mt-2 py-0">
         <div class="row">
             <div class="col-sm-12">
                 <div class="card">
-                    <div class="card-body mt-4">
-                        <div class="card-header d-flex justify-content-between  mb-3">
-                            <div class="header-title">
-                                <h4 class="card-title">Daftar pinjaman</h4>
-                            </div>
-                            <div class="me-3">
-                                <button type="submit" class="btn btn-primary " data-bs-toggle="modal"
-                                    data-bs-target="#exampleModal">Tambah Data</button>
-
-                            </div>
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <div class="header-title">
+                            <h4 class="mb-0">Daftar pinjaman</h4>
                         </div>
-
+                        <div class="me-3">
+                            <button type="submit" class="btn btn-primary " data-bs-toggle="modal"
+                                data-bs-target="#exampleModal">Tambah Data</button>
+                        </div>
+                    </div>
+                    <div class="card-body">
                         <div class="table-responsive">
                             {{-- <table id="table" class="table table-striped mt-5" data-toggle="data-table"> --}}
                             <table id="table" class="table table-hover mt-5" style="width: 100%">
