@@ -58,9 +58,20 @@
                     <div class="card-header">
                         <div class="header-title d-flex justify-content-between align-items-center">
                             <h4 class="mb-0">Angsuran</h4>
+                            @php
+                                $tanggal = $pinjaman->angsuran->sortBy('tgl_angsur')->last()->tgl_angsur;
+                                if (Carbon\Carbon::parse($tanggal)->month == today()->month) {
+                                    $telahMembayarBulanIni = true;
+                                } else {
+                                    $telahMembayarBulanIni = false;
+                                }
+                            @endphp
                             @if (!$pinjaman->lunas)
-                                <button class="btn btn-primary " data-bs-toggle="modal"
-                                    data-bs-target="#bayarAngsuran">Bayar Angsuran</button>
+                                @if (!$telahMembayarBulanIni)
+                                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#bayarAngsuran">
+                                        Bayar Angsuran
+                                    </button>
+                                @endif
                             @endif
                         </div>
 
@@ -71,10 +82,14 @@
                                 Pinjaman Lunas
                             </div>
                         @endif
+                        @if (!$pinjaman->lunas && $telahMembayarBulanIni)
+                            <div class="alert alert-success" role="alert">
+                                Angsuran bulan ini telah dibayar
+                            </div>
+                        @endif
                         <table id="table" class="table table-hover" style="width: 100%">
                             <thead>
                                 <tr>
-
                                     <th>No</th>
                                     <th>Nominal Angsuran</th>
                                     <th>Tanggal Bayar Angsuran</th>
