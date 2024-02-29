@@ -36,7 +36,7 @@ class PenarikanController extends Controller
             $penarikan->waktu_penarikan = $request->waktu_penarikan;
             $penarikan->save();
 
-            return redirect()->back();
+            return redirect()->back()->with('success', 'Berhasil Melakukan penarikan');
         }
 
         return redirect()->back()->with('error', 'Saldo tidak cukup');

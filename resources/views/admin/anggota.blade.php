@@ -126,23 +126,23 @@
                                             <td>{{ $user->email }}</td>
                                             <td>{{ $user->no_hp }}</td>
                                             <td>{{ $user->no_rekening }}</td>
-                                            <td>{{ $user->tgl_bergabung }}</td>
+                                            <td>{{ Carbon\Carbon::parse($user->tgl_bergabung)->isoFormat('D MMMM YYYY')  }}</td>
 
                                             <td class="text-center">
                                                 <button class="btn btn-primary btn-sm"
-                                                    onclick="document.location.href = '{{ route('user-edit', $user) }}'">
+                                                    onclick="document.location.href = '{{ route('user-edit', $user->id) }}'">
                                                     <i class="ti ti-pencil"></i>
                                                 </button>
 
-                                                <form action="{{ route('user-delete', $user) }}" class="d-inline"
+                                                <form id="formDelete{{ $user->id }}" action="{{ route('user-delete', $user->id) }}" class="d-inline"
                                                     method="POST">
-                                                    <button type="submit" class="btn btn-danger btn-sm">
-                                                        <i class=" ti ti-trash"></i>
-                                                    </button>
                                                     @csrf
                                                     @method('delete')
                                                     <input type="hidden" name="id" value="">
                                                 </form>
+                                                <button type="button" onclick="deleteData({{ $user->id }})" class="btn btn-danger btn-sm">
+                                                    <i class=" ti ti-trash"></i>
+                                                </button>
 
                                             </td>
                                         </tr>
@@ -170,28 +170,26 @@
                 sort: false
             });
         });
+    </script>
 
-        channel.bind('user-registered', function(data) {
-            if ($('#pending').length > 1) {
-                $('.pending').text(data.totalUnverified);
-            } else {
-                $('#pending').html(
-                    '<button class="btn btn-primary btn-block mb-3" onclick="window.location.reload()">Tampilkan <span class="pending">' +
-                    data.totalUnverified + '</span> akun Mahasiswa terbaru</button>');
-            }
-        });
 
-        function deleteData(id) {
+
+    <script>
+        function deleteData(id){
             Swal.fire({
-                title: 'Apakah Anda yakin?',
-                text: "Akun ini akan terhapus dari database.",
-                icon: 'warning',
+                title: "Apakah Anda Yakin?",
+                text: "Data Ini Akan Terhapus Dari Database",
+                icon: "warning",
                 showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Ya, Hapus!"
             }).then((result) => {
                 if (result.isConfirmed) {
-                    $(`#formDelete${id}`).submit();
-                }
+                    $('#formDelete' + id).submit()
+                    }
             });
         }
-    </script>
+        </script>
+
 @endpush

@@ -126,23 +126,25 @@
 
                                             <td class="text-center">
                                                 <button class="btn btn-primary btn-sm"
-                                                    onclick="document.location.href = '{{ route('petugas-edit', $petugas) }}'">
+                                                    onclick="document.location.href = '{{ route('petugas-edit', $petugas->id) }}'">
                                                     <i class="ti ti-pencil"></i>
                                                 </button>
 
-                                                <form action="{{ route('petugas-delete', $petugas) }}" method="POST"
+                                                <form id="formDelete{{ $petugas->id }}"
+                                                    action="{{ route('petugas-delete', $petugas->id) }}" method="POST"
                                                     class="d-inline">
-                                                    <button type="submit" class="btn btn-danger btn-sm">
-                                                        <i class="ti ti-trash"></i>
-                                                    </button>
                                                     @csrf
                                                     @method('delete')
                                                     {{-- <input type="hidden" name="id" value=""> --}}
                                                 </form>
-                                    @endforeach
+                                                <button type="button" onclick="deleteData({{ $petugas->id }})"
+                                                    class="btn btn-danger btn-sm">
+                                                    <i class="ti ti-trash"></i>
+                                                </button>
 
-                                    </td>
-                                    </tr>
+                                            </td>
+                                        </tr>
+                                    @endforeach
 
                                 </tbody>
 
@@ -167,28 +169,25 @@
                 sort: false
             });
         });
+    </script>
 
-        channel.bind('user-registered', function(data) {
-            if ($('#pending').length > 1) {
-                $('.pending').text(data.totalUnverified);
-            } else {
-                $('#pending').html(
-                    '<button class="btn btn-primary btn-block mb-3" onclick="window.location.reload()">Tampilkan <span class="pending">' +
-                    data.totalUnverified + '</span> akun Mahasiswa terbaru</button>');
-            }
-        });
-
+    <script>
         function deleteData(id) {
             Swal.fire({
-                title: 'Apakah Anda yakin?',
-                text: "Akun ini akan terhapus dari database.",
-                icon: 'warning',
+                title: "Apakah Anda Yakin?",
+                text: "Data Ini Akan Terhapus Dari Database",
+                icon: "warning",
                 showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Ya, Hapus!"
             }).then((result) => {
                 if (result.isConfirmed) {
-                    $(`#formDelete${id}`).submit();
+                    $('#formDelete' + id).submit()
                 }
             });
         }
     </script>
+
+  
 @endpush

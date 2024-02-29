@@ -64,7 +64,7 @@ class SimpananController extends Controller
         $item->tgl_simpan = $request->tgl_simpan;
         $item->save();
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Berhasil Menambahkan Data Simpanan');
     }
 
     public function storeItem(Request $request)
@@ -81,8 +81,8 @@ class SimpananController extends Controller
         $item->tgl_simpan = $request->tgl_simpan;
         $item->save();
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Berhasil Menambahkan Data Setor Simpanan');
     }
 
-    
+
 }

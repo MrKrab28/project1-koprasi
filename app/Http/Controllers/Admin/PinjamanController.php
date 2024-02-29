@@ -57,7 +57,7 @@ class PinjamanController extends Controller
         $angsuran->save();
 
 
-        return redirect()->route('pinjaman-user');
+        return redirect()->route('pinjaman-user')->with('success', 'Berhasil Menambahkan Data Pinjaman');
     }
 
 

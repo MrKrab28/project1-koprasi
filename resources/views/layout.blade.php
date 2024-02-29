@@ -45,6 +45,21 @@
     @stack('modals')
 
     @include('includes.scripts')
+    @if (session('success'))
+    <script>
+        Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: '{{ session('success') }}',
+            showConfirmButton: false,
+            timer: 2000
+        })
+    </script>
+    @php
+        session()->forget('success')
+    @endphp
+@endif
+
 </body>
 
 </html>

@@ -17,7 +17,7 @@
                         <span>Master Data</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="#">Data Akun</a></li>
+                        <li><a href="{{ route('dataAkun-index') }}">Data Akun</a></li>
                         <li><a href="{{ route('jenisSimpanan-index') }}">Jenis Simpanan</a></li>
                     </ul>
                 </li>
@@ -39,8 +39,8 @@
                         <span>Transaksi</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="{{ route('pemasukan-index') }}">Debit</a></li>
-                        <li><a href="{{ route('pengeluaran-index') }}">Kredit</a></li>
+                        <li><a href="">Debit</a></li>
+                        <li><a href="">Kredit</a></li>
                     </ul>
                 </li>
 

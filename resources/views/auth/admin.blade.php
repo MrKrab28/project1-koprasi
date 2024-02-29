@@ -8,8 +8,6 @@
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description">
     <meta content="Themesbrand" name="author">
     <!-- App favicon -->
-    <link rel="shortcut icon" href="{{ asset('assets/images/logo-koperasi.png') }}">
-
     @include('includes.styles')
 </head>
 
@@ -20,10 +18,12 @@
                 <div class="col-md-8 col-lg-5 col-xl-4">
                     <div class="card">
                         <div class="card-body">
+
+
                             <div class="text-center mt-4">
                                 <div class="mb-3">
-                                    <a href="#"><img src="{{ asset('assets/images/logo-koperasi.png') }}" height="150"
-                                            alt="logo"></a>
+                                    <a href="#"><img src="{{ asset('assets/images/logo-koperasi.png') }}"
+                                            height="150" alt="logo"></a>
                                 </div>
                             </div>
                             <div class="p-3">
@@ -55,8 +55,8 @@
                                             </div>
                                         </div>
                                         <div class="col-sm-6 text-end">
-                                            <button class="btn btn-primary w-md waves-effect waves-light"
-                                                type="submit">Log In</button>
+                                            <button class="btn btn-primary w-md waves-effect waves-light" type="submit"
+                                                onclick="showSwal()">Log In</button>
                                         </div>
                                     </div>
                                 </form>
@@ -81,9 +81,19 @@
         </div>
     </div>
 
-
     @include('includes.scripts')
 
+    @if (session('LoginError'))
+        <script>
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: '{{ session('LoginError') }}',
+                showConfirmButton: false,
+                timer: 2500
+            })
+        </script>
+    @endif
 </body>
 
 </html>

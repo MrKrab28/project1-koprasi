@@ -74,9 +74,9 @@
                                                     <i class="ti ti-pencil"></i>
                                                 </button>
 
-                                                <form action="{{ route('jenisSimpanan-delete', $jenis) }}" class="d-inline"
+                                                <form id="formDelete{{ $jenis->id }}" action="{{ route('jenisSimpanan-delete', $jenis) }}" class="d-inline"
                                                     method="POST">
-                                                    <button type="submit" class="btn btn-danger btn-sm">
+                                                    <button type="button" onclick="deleteData({{ $jenis->id }})" class="btn btn-danger btn-sm">
                                                         <i class=" ti ti-trash"></i>
                                                     </button>
                                                     @csrf
@@ -115,7 +115,7 @@
         function deleteData(id) {
             Swal.fire({
                 title: 'Apakah Anda yakin?',
-                text: "Akun ini akan terhapus dari database.",
+                text: "Data ini akan terhapus dari database.",
                 icon: 'warning',
                 showCancelButton: true,
             }).then((result) => {

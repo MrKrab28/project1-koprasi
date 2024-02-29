@@ -37,7 +37,7 @@ class PetugasController extends Controller
         $petugas->tgl_bergabung = $request->tgl_bergabung;
         $petugas->save();
 
-        return redirect()->route('petugas-index');
+        return redirect()->route('petugas-index')->with('success', 'Berhasil Menambahkan Data Petugas');
     }
 
     public function edit(Petugas $petugas){
@@ -56,12 +56,12 @@ class PetugasController extends Controller
         $petugas->password = bcrypt($request->password) ;
         $petugas->update();
 
-        return redirect()->route('petugas-index');
+        return redirect()->route('petugas-index')->with('success', 'Data Berhasil di Update');
     }
 
     public function delete(Petugas $petugas){
         $petugas->delete();
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Berhasil Menghapus Data Petugas');
     }
 
 

@@ -24,7 +24,7 @@ class JenisSimpananController extends Controller
         $jenis_simpanan->jumlah = $request->jumlah;
         $jenis_simpanan->save();
 
-        return redirect()->route('jenisSimpanan-index');
+        return redirect()->route('jenisSimpanan-index')->with('success', 'Berhasil Menambahkan Data Jenis Simpanan');
     }
 
     public function edit(JenisSimpanan $jenis){
@@ -42,11 +42,11 @@ class JenisSimpananController extends Controller
         $jenis->jumlah = $request->jumlah;
         $jenis->update();
 
-        return redirect()->route('jenisSimpanan-index');
+        return redirect()->route('jenisSimpanan-index')->with('success', 'Data Berhasil di Update');
     }
 
     public function delete(JenisSimpanan $jenis){
         $jenis->delete();
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Data Berhasil di Hapus');
     }
 }

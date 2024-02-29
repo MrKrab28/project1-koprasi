@@ -72,18 +72,18 @@
 @endsection
 
 @push('scripts')
+
+
+@if (session('success'))
     <script>
-        function deleteData(id) {
-            Swal.fire({
-                title: 'Apakah Anda yakin?',
-                text: "Akun ini akan terhapus dari database.",
-                icon: 'warning',
-                showCancelButton: true,
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $(`#formDelete${id}`).submit();
-                }
-            });
-        }
+
+
+    Swal.fire({
+        title: "{{ session('success') }}",
+        text: "Data di Update",
+        icon: "success"
+    });
     </script>
+    @endif
+
 @endpush

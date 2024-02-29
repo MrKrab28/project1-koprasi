@@ -70,12 +70,12 @@ class UserController extends Controller
 
         $user->update();
 
-        return redirect()->route('user-index')->with('Success', 'Berhasi Mengubah Data');
+        return redirect()->route('user-index')->with('success', 'Data Berhasil di Update');
 
     }
     public function delete(User $user)
     {
         $user->delete();
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Data Berhasil di Hapus');
     }
 }

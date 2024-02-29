@@ -156,28 +156,15 @@
                 sort: false
             });
         });
-
-        channel.bind('user-registered', function(data) {
-            if ($('#pending').length > 1) {
-                $('.pending').text(data.totalUnverified);
-            } else {
-                $('#pending').html(
-                    '<button class="btn btn-primary btn-block mb-3" onclick="window.location.reload()">Tampilkan <span class="pending">' +
-                    data.totalUnverified + '</span> akun Mahasiswa terbaru</button>');
-            }
-        });
-
-        function deleteData(id) {
-            Swal.fire({
-                title: 'Apakah Anda yakin?',
-                text: "Akun ini akan terhapus dari database.",
-                icon: 'warning',
-                showCancelButton: true,
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $(`#formDelete${id}`).submit();
-                }
-            });
-        }
     </script>
+    @if (session('success'))
+    <script>
+         Swal.fire({
+        title: "{{ session('success') }}",
+        text: "Data di Update",
+        icon: "success"
+    });
+   
+    </script>
+    @endif
 @endpush

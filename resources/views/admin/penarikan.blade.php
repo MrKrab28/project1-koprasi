@@ -4,6 +4,9 @@
     <div class="container-fluid">
         <!--  Row 1 -->
 
+
+        <a href="{{ route('simpanan-user') }}?jenis=2" class="btn btn-primary" >Kembali</a>
+      
         <div class="row mt-5">
             <div class="card mb-0">
                 <div class="card-body">
@@ -77,18 +80,26 @@
                 sort: false
             });
         });
-
-        function deleteData(id) {
-            Swal.fire({
-                title: 'Apakah Anda yakin?',
-                text: "Akun ini akan terhapus dari database.",
-                icon: 'warning',
-                showCancelButton: true,
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $(`#formDelete${id}`).submit();
-                }
-            });
-        }
     </script>
+        @if (session('success'))
+     <script>
+          Swal.fire({
+         title: "{{ session('success') }}",
+         text: "Data di Update",
+         icon: "success"
+     });
+
+     </script>
+     @endif
+     @if (session('error'))
+     <script>
+
+         Swal.fire({
+             icon: "error",
+             title: "{{ session('error') }}",
+             text: "Mohon Periksa Saldo Anda",
+             footer: '<a href="#">Why do I have this issue?</a>'
+            });
+            </script>
+     @endif
 @endpush

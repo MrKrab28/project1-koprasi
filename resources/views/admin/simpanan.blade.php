@@ -87,7 +87,7 @@
                                 @endforeach
                             </select>
                         </div>
-
+{{--
                         <div class="mb-3">
                             <label for="jumlah_setor" class="form-label">Setoran Awal</label>
                             <input type="number" class="form-control" id="jumlah_setor" name="jumlah_setor"
@@ -98,6 +98,17 @@
                             <label for="tgl_simpan" class="form-label">Tanggal Simpan</label>
                             <input type="date" class="form-control" id="tgl_simpan" name="tgl_simpan"
                                 value="{{ $jenis->jumlah }}" required>
+                        </div> --}}
+                        <div class="mb-3">
+                            <label for="jumlah_setor" class="form-label">Setoran Awal</label>
+                            <input type="number" class="form-control" id="jumlah_setor" name="jumlah_setor"
+                                required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="tgl_simpan" class="form-label">Tanggal Simpan</label>
+                            <input type="date" class="form-control" id="tgl_simpan" name="tgl_simpan"
+                              required>
                         </div>
 
                         <div class="modal-footer">
@@ -127,18 +138,15 @@
                 sort: false
             });
         });
-
-        function deleteData(id) {
-            Swal.fire({
-                title: 'Apakah Anda yakin?',
-                text: "Akun ini akan terhapus dari database.",
-                icon: 'warning',
-                showCancelButton: true,
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $(`#formDelete${id}`).submit();
-                }
-            });
-        }
     </script>
+     @if (session('success'))
+     <script>
+          Swal.fire({
+         title: "{{ session('success') }}",
+         text: "Data di Update",
+         icon: "success"
+     });
+
+     </script>
+     @endif
 @endpush

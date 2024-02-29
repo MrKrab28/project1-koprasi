@@ -21,11 +21,11 @@ class AuthController extends Controller
         ]);
 
         if (Auth::guard('admin')->attempt($credentials)) {
-            return redirect()->route('dashboard');
+            return redirect()->route('dashboard')->with('success', 'Login Berhasil');
         }
 
         if (Auth::guard('petugas')->attempt($credentials)) {
-            return redirect()->route('dashboard');
+            return redirect()->route('dashboard')->with('success', 'Login Berhasil');
         }
 
         return redirect()->back()->with('LoginError', 'Email atau Password Salah');
