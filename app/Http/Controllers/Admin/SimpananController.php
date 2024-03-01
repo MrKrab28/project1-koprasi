@@ -9,9 +9,6 @@ use App\Http\Controllers\Controller;
 use App\Models\JenisSimpanan;
 use App\Models\Penarikan;
 use App\Models\SimpananItem;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
-use SebastianBergmann\CodeUnit\FunctionUnit;
 
 class SimpananController extends Controller
 {

@@ -83,7 +83,17 @@
 
 
     @include('includes.scripts')
-
+    @if (session('LoginError'))
+    <script>
+        Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: '{{ session('LoginError') }}',
+            showConfirmButton: false,
+            timer: 2500
+        })
+    </script>
+@endif
 </body>
 
 </html>

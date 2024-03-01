@@ -13,14 +13,14 @@ Route::get('/register', [RegisterController::class, 'index'])->name('user.getreg
 Route::post('/register', [RegisterController::class, 'store'])->name('user.register');
 
 Route::get('/', function () {
-    return redirect()->route('login');
+    return view('auth.anggota');
 });
 
-Route::get('login', function () {
-    return view('login');
-});
+// Route::get('login', function () {
+//     return view('login');
+// });
 
-Route::get('user/dashboard', [UserAuthController::class, 'dashboard'])->name('user.dashboard')->middleware('auth:anggota');
+// Route::get('user/dashboard', [UserAuthController::class, 'dashboard'])->name('user.dashboard')->middleware('auth:anggota');
 // Auth
 Route::group(['middleware' => ['guest:admin', 'guest:anggota']], function () {
     // Auth User

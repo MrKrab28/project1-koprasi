@@ -20,7 +20,7 @@ class AuthController extends Controller
         ]);
 
         if (Auth::guard('anggota')->attempt($credentials)) {
-            return redirect()->route('user.dashboard');
+            return redirect()->route('user-dashboard')->with('success', 'Berhasil Login');
         }
 
         return redirect()->back()->with('LoginError', 'Email atau Password Salah');
@@ -28,7 +28,7 @@ class AuthController extends Controller
 
     public function logout(){
         Auth::logout();
-        return redirect()->route('user-login');
+        return redirect()->route('login');
     }
 
     public function dashboard(){

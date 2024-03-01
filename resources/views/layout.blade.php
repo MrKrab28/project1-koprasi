@@ -20,6 +20,10 @@
             @include('includes.header.admin')
             @include('includes.sidebar.admin')
         @endauth
+        @auth("anggota")
+        @include('includes.header.anggota')
+        @include('includes.sidebar.anggota')
+        @endauth
 
         <div class="main-content" id="result">
             <div class="page-content">
@@ -51,6 +55,7 @@
             position: 'center',
             icon: 'success',
             title: '{{ session('success') }}',
+            text: 'Selamat Datang',
             showConfirmButton: false,
             timer: 2000
         })

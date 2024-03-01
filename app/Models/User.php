@@ -57,9 +57,9 @@ class User extends Authenticatable
         );
     }
 
-    public function akun(){
-        return $this->hasMany(Akun::class, 'id_anggota');
-    }
+    // public function akun(){
+    //     return $this->hasMany(Akun::class, 'id_anggota');
+    // }
 
 
     /**
