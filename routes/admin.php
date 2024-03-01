@@ -81,11 +81,13 @@ Route::group(['middleware' => 'auth:admin'], function () {
 
 
     // Data Akun
-    Route::get('dataakun', [AkunController::class, 'index'])->name('dataAkun-index');
-    Route::post('dataakun/add', [AkunController::class, 'store'])->name('dataAkun-store');
-    Route::get('dataakun/edit/{akun}', [AkunController::class, 'edit'])->name('dataAkun-edit');
-    Route::put('dataakun/update/{akun}', [AkunController::class, 'update'])->name('dataAkun-update');
-    Route::delete('dataakun/{akun}', [AkunController::class, 'delete'])->name('dataAkun-delete');
+    Route::prefix('data-akun')->group(function () {
+        Route::get('/', [AkunController::class, 'index'])->name('dataAkun-index');
+        Route::post('add', [AkunController::class, 'store'])->name('dataAkun-store');
+        Route::get('edit/{akun}', [AkunController::class, 'edit'])->name('dataAkun-edit');
+        Route::put('update/{akun}', [AkunController::class, 'update'])->name('dataAkun-update');
+        Route::delete('{akun}', [AkunController::class, 'delete'])->name('dataAkun-delete');
+    });
 
 
     // Auth

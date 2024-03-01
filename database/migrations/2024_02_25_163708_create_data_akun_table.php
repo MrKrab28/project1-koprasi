@@ -13,12 +13,9 @@ return new class extends Migration
     {
         Schema::create('data_akun', function (Blueprint $table) {
             $table->integer('no_reff')->primary();
-            // $table->foreignId('id_anggota');
             $table->string('nama_reff');
             $table->string('keterangan');
-            $table->date('tgl_daftarAkun');
             $table->timestamps();
-
         });
     }
 

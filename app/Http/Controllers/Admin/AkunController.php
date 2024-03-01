@@ -22,17 +22,15 @@ class AkunController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'no_reff' => 'required',
+            'no_reff' => 'required|unique',
             'nama_reff' => 'required',
             'keterangan' => 'required',
-            'tgl_daftarAkun' => 'required',
         ]);
 
         $akun = new DataAkun();
         $akun->no_reff = $request->no_reff;
         $akun->nama_reff = $request->nama_reff;
         $akun->keterangan = $request->keterangan;
-        $akun->tgl_daftarAkun = $request->tgl_daftarAkun;
         $akun->save();
 
         return redirect()->route('dataAkun-index')->with('success', 'Data Akun Berhasil Ditambahkan');

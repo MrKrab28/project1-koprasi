@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('content')
-    <div class="conatiner-fluid content-inner mt-2 py-0">
+    <div class="container-fluid content-inner mt-2 py-0">
         <div class="row">
             <div class="col-sm-12">
                 <div class="card">
@@ -74,9 +74,11 @@
                                                     <i class="ti ti-pencil"></i>
                                                 </button>
 
-                                                <form id="formDelete{{ $jenis->id }}" action="{{ route('jenisSimpanan-delete', $jenis) }}" class="d-inline"
+                                                <form id="formDelete{{ $jenis->id }}"
+                                                    action="{{ route('jenisSimpanan-delete', $jenis) }}" class="d-inline"
                                                     method="POST">
-                                                    <button type="button" onclick="deleteData({{ $jenis->id }})" class="btn btn-danger btn-sm">
+                                                    <button type="button" onclick="deleteData({{ $jenis->id }})"
+                                                        class="btn btn-danger btn-sm">
                                                         <i class=" ti ti-trash"></i>
                                                     </button>
                                                     @csrf

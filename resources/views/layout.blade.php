@@ -16,13 +16,13 @@
     <!-- Begin page -->
     <div id="layout-wrapper">
 
-        @auth("admin")
+        @auth('admin')
             @include('includes.header.admin')
             @include('includes.sidebar.admin')
         @endauth
-        @auth("anggota")
-        @include('includes.header.anggota')
-        @include('includes.sidebar.anggota')
+        @auth('anggota')
+            @include('includes.header.anggota')
+            @include('includes.sidebar.anggota')
         @endauth
 
         <div class="main-content" id="result">
@@ -50,20 +50,20 @@
 
     @include('includes.scripts')
     @if (session('success'))
-    <script>
-        Swal.fire({
-            position: 'center',
-            icon: 'success',
-            title: '{{ session('success') }}',
-            text: 'Selamat Datang',
-            showConfirmButton: false,
-            timer: 2000
-        })
-    </script>
-    @php
-        session()->forget('success')
-    @endphp
-@endif
+        <script>
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: '{{ session('success') }}',
+                text: 'Selamat Datang',
+                showConfirmButton: false,
+                timer: 2000
+            })
+        </script>
+        @php
+            session()->forget('success');
+        @endphp
+    @endif
 
 </body>
 

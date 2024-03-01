@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('content')
-    <div class="conatiner-fluid content-inner mt-2 py-0">
+    <div class="container-fluid content-inner mt-2 py-0">
         <div class="row">
             <div class="col-sm-12">
                 <div class="card">
@@ -188,6 +188,4 @@
             });
         }
     </script>
-
-  
 @endpush

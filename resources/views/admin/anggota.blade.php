@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('content')
-    <div class="conatiner-fluid content-inner mt-2 py-0">
+    <div class="container-fluid content-inner mt-2 py-0">
         <div class="row">
             <div class="col-sm-12">
                 <div class="card">
@@ -126,7 +126,8 @@
                                             <td>{{ $user->email }}</td>
                                             <td>{{ $user->no_hp }}</td>
                                             <td>{{ $user->no_rekening }}</td>
-                                            <td>{{ Carbon\Carbon::parse($user->tgl_bergabung)->isoFormat('D MMMM YYYY')  }}</td>
+                                            <td>{{ Carbon\Carbon::parse($user->tgl_bergabung)->isoFormat('D MMMM YYYY') }}
+                                            </td>
 
                                             <td class="text-center">
                                                 <button class="btn btn-primary btn-sm"
@@ -134,13 +135,15 @@
                                                     <i class="ti ti-pencil"></i>
                                                 </button>
 
-                                                <form id="formDelete{{ $user->id }}" action="{{ route('user-delete', $user->id) }}" class="d-inline"
+                                                <form id="formDelete{{ $user->id }}"
+                                                    action="{{ route('user-delete', $user->id) }}" class="d-inline"
                                                     method="POST">
                                                     @csrf
                                                     @method('delete')
                                                     <input type="hidden" name="id" value="">
                                                 </form>
-                                                <button type="button" onclick="deleteData({{ $user->id }})" class="btn btn-danger btn-sm">
+                                                <button type="button" onclick="deleteData({{ $user->id }})"
+                                                    class="btn btn-danger btn-sm">
                                                     <i class=" ti ti-trash"></i>
                                                 </button>
 
@@ -175,7 +178,7 @@
 
 
     <script>
-        function deleteData(id){
+        function deleteData(id) {
             Swal.fire({
                 title: "Apakah Anda Yakin?",
                 text: "Data Ini Akan Terhapus Dari Database",
@@ -187,9 +190,8 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     $('#formDelete' + id).submit()
-                    }
+                }
             });
         }
-        </script>
-
+    </script>
 @endpush
