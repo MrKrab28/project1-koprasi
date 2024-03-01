@@ -39,8 +39,8 @@
                         <span>Transaksi</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="">Debit</a></li>
-                        <li><a href="">Kredit</a></li>
+                        <li><a href="#">Debit</a></li>
+                        <li><a href="#">Kredit</a></li>
                     </ul>
                 </li>
 
