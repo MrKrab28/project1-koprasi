@@ -20,7 +20,7 @@ Route::group(['middleware' =>  'auth:anggota'], function () {
 
 
 
-    Route::get('pinjaman', [PinjamanController::class, 'pinjaman'])->name('user-pinjaman');
+    Route::get('pinjaman', [PinjamanController::class, 'dataPinjaman'])->name('user-pinjaman');
 
     Route::get('simpanan', [SimpananController::class, 'dataSimpanan'])->name('user-simpanan');
 });

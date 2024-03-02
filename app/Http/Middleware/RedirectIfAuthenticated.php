@@ -26,7 +26,7 @@ class RedirectIfAuthenticated
                         return redirect()->route('dashboard');
 
                     default:
-                        return redirect()->route('user.dashboard');
+                        return redirect()->route('user-dashboard');
                 }
             }
         }
