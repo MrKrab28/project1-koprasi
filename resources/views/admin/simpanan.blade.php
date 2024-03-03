@@ -87,21 +87,9 @@
                                 @endforeach
                             </select>
                         </div>
-                        {{--
                         <div class="mb-3">
                             <label for="jumlah_setor" class="form-label">Setoran Awal</label>
-                            <input type="number" class="form-control" id="jumlah_setor" name="jumlah_setor"
-                                value="{{ $jenis->jumlah }}" required>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="tgl_simpan" class="form-label">Tanggal Simpan</label>
-                            <input type="date" class="form-control" id="tgl_simpan" name="tgl_simpan"
-                                value="{{ $jenis->jumlah }}" required>
-                        </div> --}}
-                        <div class="mb-3">
-                            <label for="jumlah_setor" class="form-label">Setoran Awal</label>
-                            <input type="number" class="form-control" id="jumlah_setor" name="jumlah_setor"
+                            <input type="text" class="form-control numeric" id="jumlah_setor" name="jumlah_setor"
                                 value="{{ $jenis->jumlah }}" required>
                         </div>
 
@@ -130,7 +118,13 @@
     @include('includes.datatables.scripts')
     @include('includes.choices-js.scripts')
 
+    <script src="{{ asset('assets/plugins/autonumeric/autonumeric.js') }}"></script>
+
     <script>
+        new AutoNumeric('input.numeric', {
+            allowDecimalPadding: false
+        })
+
         $(document).ready(function() {
             $('#table').DataTable({
                 responsive: true,

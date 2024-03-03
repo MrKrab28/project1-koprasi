@@ -27,7 +27,8 @@ class SimpananController extends Controller
         }
     }
 
-    public function detail(Request $request) {
+    public function detail(Request $request)
+    {
 
         if ($request->has('id')) {
             $simpanan = Simpanan::find($request->id);
@@ -36,7 +37,6 @@ class SimpananController extends Controller
         } else {
             abort(404);
         }
-
     }
 
     public function store(Request $request)
@@ -44,7 +44,7 @@ class SimpananController extends Controller
         $request->validate([
             'jenis' => 'required',
             'id_anggota' => 'required',
-            'jumlah_setor' => 'required|numeric',
+            'jumlah_setor' => 'required',
             'tgl_simpan' => 'required|date',
         ]);
 
@@ -57,7 +57,7 @@ class SimpananController extends Controller
 
         $item = new SimpananItem();
         $item->id_simpanan = $simpanan->id;
-        $item->jumlah_setor = $request->jumlah_setor;
+        $item->jumlah_setor = str_replace([',', '.'], '', $request->jumlah_setor);
         $item->tgl_simpan = $request->tgl_simpan;
         $item->save();
 
@@ -74,12 +74,10 @@ class SimpananController extends Controller
 
         $item = new SimpananItem();
         $item->id_simpanan = $request->id_simpanan;
-        $item->jumlah_setor = $request->jumlah_setor;
+        $item->jumlah_setor = str_replace([',', '.'], '', $request->jumlah_setor);
         $item->tgl_simpan = $request->tgl_simpan;
         $item->save();
 
         return redirect()->back()->with('success', 'Berhasil Menambahkan Data Setor Simpanan');
     }
-
-
 }
