@@ -87,7 +87,7 @@
                                 @endforeach
                             </select>
                         </div>
-{{--
+                        {{--
                         <div class="mb-3">
                             <label for="jumlah_setor" class="form-label">Setoran Awal</label>
                             <input type="number" class="form-control" id="jumlah_setor" name="jumlah_setor"
@@ -102,13 +102,12 @@
                         <div class="mb-3">
                             <label for="jumlah_setor" class="form-label">Setoran Awal</label>
                             <input type="number" class="form-control" id="jumlah_setor" name="jumlah_setor"
-                                required>
+                                value="{{ $jenis->jumlah }}" required>
                         </div>
 
                         <div class="mb-3">
                             <label for="tgl_simpan" class="form-label">Tanggal Simpan</label>
-                            <input type="date" class="form-control" id="tgl_simpan" name="tgl_simpan"
-                              required>
+                            <input type="date" class="form-control" id="tgl_simpan" name="tgl_simpan" required>
                         </div>
 
                         <div class="modal-footer">
@@ -139,14 +138,13 @@
             });
         });
     </script>
-     @if (session('success'))
-     <script>
-          Swal.fire({
-         title: "{{ session('success') }}",
-         text: "Data di Update",
-         icon: "success"
-     });
-
-     </script>
-     @endif
+    @if (session('success'))
+        <script>
+            Swal.fire({
+                title: "{{ session('success') }}",
+                text: "Data di Update",
+                icon: "success"
+            });
+        </script>
+    @endif
 @endpush

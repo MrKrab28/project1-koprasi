@@ -1,17 +1,14 @@
 @extends('layout')
 
 @section('content')
-
-
-
-
     <div class="card">
         <div class="card-body">
             <div class="container mb-5 mt-2">
                 <div class="row d-flex align-items-baseline">
                     <div class="col-xl-9">
                         <p style="color: #7e8d9f;font-size: 20px;">Simpanan Koperasi
-                            <strong>{{ Auth::User()->nama }}</strong></p>
+                            <strong>{{ Auth::User()->nama }}</strong>
+                        </p>
                     </div>
                     <div class="col-xl-3 float-end">
                         <a class="btn btn-light text-capitalize border-0" data-mdb-ripple-color="dark"><i
@@ -33,8 +30,6 @@
                     <div class="row">
                         <div class="col-xl-8">
                             <ul class="list-unstyled">
-                                @foreach ($daftarSimpanan as $item)
-                                @endforeach
                                 <li class="text-muted">Nama :<span style="color:#5d9fc5 ;">{{ Auth::user()->nama }}</span>
                                 </li>
                                 <li class="text-muted">Alamat :<span style="color:#5d9fc5 ;">{{ Auth::user()->email }}</li>
@@ -42,7 +37,6 @@
                             </ul>
                         </div>
                         <div class="col-xl-4">
-
                             <ul class="list-unstyled">
                                 <li class="text-muted">Jenis Kelamin :<span
                                         style="color:#5d9fc5 ;">{{ Auth::user()->jk == 'P' ? 'Perempuan' : 'Laki-laki' }}</span>
@@ -51,10 +45,10 @@
                                 <li class="text-muted">Tanggal Bergabung :<span
                                         style="color:#5d9fc5 ;">{{ Carbon\Carbon::parse(Auth::user()->tgl_bergabung)->isoFormat('D MMMM YYYY') }}
                                 </li>
-                                <li class="text-muted fs-4 mb-3 mt-3"><i class="fas fa-circle" style="color:#84B0CA ;"></i> <span
-                                        @foreach ($daftarSimpanan as $item)
-                                class="fw-bold">Total Simpanan :</span>Rp. {{ number_format($item->saldo) }}</li> @endforeach
-                                        </ul>
+                                <li class="text-muted fs-4 mb-3 mt-3"><i class="fas fa-circle" style="color:#84B0CA ;"></i>
+                                    <span class="fw-bold">Total Simpanan :Rp. {{ number_format($simpanan->saldo) }}</span>
+                                </li>
+                            </ul>
                         </div>
                     </div>
 
@@ -68,21 +62,21 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($simpananUser->sortby('tgl_simpan') as $item )
-
-
-                                <tr>
-                                    <th>{{ $loop->iteration }}</th>
-                                    <td>Rp. {{ number_format($item->jumlah_setor) }}</td>
-                                    <td>{{ Carbon\Carbon::parse ($item->tgl_simpan)->isoFormat('D MMMM YYYY') }}</td>
-                                </tr>
-
+                                @foreach ($simpanan->items->sortby('tgl_simpan') as $item)
+                                    <tr>
+                                        <th>{{ $loop->iteration }}</th>
+                                        <td>Rp. {{ number_format($item->jumlah_setor) }}</td>
+                                        <td>{{ Carbon\Carbon::parse($item->tgl_simpan)->isoFormat('D MMMM YYYY') }}</td>
+                                    </tr>
                                 @endforeach
                             </tbody>
 
                         </table>
                     </div>
-
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 @push('styles')
     @include('includes.datatables.styles')
