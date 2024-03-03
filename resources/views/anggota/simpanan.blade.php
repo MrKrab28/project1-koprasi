@@ -46,7 +46,9 @@
                                         style="color:#5d9fc5 ;">{{ Carbon\Carbon::parse(Auth::user()->tgl_bergabung)->isoFormat('D MMMM YYYY') }}
                                 </li>
                                 <li class="text-muted fs-4 mb-3 mt-3"><i class="fas fa-circle" style="color:#84B0CA ;"></i>
-                                    <span class="fw-bold">Total Simpanan :Rp. {{ number_format($simpanan->saldo) }}</span>
+                                    <span class="fw-bold">
+                                        Total Simpanan : Rp. {{ number_format($simpanan->saldo ?? 0) }}
+                                    </span>
                                 </li>
                             </ul>
                         </div>
@@ -62,13 +64,16 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($simpanan->items->sortby('tgl_simpan') as $item)
-                                    <tr>
-                                        <th>{{ $loop->iteration }}</th>
-                                        <td>Rp. {{ number_format($item->jumlah_setor) }}</td>
-                                        <td>{{ Carbon\Carbon::parse($item->tgl_simpan)->isoFormat('D MMMM YYYY') }}</td>
-                                    </tr>
-                                @endforeach
+                                @if ($simpanan)
+                                    @foreach ($simpanan->items->sortby('tgl_simpan') as $item)
+                                        <tr>
+                                            <th>{{ $loop->iteration }}</th>
+                                            <td>Rp. {{ number_format($item->jumlah_setor) }}</td>
+                                            <td>{{ Carbon\Carbon::parse($item->tgl_simpan)->isoFormat('D MMMM YYYY') }}
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                @endif
                             </tbody>
 
                         </table>
@@ -90,18 +95,5 @@
                 sort: false
             });
         });
-
-        function deleteData(id) {
-            Swal.fire({
-                title: 'Apakah Anda yakin?',
-                text: "Akun ini akan terhapus dari database.",
-                icon: 'warning',
-                showCancelButton: true,
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $(`#formDelete${id}`).submit();
-                }
-            });
-        }
     </script>
 @endpush
