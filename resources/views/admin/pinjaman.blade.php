@@ -161,16 +161,13 @@
         })
 
         $(document).ready(function() {
-            $('#id_anggota').select2();
-        });
-
-        $(document).ready(function() {
             $('#table').DataTable({
                 responsive: true,
                 sort: false
             });
         });
     </script>
+
     @if (session('success'))
         <script>
             Swal.fire({
