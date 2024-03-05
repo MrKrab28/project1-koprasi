@@ -8,12 +8,14 @@ use Illuminate\Http\Request;
 
 class JenisSimpananController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $jenis_simpanan = JenisSimpanan::all();
         return view('admin.jenisSimpanan', compact('jenis_simpanan'));
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         $request->validate([
             'nama' => 'required',
             'jumlah' => 'required'
@@ -21,31 +23,34 @@ class JenisSimpananController extends Controller
 
         $jenis_simpanan = new JenisSimpanan();
         $jenis_simpanan->nama = $request->nama;
-        $jenis_simpanan->jumlah = $request->jumlah;
+        $jenis_simpanan->jumlah = str_replace([',', '.'], '', $request->jumlah);
         $jenis_simpanan->save();
 
         return redirect()->route('jenisSimpanan-index')->with('success', 'Berhasil Menambahkan Data Jenis Simpanan');
     }
 
-    public function edit(JenisSimpanan $jenis){
+    public function edit(JenisSimpanan $jenis)
+    {
         return view('admin.jenisSimpanan-edit', compact('jenis'));
     }
 
-    public function update(Request $request, JenisSimpanan $jenis){
+    public function update(Request $request, JenisSimpanan $jenis)
+    {
         $request->validate([
             'nama' => 'required',
-            'jumlah' =>'required'
+            'jumlah' => 'required'
         ]);
 
         $jenis = JenisSimpanan::find($jenis->id);
         $jenis->nama = $request->nama;
-        $jenis->jumlah = $request->jumlah;
+        $jenis->jumlah = str_replace([',', '.'], '', $request->jumlah);
         $jenis->update();
 
         return redirect()->route('jenisSimpanan-index')->with('success', 'Data Berhasil di Update');
     }
 
-    public function delete(JenisSimpanan $jenis){
+    public function delete(JenisSimpanan $jenis)
+    {
         $jenis->delete();
         return redirect()->back()->with('success', 'Data Berhasil di Hapus');
     }
