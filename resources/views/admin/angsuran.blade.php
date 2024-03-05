@@ -60,7 +60,10 @@
                             <h4 class="mb-0">Angsuran</h4>
                             @php
                                 $tanggal = $pinjaman->angsuran->sortBy('tgl_angsur')->last()->tgl_angsur;
-                                if (Carbon\Carbon::parse($tanggal)->month == today()->month) {
+                                if (
+                                    Carbon\Carbon::parse($tanggal)->month == today()->month &&
+                                    $pinjaman->angsuran->count() > 1
+                                ) {
                                     $telahMembayarBulanIni = true;
                                 } else {
                                     $telahMembayarBulanIni = false;
