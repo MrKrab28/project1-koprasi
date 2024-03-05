@@ -174,9 +174,18 @@
     @if (session('success'))
         <script>
             Swal.fire({
-                title: "{{ session('success') }}",
-                text: "Data di Update",
+                title: "Berhasil",
+                text: "{{ session('success') }}",
                 icon: "success"
+            });
+        </script>
+    @endif
+    @if (session('failed'))
+        <script>
+            Swal.fire({
+                title: "Gagal",
+                text: "{{ session('failed') }}",
+                icon: "error"
             });
         </script>
     @endif

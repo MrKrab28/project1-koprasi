@@ -35,6 +35,12 @@ class PinjamanController extends Controller
             'total_pinjaman' => 'required'
         ]);
 
+        $pinjamanLalu = Pinjaman::where('id_anggota', $request->id_anggota)->withCount('angsuran')->first();
+
+        if ($pinjamanLalu && $pinjamanLalu->angsuran_count != $pinjamanLalu->banyak_angsuran) {
+            return redirect()->back()->with('failed', 'Pinjaman terakhir masih belum lunas');
+        }
+
         $totalPinjaman = str_replace([',', '.'], '', $request->total_pinjaman);
 
         $bunga = $request->bunga / 100;
@@ -47,7 +53,7 @@ class PinjamanController extends Controller
         $pinjaman->total_pinjaman = $totalPinjaman;
         $pinjaman->banyak_angsuran = $request->banyak_angsuran;
         $pinjaman->nominal_angsuran = round($angsuran, -3);
-        $pinjaman->denda = $request->denda;
+        $pinjaman->denda = str_replace([',', '.'], '', $request->denda);
         $pinjaman->bunga = $bunga;
         $pinjaman->save();
 
