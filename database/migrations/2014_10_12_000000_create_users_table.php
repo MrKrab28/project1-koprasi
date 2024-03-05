@@ -3,6 +3,7 @@
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -14,57 +15,30 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('nama');
-            $table->string('email');
-            $table->string('password');
-            $table->string('no_hp');
-            $table->enum('jk', ['L', 'P'])->nullable();
-            $table->string('foto_ktp')->default('default.png');
             $table->string('nik')->unique();
-            $table->enum('level', ['admin', 'user'])->default('user');
-            $table->string('no_rekening')->unique();
-            $table->date('tgl_bergabung');
+            $table->string('nama');
+            $table->string('email')->unique();
+            $table->string('password');
             $table->timestamp('email_verified_at')->nullable();
+            $table->string('no_hp');
+            $table->enum('jk', ['L', 'P']);
+            $table->string('no_rekening')->unique();
+            $table->string('bank');
+            $table->date('tgl_bergabung')->default(now());
+            $table->string('foto_ktp')->default('default.png');
             $table->rememberToken();
             $table->timestamps();
         });
 
         $user = new User();
-        $user->nama = 'admin';
-        $user->email = 'admin@mail.com';
-        $user->no_hp = '123123';
-        $user->jk = 'L';
-        $user->level = 'admin';
-        $user->password = bcrypt('123');
         $user->nik = '7371112810990005';
-        $user->no_rekening = '12312314';
-        $user->tgl_bergabung = now();
-        $user->save();
-
-        $user = new User();
-        $user->nama = 'imam';
-        $user->email = 'imam@mail.com';
-        $user->no_hp = '3456234';
+        $user->nama = 'user1';
+        $user->email = 'user1@localhost';
+        $user->password = Hash::make('123');
+        $user->no_hp = '084653695873';
         $user->jk = 'L';
-        // $user ->level = 'admin';
-        $user->password = bcrypt('123');
-        $user->nik = '7371112810990003';
-        $user->no_rekening = '123456';
-        $user->tgl_bergabung = now();
-        $user->save();
-
-
-
-        $user = new User();
-        $user->nama = 'ASRI';
-        $user->email = 'asri@mail.com';
-        $user->no_hp = '34561234';
-        $user->jk = 'P';
-        // $user ->level = 'admin';
-        $user->password = bcrypt('123');
-        $user->nik = '737111281093546003';
-        $user->no_rekening = '123233456';
-        $user->tgl_bergabung = now();
+        $user->no_rekening = '846278699';
+        $user->bank = 'BCA';
         $user->save();
     }
 
