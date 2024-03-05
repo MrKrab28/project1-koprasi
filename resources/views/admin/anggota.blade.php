@@ -11,83 +11,6 @@
                         </div>
                         <button type="submit" class="btn btn-primary " data-bs-toggle="modal"
                             data-bs-target="#exampleModal">Tambah Data</button>
-                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                            aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Petugas
-                                        </h1>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
-                                    </div>
-                                    <form action="{{ route('user-store') }}" method="POST">
-                                        @csrf
-                                        <input type="hidden" name="jenis" required>
-                                        <div class="modal-body">
-                                            <div class="mb-3">
-                                                <label for="nama" class="form-label">Nama Lengkap</label>
-                                                <input class="form-control" name="nama" id="nama" required>
-
-                                            </div>
-
-                                            <div class="mb-3">
-                                                <label for="email" class="form-label">Email</label>
-                                                <input type="text" class="form-control" id="email" name="email"
-                                                    required>
-                                            </div>
-
-                                            <div class="mb-3">
-                                                <label for="password" class="form-label" id="Password">Password</label>
-                                                <input type="password" class="form-control" name="password">
-
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="no_hp" class="form-label">No.Hp</label>
-                                                <input type="number" class="form-control" id="no_hp" name="no_hp"
-                                                    required>
-                                            </div>
-                                            <div class="mb-3">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="jk"
-                                                        value="L" id="jk">
-                                                    <label class="form-check-label" for="flexRadioDefault1">
-                                                        Laki - Laki
-                                                    </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="jk"
-                                                        value="P" id="flexRadioDefault2" checked>
-                                                    <label class="form-check-label" for="jk">
-                                                        Perempuan
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="nik" class="form-label">NIK KTP</label>
-                                                <input type="text" class="form-control" id="nik" name="nik"
-                                                    required>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="no_rekening" class="form-label">No.Rekening</label>
-                                                <input type="no_rekening" class="form-control" id="no_rekening"
-                                                    name="no_rekening" required>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="tgl_bergabung" class="form-label">Tanggal
-                                                    Bergabung</label>
-                                                <input type="date" class="form-control" id="tgl_bergabung"
-                                                    name="tgl_bergabung" required>
-                                            </div>
-                                            <div class="modal-footer">
-
-                                                <button type="submit" class="btn btn-primary">Tambahkan</button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                     <div class="card-body">
 
@@ -100,11 +23,10 @@
                                         <th>No</th>
                                         <th>NIK KTP</th>
                                         <th>Nama Lengkap</th>
-                                        <th>Jenis Kelamin</th>
                                         <th>Email</th>
                                         <th>No. HP</th>
-                                        <th>No.Rekening</th>
-                                        <th>Tanggal Bergabung</th>
+                                        <th>No. Rekening</th>
+                                        <th>Bank</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -116,17 +38,10 @@
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $user->nik }}</td>
                                             <td>{{ $user->nama }}</td>
-
-                                            @if ($user->jk == 'L')
-                                                <td>Laki-Laki</td>
-                                            @else
-                                                <td>Perempuan</td>
-                                            @endif
-
                                             <td>{{ $user->email }}</td>
                                             <td>{{ $user->no_hp }}</td>
                                             <td>{{ $user->no_rekening }}</td>
-                                            <td>{{ Carbon\Carbon::parse($user->tgl_bergabung)->isoFormat('D MMMM YYYY') }}
+                                            <td>{{ $user->bank }}</td>
                                             </td>
 
                                             <td class="text-center">
@@ -160,6 +75,91 @@
         </div>
     </div>
 @endsection
+
+@push('modals')
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Anggota
+                    </h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="{{ route('user-store') }}" method="POST">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="nik" class="form-label">NIK KTP</label>
+                            <input type="text" class="form-control" id="nik" name="nik" autocomplete="off"
+                                required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="nama" class="form-label">Nama Lengkap</label>
+                            <input class="form-control" name="nama" id="nama" autocomplete="off" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="text" class="form-control" id="email" name="email" autocomplete="off"
+                                required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="password" class="form-label" id="Password">Password</label>
+                            <input type="password" class="form-control" id="password" name="password" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="no_hp" class="form-label">No. HP</label>
+                            <input type="text" class="form-control" id="no_hp" name="no_hp" autocomplete="off"
+                                required>
+                        </div>
+                        <div class="mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="jk" value="L" id="jk">
+                                <label class="form-check-label" for="flexRadioDefault1">
+                                    Laki - Laki
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="jk" value="P"
+                                    id="flexRadioDefault2" checked>
+                                <label class="form-check-label" for="jk">
+                                    Perempuan
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="no_rekening" class="form-label">No. Rekening</label>
+                                    <input type="text" class="form-control" id="no_rekening" name="no_rekening"
+                                        autocomplete="off" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="bank" class="form-label">Bank</label>
+                                    <input type="text" class="form-control" id="bank" name="bank"
+                                        autocomplete="off" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="tgl_bergabung" class="form-label">Tanggal
+                                Bergabung</label>
+                            <input type="date" class="form-control" id="tgl_bergabung" name="tgl_bergabung"
+                                autocomplete="off" required>
+                        </div>
+                        <div class="modal-footer">
+
+                            <button type="submit" class="btn btn-primary">Tambahkan</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+@endpush
+
 @push('styles')
     @include('includes.datatables.styles')
 @endpush
