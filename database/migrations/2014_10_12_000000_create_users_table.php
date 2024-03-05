@@ -31,14 +31,14 @@ return new class extends Migration
         });
 
         $user = new User();
-        $user->nik = '7371112810990005';
-        $user->nama = 'user1';
+        $user->nik = '7371112902990005';
+        $user->nama = 'User';
         $user->email = 'user1@localhost';
         $user->password = Hash::make('123');
         $user->no_hp = '084653695873';
         $user->jk = 'L';
         $user->no_rekening = '846278699';
-        $user->bank = 'BCA';
+        $user->bank = 'BCJ';
         $user->save();
     }
 
