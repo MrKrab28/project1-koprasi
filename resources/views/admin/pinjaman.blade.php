@@ -23,8 +23,8 @@
 
                                         <th>No</th>
                                         <th>Nama Lengkap</th>
-                                        <th>No.HP</th>
-                                        <th>No.Rekening</th>
+                                        <th>No. HP</th>
+                                        <th>No. Rekening</th>
                                         <th>Status Pinjaman Terakhir</th>
                                         <th>Aksi</th>
                                     </tr>
@@ -92,7 +92,8 @@
 
                         <div class="mb-3">
                             <label for="total_pinjaman" class="form-label">Pinjaman</label>
-                            <input type="text" class="form-control" id="total_pinjaman" name="total_pinjaman" required>
+                            <input type="text" class="form-control numeric" id="total_pinjaman" name="total_pinjaman"
+                                autocomplete="off" required>
                         </div>
 
                         <div class="mb-3">
@@ -111,7 +112,8 @@
                                     <label for="denda" class="form-label">Denda Jatuh Tempo</label>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text" id="basic-addon1">Rp.</span>
-                                        <input type="text" class="form-control" id="denda" name="denda" required>
+                                        <input type="text" class="form-control numeric" id="denda" name="denda"
+                                            autocomplete="off" required>
                                     </div>
                                 </div>
                             </div>
@@ -119,7 +121,8 @@
                                 <div class="mb-3">
                                     <label for="bunga" class="form-label">Bunga</label>
                                     <div class="input-group mb-3">
-                                        <input type="text" class="form-control" id="bunga" name="bunga" required>
+                                        <input type="text" class="form-control" id="bunga" name="bunga"
+                                            autocomplete="off" required>
                                         <span class="input-group-text" id="basic-addon1">%</span>
                                     </div>
                                 </div>
@@ -145,7 +148,18 @@
 @push('scripts')
     @include('includes.datatables.scripts')
     @include('includes.choices-js.scripts')
+
+    <script src="{{ asset('assets/plugins/autonumeric/autonumeric.js') }}"></script>
+
     <script>
+        new AutoNumeric('#total_pinjaman.numeric', {
+            allowDecimalPadding: false
+        })
+
+        new AutoNumeric('#denda.numeric', {
+            allowDecimalPadding: false
+        })
+
         $(document).ready(function() {
             $('#id_anggota').select2();
         });
@@ -158,13 +172,12 @@
         });
     </script>
     @if (session('success'))
-    <script>
-         Swal.fire({
-        title: "{{ session('success') }}",
-        text: "Data di Update",
-        icon: "success"
-    });
-   
-    </script>
+        <script>
+            Swal.fire({
+                title: "{{ session('success') }}",
+                text: "Data di Update",
+                icon: "success"
+            });
+        </script>
     @endif
 @endpush

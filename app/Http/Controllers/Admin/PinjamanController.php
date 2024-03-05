@@ -31,19 +31,20 @@ class PinjamanController extends Controller
         $request->validate([
             'id_anggota' => 'required',
             'banyak_angsuran' => 'required',
-            // 'jumlah_angsuran' => 'required',
             'tgl_pinjaman' => 'required|date',
-            'total_pinjaman' => 'required|numeric'
+            'total_pinjaman' => 'required'
         ]);
 
+        $totalPinjaman = str_replace([',', '.'], '', $request->total_pinjaman);
+
         $bunga = $request->bunga / 100;
-        $angsuran = $request->total_pinjaman / $request->banyak_angsuran + ($request->total_pinjaman / $request->banyak_angsuran * $bunga);
+        $angsuran = $totalPinjaman / $request->banyak_angsuran + ($totalPinjaman / $request->banyak_angsuran * $bunga);
 
         $pinjaman = new Pinjaman();
         $pinjaman->id_anggota = $request->id_anggota;
         $pinjaman->tgl_pinjaman = $request->tgl_pinjaman;
         $pinjaman->jatuh_tempo = Carbon::parse($request->tgl_pinjaman)->addMonth();
-        $pinjaman->total_pinjaman = $request->total_pinjaman;
+        $pinjaman->total_pinjaman = $totalPinjaman;
         $pinjaman->banyak_angsuran = $request->banyak_angsuran;
         $pinjaman->nominal_angsuran = round($angsuran, -3);
         $pinjaman->denda = $request->denda;
@@ -59,8 +60,4 @@ class PinjamanController extends Controller
 
         return redirect()->route('pinjaman-user')->with('success', 'Berhasil Menambahkan Data Pinjaman');
     }
-
-
-
-
 }

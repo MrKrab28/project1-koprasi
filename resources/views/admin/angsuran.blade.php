@@ -153,6 +153,7 @@
 @endpush
 @push('scripts')
     @include('includes.datatables.scripts')
+
     <script>
         $(document).ready(function() {
             $('#table').DataTable({

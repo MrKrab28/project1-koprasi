@@ -2,9 +2,7 @@
 
 @section('content')
     <div class="container-fluid">
-        <!--  Row 1 -->
-
-        <a href="{{ route('simpanan-user') }}?jenis={{ $simpanan->id_jenis }}" class="btn btn-primary" >Kembali</a>
+        <a href="{{ route('simpanan-user') }}?jenis={{ $simpanan->id_jenis }}" class="btn btn-primary">Kembali</a>
 
         <div class="row mt-5">
             <div class="card mb-0">
@@ -21,7 +19,7 @@
                         <input type="hidden" name="id_simpanan" value="{{ Request::get('id') }}">
                         <div class="input-group mb-3">
                             <label for="" class="input-group-text" id="basic-addon1">Jumlah Setor</label>
-                            <input type="number" class="form-control" name="jumlah_setor" step="1000"
+                            <input type="text" class="form-control numeric" id="jumlah_setor" name="jumlah_setor"
                                 value="{{ $simpanan->jenis->jumlah }}" required>
                         </div>
                         <div class="input-group mb-3">
@@ -67,7 +65,14 @@
 @endpush
 @push('scripts')
     @include('includes.datatables.scripts')
+
+    <script src="{{ asset('assets/plugins/autonumeric/autonumeric.js') }}"></script>
+
     <script>
+        new AutoNumeric('#jumlah_setor.numeric', {
+            allowDecimalPadding: false
+        })
+
         $(document).ready(function() {
             $('#table').DataTable({
                 responsive: true,
@@ -75,14 +80,13 @@
             });
         });
     </script>
-     @if (session('success'))
-     <script>
-          Swal.fire({
-         title: "{{ session('success') }}",
-         text: "Data di Update",
-         icon: "success"
-     });
-
-     </script>
-     @endif
+    @if (session('success'))
+        <script>
+            Swal.fire({
+                title: "{{ session('success') }}",
+                text: "Data di Update",
+                icon: "success"
+            });
+        </script>
+    @endif
 @endpush

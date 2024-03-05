@@ -28,13 +28,14 @@
                                         <div class="modal-body">
                                             <div class="mb-3">
                                                 <label for="nama" class="form-label">Nama Jenis Simpanan</label>
-                                                <input class="form-control" name="nama" id="nama" required>
+                                                <input class="form-control" name="nama" id="nama" required
+                                                    autocomplete="off">
                                             </div>
 
                                             <div class="mb-3">
                                                 <label for="jumlah" class="form-label">Setoran Awal</label>
-                                                <input type="number" class="form-control" id="jumlah" name="jumlah"
-                                                    required>
+                                                <input type="text" class="form-control numeric" id="jumlah"
+                                                    autocomplete="off" name="jumlah" required>
                                             </div>
 
 
@@ -105,7 +106,14 @@
 
 @push('scripts')
     @include('includes.datatables.scripts')
+
+    <script src="{{ asset('assets/plugins/autonumeric/autonumeric.js') }}"></script>
+
     <script>
+        new AutoNumeric('#jumlah.numeric', {
+            allowDecimalPadding: false
+        })
+
         $(document).ready(function() {
             $('#table').DataTable({
                 responsive: true,

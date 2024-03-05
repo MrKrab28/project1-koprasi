@@ -28,10 +28,12 @@ class PenarikanController extends Controller
 
         $simpanan = Simpanan::find($request->id_simpanan);
 
-        if ($simpanan->saldo > $request->jumlah_penarikan) {
+        $jumlahPenarikan = str_replace([',', '.'], '', $request->jumlah_penarikan);
+
+        if ($simpanan->saldo > $jumlahPenarikan) {
             $penarikan = new Penarikan();
             $penarikan->id_simpanan = $simpanan->id;
-            $penarikan->jumlah_penarikan =  $request->jumlah_penarikan;
+            $penarikan->jumlah_penarikan =  $jumlahPenarikan;
             $penarikan->tgl_penarikan = $request->tgl_penarikan;
             $penarikan->waktu_penarikan = $request->waktu_penarikan;
             $penarikan->save();

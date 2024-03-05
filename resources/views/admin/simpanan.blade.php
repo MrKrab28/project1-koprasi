@@ -121,7 +121,7 @@
     <script src="{{ asset('assets/plugins/autonumeric/autonumeric.js') }}"></script>
 
     <script>
-        new AutoNumeric('input.numeric', {
+        new AutoNumeric('#jumlah_setor.numeric', {
             allowDecimalPadding: false
         })
 

@@ -5,8 +5,8 @@
         <!--  Row 1 -->
 
 
-        <a href="{{ route('simpanan-user') }}?jenis=2" class="btn btn-primary" >Kembali</a>
-      
+        <a href="{{ route('simpanan-user') }}?jenis=2" class="btn btn-primary">Kembali</a>
+
         <div class="row mt-5">
             <div class="card mb-0">
                 <div class="card-body">
@@ -21,8 +21,10 @@
                         @csrf
                         <input type="hidden" name="id_simpanan" value="{{ Request::get('id') }}">
                         <div class="input-group mb-3">
-                            <label for="jumlah_penarikan" class="input-group-text" id="basic-addon1">Jumlah Penarikan</label>
-                            <input type="number" class="form-control" name="jumlah_penarikan" required>
+                            <label for="jumlah_penarikan" class="input-group-text" id="basic-addon1">Jumlah
+                                Penarikan</label>
+                            <input type="text" class="form-control numeric" id="jumlah_penarikan" name="jumlah_penarikan"
+                                required>
                         </div>
                         <div class="input-group mb-3">
                             <label for="tgl_penarikan" class="input-group-text" id="basic-addon1">Tanggal Penarikan</label>
@@ -32,7 +34,7 @@
                             <label for="waktu_penarikan" class="input-group-text" id="basic-addon1">Waktu Penarikan</label>
                             <input type="time" class="form-control" name="waktu_penarikan" required>
                         </div>
-                        <button type="submit" class="btn btn-success">Tambah Setoran</button>
+                        <button type="submit" class="btn btn-success">Input Penarikan</button>
                     </form>
 
                     <table id="table" class="table table-hover" style="width: 100%">
@@ -55,7 +57,7 @@
 
 
                                     <td>{{ Carbon\Carbon::parse($item->tgl_penarikan)->isoFormat('D MMMM YYYY') }}</td>
-                                    <td>{{ $item->waktu_penarikan}}</td>
+                                    <td>{{ $item->waktu_penarikan }}</td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -73,7 +75,14 @@
 @endpush
 @push('scripts')
     @include('includes.datatables.scripts')
+
+    <script src="{{ asset('assets/plugins/autonumeric/autonumeric.js') }}"></script>
+
     <script>
+        new AutoNumeric('#jumlah_penarikan.numeric', {
+            allowDecimalPadding: false
+        })
+
         $(document).ready(function() {
             $('#table').DataTable({
                 responsive: true,
@@ -81,25 +90,23 @@
             });
         });
     </script>
-        @if (session('success'))
-     <script>
-          Swal.fire({
-         title: "{{ session('success') }}",
-         text: "Data di Update",
-         icon: "success"
-     });
-
-     </script>
-     @endif
-     @if (session('error'))
-     <script>
-
-         Swal.fire({
-             icon: "error",
-             title: "{{ session('error') }}",
-             text: "Mohon Periksa Saldo Anda",
-             footer: '<a href="#">Why do I have this issue?</a>'
+    @if (session('success'))
+        <script>
+            Swal.fire({
+                title: "{{ session('success') }}",
+                text: "Data di Update",
+                icon: "success"
             });
-            </script>
-     @endif
+        </script>
+    @endif
+    @if (session('error'))
+        <script>
+            Swal.fire({
+                icon: "error",
+                title: "{{ session('error') }}",
+                text: "Mohon Periksa Saldo Anda",
+                footer: '<a href="#">Why do I have this issue?</a>'
+            });
+        </script>
+    @endif
 @endpush
