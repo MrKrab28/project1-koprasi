@@ -16,29 +16,27 @@
                     <div class="card-body">
 
                         <div class="table-responsive">
-                            {{-- <table id="table" class="table table-striped mt-5" data-toggle="data-table"> --}}
                             <table id="table" class="table table-hover mt-5 w-100">
                                 <thead>
                                     <tr>
-
                                         <th>No</th>
                                         <th>Nama Lengkap</th>
                                         <th>Saldo</th>
-                                        <th>No.Hp</th>
-                                        <th>No.Rekening</th>
+                                        <th>No. HP</th>
+                                        <th>No. Rekening</th>
+                                        <th>Bank</th>
                                         <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-
                                     @foreach ($daftarSimpanan as $simpanan)
                                         <tr>
-
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $simpanan->user->nama }}</td>
                                             <td>Rp. {{ number_format($simpanan->saldo) }}</td>
                                             <td>{{ $simpanan->user->no_hp }}</td>
                                             <td>{{ $simpanan->user->no_rekening }}</td>
+                                            <td>{{ $simpanan->user->bank }}</td>
 
                                             <td class="text-center">
                                                 <button class="btn btn-success btn-sm"
@@ -49,7 +47,6 @@
                                                     onclick="document.location.href = '{{ route('simpanan-user.detail') }}?id={{ $simpanan->id }}'">
                                                     Lihat Simpanan
                                                 </button>
-
                                             </td>
                                         </tr>
                                     @endforeach
@@ -89,8 +86,11 @@
                         </div>
                         <div class="mb-3">
                             <label for="jumlah_setor" class="form-label">Setoran Awal</label>
-                            <input type="text" class="form-control numeric" id="jumlah_setor" name="jumlah_setor"
-                                value="{{ $jenis->jumlah }}" required>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1">Rp.</span>
+                                <input type="text" class="form-control numeric" id="jumlah_setor" name="jumlah_setor"
+                                    value="{{ $jenis->jumlah }}" autocomplete="off" required>
+                            </div>
                         </div>
 
                         <div class="mb-3">

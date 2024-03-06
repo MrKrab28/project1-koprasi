@@ -25,6 +25,7 @@
                                         <th>Nama Lengkap</th>
                                         <th>No. HP</th>
                                         <th>No. Rekening</th>
+                                        <th>Bank</th>
                                         <th>Status Pinjaman Terakhir</th>
                                         <th>Aksi</th>
                                     </tr>
@@ -33,11 +34,11 @@
 
                                     @foreach ($daftarPinjaman as $user)
                                         <tr>
-
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $user->nama }}</td>
                                             <td>{{ $user->no_hp }}</td>
                                             <td>{{ $user->no_rekening }} </td>
+                                            <td>{{ $user->bank }} </td>
                                             <td>{!! $user->pinjamanTerakhir->lunas
                                                 ? '<span class="text-success">Lunas</span>'
                                                 : '<span class="text-danger">Belum Lunas</span>' !!}</td>
@@ -92,8 +93,11 @@
 
                         <div class="mb-3">
                             <label for="total_pinjaman" class="form-label">Pinjaman</label>
-                            <input type="text" class="form-control numeric" id="total_pinjaman" name="total_pinjaman"
-                                autocomplete="off" required>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1">Rp.</span>
+                                <input type="text" class="form-control numeric" id="total_pinjaman" name="total_pinjaman"
+                                    autocomplete="off" required>
+                            </div>
                         </div>
 
                         <div class="mb-3">
