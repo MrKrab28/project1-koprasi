@@ -35,9 +35,9 @@ class PinjamanController extends Controller
             'total_pinjaman' => 'required'
         ]);
 
-        $pinjamanLalu = Pinjaman::where('id_anggota', $request->id_anggota)->withCount('angsuran')->first();
+        $pinjamanLalu = Pinjaman::where('id_anggota', $request->id_anggota)->first();
 
-        if ($pinjamanLalu && $pinjamanLalu->angsuran_count != $pinjamanLalu->banyak_angsuran) {
+        if ($pinjamanLalu && !$pinjamanLalu->lunas) {
             return redirect()->back()->with('failed', 'Pinjaman terakhir masih belum lunas');
         }
 
