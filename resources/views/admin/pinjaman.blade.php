@@ -9,10 +9,8 @@
                         <div class="header-title">
                             <h4 class="mb-0">Daftar pinjaman</h4>
                         </div>
-                        <div class="me-3">
-                            <button type="submit" class="btn btn-primary " data-bs-toggle="modal"
-                                data-bs-target="#exampleModal">Tambah Data</button>
-                        </div>
+                        <button type="submit" class="btn btn-primary " data-bs-toggle="modal"
+                            data-bs-target="#exampleModal">Tambah Data</button>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
