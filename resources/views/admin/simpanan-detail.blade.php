@@ -8,13 +8,15 @@
             <div class="card mb-0">
                 <div class="card-body">
 
+
+
                     <div class="d-sm-flex d-block align-items-center justify-content-between mb-9">
                         <div class="mb-3 mb-sm-0">
                             <h5 class="card-title fw-semibold">Tambah Data Simpanan</h5>
                         </div>
                     </div>
 
-                    <form action="{{ route('simpanan-storeItem') }}" method="POST" class="mb-4">
+                    {{-- <form action="{{ route('simpanan-storeItem') }}" method="POST" class="mb-4">
                         @csrf
                         <input type="hidden" name="id_simpanan" value="{{ Request::get('id') }}">
                         <div class="input-group mb-3">
@@ -27,8 +29,10 @@
                             <input type="date" class="form-control" name="tgl_simpan" required>
                         </div>
                         <button type="submit" class="btn btn-success">Tambah Setoran</button>
-                    </form>
-
+                    </form> --}}
+                    <button class="btn btn-primary mb-4" data-bs-toggle="modal" data-bs-target="#tambahData" >
+                        Tambah Data
+                    </button>
                     <table id="table" class="table table-hover" style="width: 100%">
                         <thead>
                             <tr>
@@ -60,6 +64,42 @@
         </div>
     </div>
 @endsection
+@push('modals')
+    <div class="modal fade" id="tambahData" tabindex="-1" aria-labelledby="tambahDataLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="tambahDataLabel">Tambah Setoran
+                    </h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="{{ route('simpanan-storeItem') }}" method="POST">
+                    @csrf
+                    <input type="hidden" name="id_simpanan" value="{{ Request::get('id') }}" required>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="jumlah_setor" class="form-label">Jumlah Setor</label>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1">Rp.</span>
+                                <input type="text" class="form-control numeric" id="jumlah_setor" name="jumlah_setor"
+                                value="{{ $simpanan->jenis->jumlah }}" autocomplete="off" required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="" class="input-group-text" id="basic-addon1">Tanggal Simpan</label>
+                            <input type="date" class="form-control" name="tgl_simpan" required>
+                        </div>
+
+                        <div class="modal-footer">
+
+                            <button type="submit" class="btn btn-primary">Tambah Setoran</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+@endpush
 @push('styles')
     @include('includes.datatables.styles')
 @endpush
