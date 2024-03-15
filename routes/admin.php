@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\PemasukanController;
 use App\Http\Controllers\Admin\PengeluaranController;
 use App\Http\Controllers\Admin\JenisSimpananController;
+use App\Http\Controllers\Admin\ListBarangController;
 use App\Http\Controllers\Admin\PenarikanController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\PetugasController as AdminPetugasController;
@@ -61,6 +62,7 @@ Route::group(['middleware' => 'auth:admin'], function () {
     // TRANSAKSI
 
 
+
     //Pemasukan
     // Route::get('pemasukan', [PemasukanController::class, 'index'])->name('pemasukan-index');
     // Route::post('pemasukan/add', [PemasukanController::class, 'store'])->name('pemasukan-store');
@@ -92,4 +94,12 @@ Route::group(['middleware' => 'auth:admin'], function () {
 
     // Auth
     Route::get('logout', [AuthController::class, 'logout'])->name('admin-logout');
+
+
+    // List Barang
+    Route::get('barang', [ListBarangController::class, 'index'])->name('barang-index');
+    Route::post('barang/add', [ListBarangController::class, 'store'])->name('barang-store');
+    Route::get('barang/edit/{barang}', [ListBarangController::class, 'edit'])->name('barang-edit');
+    Route::put('barang/update/{barang}', [ListBarangController::class, 'update'])->name('barang-update');
+    Route::delete('barang/{barang}', [ListBarangController::class, 'delete'])->name('barang-delete');
 });

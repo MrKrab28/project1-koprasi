@@ -90,6 +90,12 @@
                 <li class="menu-title">Persediaan</li>
 
                 <li>
+                    <a href="{{ route('barang-index') }}" class="waves-effect">
+                        <i class="mdi mdi-archive-outline"></i>
+                        <span>List Barang</span>
+                    </a>
+                </li>
+                <li>
                     <a href="#" class="waves-effect">
                         <i class="mdi mdi-archive-outline"></i>
                         <span>Menu 1</span>

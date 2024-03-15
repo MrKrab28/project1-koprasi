@@ -24,6 +24,10 @@
             @include('includes.header.anggota')
             @include('includes.sidebar.anggota')
         @endauth
+        @auth('petugas')
+        @include('includes.header.petugas')
+        @include('includes.sidebar.petugas')
+        @endauth
 
         <div class="main-content" id="result">
             <div class="page-content">

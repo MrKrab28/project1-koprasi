@@ -25,7 +25,7 @@ class AuthController extends Controller
         }
 
         if (Auth::guard('petugas')->attempt($credentials)) {
-            return redirect()->route('dashboard')->with('success', 'Login Berhasil');
+            return redirect()->route('petugas-dashboard')->with('success', 'Login Berhasil');
         }
 
         return redirect()->back()->with('LoginError', 'Email atau Password Salah');
