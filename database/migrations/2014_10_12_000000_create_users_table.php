@@ -23,7 +23,6 @@ return new class extends Migration
             $table->string('no_hp');
             $table->enum('jk', ['L', 'P']);
             $table->string('no_rekening')->unique();
-            $table->string('bank');
             $table->date('tgl_bergabung')->default(now());
             $table->string('foto_ktp')->default('default.png');
             $table->rememberToken();
@@ -38,7 +37,7 @@ return new class extends Migration
         $user->no_hp = '084653695873';
         $user->jk = 'L';
         $user->no_rekening = '846278699';
-        $user->bank = 'BCJ';
+        // $user->bank = 'BCJ';
         $user->save();
     }
 

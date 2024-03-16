@@ -21,6 +21,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        View::share('jenis_simpanan', JenisSimpanan::orderBy('nama')->get());
+        try {
+            View::share('jenis_simpanan', JenisSimpanan::orderBy('nama')->get());
+
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
     }
 }

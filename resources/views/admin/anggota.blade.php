@@ -135,13 +135,13 @@
                                         autocomplete="off" required>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            {{-- <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="bank" class="form-label">Bank</label>
                                     <input type="text" class="form-control" id="bank" name="bank"
                                         autocomplete="off" required>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                         <div class="mb-3">
                             <label for="tgl_bergabung" class="form-label">Tanggal
